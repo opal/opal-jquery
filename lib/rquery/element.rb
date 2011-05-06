@@ -66,7 +66,11 @@ module RQuery
     # @param [String] selector
     # @return [Element]
     def find(selector)
-      `return self.find(selector);`
+      `if (selector.$flags & $runtime.T_SYMBOL) {
+        return self.find('#' + selector.toString());
+      } else {
+        return self.find(selector);
+      }`
     end
 
     # Returns a string representation of the collection of elements. If the
@@ -93,7 +97,7 @@ module RQuery
     #
     # @return [String]
     def tag
-      `return self[0] ? self[0].tagName.toLowerCase() : '';`
+      `return (self[0] && self[0].tagName) ? self[0].tagName.toLowerCase() : '';`
     end
 
     # Returns the number of elements in the receiver.
@@ -147,16 +151,9 @@ module RQuery
     #
     # @return [Element] returns the receiver
     def each
-      `var length = self.length;
-
-      for (var i = 0; i < length; i++) {
-        try {
-          #{yield `$(self[i])`, `i`};
-        } catch (e) {
-          throw e;
-        }
+      `for (var i = 0, ii = self.length; i < ii; i++) {
+        #{yield `$(self[i])`, `i`};
       }
-
       return self;`
     end
 

@@ -49,7 +49,7 @@ module RQuery
       `return document.title;`
     end
 
-    def [](selector)
+    def [](selector = nil)
       Element.find selector
     end
 
