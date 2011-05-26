@@ -1,4 +1,3 @@
-$:.unshift File.join(File.dirname(__FILE__), '..', '..', 'lib')
 require 'opal'
 require 'fileutils'
 
@@ -27,12 +26,11 @@ COPYRIGHT = <<-EOS
 EOS
 
 desc "Rebuild rquery.js ready for browser"
-task :browser do
+task :opal do
   FileUtils.mkdir_p 'extras'
 
   gem = Opal::Gem.new File.dirname(__FILE__)
-  content = gem.bundle
-
+  content = gem.bundle :core => true
   content = COPYRIGHT + content
 
   File.open('extras/rquery.js', 'w+') { |out| out.write content }

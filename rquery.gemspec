@@ -13,6 +13,6 @@ Gem::Specification.new do |s|
 
   s.test_files   = Dir['spec/**/*.rb']
 
-  s.add_dependency "json"
+  s.add_dependency "opal-json"
 end
 

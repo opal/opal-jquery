@@ -1,4 +1,4 @@
-require 'json'
+require 'opal-json'
 
 # RQuery wraps around the jquery library to provide a ruby api for DOM
 # manipulation. Core classes and modules are contained in this module,
