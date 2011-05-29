@@ -56,11 +56,11 @@ module RQuery
     alias_method :find, :[]
   end
 
-  Document = `$(document)`
-  Document.extend DocumentMethods
+  # Document = `$(document)`
+  # Document.extend DocumentMethods
 end
 
 # The global variable `$document` is the main variable that should be
 # used when accessing the document with selectors.
-$document = RQuery::Document
+# $document = RQuery::Document
 

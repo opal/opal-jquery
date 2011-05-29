@@ -2,8 +2,6 @@ module RQuery
 
   class Event
 
-    native_prototype `$.Event.prototype`
-
     # Returns the actual element that initiated the event.
     #
     # @return [Element]

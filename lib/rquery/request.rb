@@ -8,10 +8,10 @@ module RQuery
     # overrideen, then these defaults will be used on each request. This
     # is not a full list of all options that can be used; these are just
     # the bare essentials and useful defaults.
-    DEFAULT_OPTIONS = {
-      :url    => '',
-      :type   => 'GET'
-    }
+    # DEFAULT_OPTIONS = {
+      # :url    => '',
+      # :type   => 'GET'
+    # }
 
     # Creates a new Request object. The passed options are merged with
     # DEFAULT_OPTIONS and will be used as the base options for each

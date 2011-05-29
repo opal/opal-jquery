@@ -30,7 +30,7 @@ task :opal do
   FileUtils.mkdir_p 'extras'
 
   gem = Opal::Gem.new File.dirname(__FILE__)
-  content = gem.bundle :core => true
+  content = gem.bundle :standalone => true
   content = COPYRIGHT + content
 
   File.open('extras/rquery.js', 'w+') { |out| out.write content }
