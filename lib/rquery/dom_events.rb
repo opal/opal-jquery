@@ -1,22 +1,22 @@
-module RQuery
+# module RQuery
 
-  module DOMEvents
+#   module DOMEvents
 
-    def mouse_down
-      `self.mousedown(function(event) {
-        #{yield `event`};
-      });`
+#     def mouse_down
+#       `self.mousedown(function(event) {
+#         #{yield `event`};
+#       });`
 
-      self
-    end
+#       self
+#     end
 
-    def click
-      `self.click(function(event) {
-        #{yield `event`};
-      });`
+#     def click
+#       `self.click(function(event) {
+#         #{yield `event`};
+#       });`
 
-      self
-    end
-  end
-end
+#       self
+#     end
+#   end
+# end
 

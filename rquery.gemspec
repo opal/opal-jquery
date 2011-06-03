@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.authors      = ["Adam Beynon"]
   s.email        = ["adam@adambeynon.com"]
   s.homepage     = "http://github.com/adambeynon/opal"
-  s.summary      = "Rquery DOM library for ruby/opal"
+  s.summary      = "RQuery DOM library for ruby/opal"
 
   s.files        = Dir.glob("{bin,lib}/**/*") + %w[README.md]
   s.require_path = "lib"
