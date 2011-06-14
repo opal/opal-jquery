@@ -13,6 +13,7 @@ class RQuery < Array
       `var len = elems.length;
 
       var res = #{ allocate };
+      res.length = len;
 
       if (len == 0) {
         // do nothing when empty?
@@ -151,5 +152,13 @@ class RQuery < Array
 
     return #{ self.class.from_native *`res` };`
   end
+
+  alias_method :succ, :next
+
+  def clear
+
+  end
+
+  alias_method :empty, :clear
 end
 

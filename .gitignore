@@ -5,4 +5,6 @@ extras
 /tmp
 *.gem
 .yardoc
+/examples/**/*.js
+rquery*.js
 
