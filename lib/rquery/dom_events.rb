@@ -1,6 +1,6 @@
-class RQuery
+module RQuery
 
-  module DomEvents
+  module DOMEvents
 
     EVENT_MAP = {
       :click        => 'click',
@@ -45,8 +45,6 @@ class RQuery
 
     end
 
-  end # DomEvents
-
-  include DomEvents
+  end # DOMEvents
 end
 

@@ -1,4 +1,4 @@
-class RQuery
+module RQuery
 
   @ready = false
   @ready_blocks = []
@@ -21,14 +21,10 @@ class RQuery
   end
 
   def self.__handle_ready__
-    puts "handling ready"
     return unless @ready
     blocks = @ready_blocks
-    puts "wow"
-    puts blocks.inspect
 
     while block = blocks.pop
-      `console.log(block.toString());`
       block.call
     end
   end
@@ -40,7 +36,6 @@ class RQuery
       document.addEventListener("DOMContentLoaded", ready_function, false);
 
       ready_function = function() {
-      console.log("here..");
         document.removeEventListener("DOMContentLoaded", ready_function, false);
         #{ @ready = true };
         #{ __handle_ready__ };
@@ -51,7 +46,6 @@ class RQuery
     }
 
     if (document.readyState == "complete") {
-      console.log("Document is already ready...");
       setTimeout(ready_function, 0);
     }
 

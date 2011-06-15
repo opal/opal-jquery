@@ -1,4 +1,5 @@
-class RQuery < Array
+module RQuery
+  module CSS
 
   # Adds the given class or classes to each element in the receiver. Multiple
   # classes may be added by seperating them with a space. These classes do not
@@ -88,5 +89,6 @@ class RQuery < Array
     false
   end
 
+end
 end
 

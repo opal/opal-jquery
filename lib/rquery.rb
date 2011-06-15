@@ -1,4 +1,4 @@
-# require 'opal-json'
+require 'opal_json'
 
 require 'rquery/element'
 require 'rquery/document'

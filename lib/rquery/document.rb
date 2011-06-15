@@ -1,6 +1,6 @@
 require 'rquery/element'
 
-class RQuery < Array
+module RQuery
 
   module DocumentMethods
 
@@ -25,12 +25,11 @@ class RQuery < Array
     # def head; end
   end
 
-  @document = from_native `document`
-  class << @document; include DocumentMethods; end
+  @document = Element.from_native `document`
+  class << @document; include RQuery::DocumentMethods; end
 
   def self.document
     @document
   end
 end
-
 
