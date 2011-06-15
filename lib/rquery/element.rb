@@ -117,7 +117,12 @@ module RQuery
     # @return [String]
     def to_s
       if length == 1
-        "#<RQuery: div id=\"#{id}\">"
+        str = "<#{tag}"
+        str += " id=\"#{id}\"" if id
+        str += " src=\"#{src}\"" if src
+        str += " href=\"#{href}\"" if href
+        str += ">"
+        str
       else
         "[#{join ', '}]"
       end
@@ -130,6 +135,18 @@ module RQuery
 
     def id
       `return self.$elem.id || nil;`
+    end
+
+    def tag
+      `return self.$elem.tagName.toLowerCase() || nil;`
+    end
+
+    def src
+      `return self.$elem.src || nil;`
+    end
+
+    def href
+      `return self.$elem.href || nil;`
     end
 
     def next

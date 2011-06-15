@@ -5,7 +5,7 @@ module RQuery
   module DocumentMethods
 
     def to_s
-      "#<RQuery document>"
+      "<document>"
     end
 
     alias_method :inspect, :to_s
