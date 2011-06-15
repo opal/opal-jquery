@@ -19,22 +19,32 @@ module RQuery
       def from_native(*elems)
         `var len = elems.length;
 
-        var res = #{ allocate };
-        res.length = len;
+        var res, elem;
 
         if (len == 0) {
           // do nothing when empty?
+          res = #{ allocate };
         }
         else if (len == 1) {
+          elem = elems[0];
+
+          if (elem == document) {
+            return #{RQuery.document};
+          }
+
+          res = #{ allocate };
           res[0] = res;
-          res.$elem = elems[0];
+          res.$elem = elem;
         }
         else {
+          res = #{ allocate };
           res.$elem = elems[0];
           for (var i = 0; i < len; i++) {
             res[i] = #{ from_native `elems[i]` };
           }
         }
+
+        res.length = len;
 
         return res;`
       end
@@ -91,6 +101,20 @@ module RQuery
       }
 
       return #{ self.class.from_native *`ary` };`
+    end
+
+    def ==(other)
+      `var len = self.length, len2 = other.length;
+
+      if (len != len2) { return Qfalse; }
+
+      for (var i = 0; i < len; i++) {
+        if (self[i].$elem != other[i].$elem) {
+          return Qfalse;
+        }
+      }
+
+      return Qtrue;`
     end
 
     # Returns this objects previous context, if it exists. If it does not have
@@ -182,6 +206,41 @@ module RQuery
     end
 
     alias_method :succ, :next
+
+    def prev
+      `var len = self.length, elem;
+
+      if (len == 1) {
+        elem = self.$elem.previousSibling;
+
+        while (elem) {
+          if (elem.nodeType == 1) {
+            return #{ self.class.from_native `elem` };
+          }
+          elem = elem.previousSibling;
+        }
+
+        return #{ nil };
+      }
+      return len;`
+    end
+
+    alias_method :pred, :prev
+
+    def parent
+      `var len = self.length, elem;
+
+      if (len == 1) {
+        elem = self.$elem.parentNode;
+
+        if (elem) {
+          return #{ self.class.from_native `elem` };
+        }
+
+        return #{ nil };
+      }`
+      nil
+    end
 
     def clear
       raise "Element#clear not yet implemented"

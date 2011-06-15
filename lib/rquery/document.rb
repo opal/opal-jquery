@@ -25,11 +25,17 @@ module RQuery
     # def head; end
   end
 
-  @document = Element.from_native `document`
-  class << @document; include RQuery::DocumentMethods; end
-
   def self.document
-    @document
+    return @document if @document
+
+    `var doc = #{Element.allocate};
+    doc.$elem = document;
+    doc.length = 1;
+    doc[0] = doc;`
+
+    @document = `doc`
   end
+
+  class << document; include RQuery::DocumentMethods; end
 end
 
