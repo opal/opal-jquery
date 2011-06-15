@@ -1,4 +1,4 @@
-module RQuery
+class Element < Array
 
   module DOMEvents
 

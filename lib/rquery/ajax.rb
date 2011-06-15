@@ -1,3 +1,6 @@
+class Ajax
+
+end
 # module RQuery
 
 #   # The Request class wraps the native XMLHttpRequest object in the

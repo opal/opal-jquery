@@ -1,4 +1,4 @@
-module RQuery
+class Element < Array
   module CSS
 
   # Adds the given class or classes to each element in the receiver. Multiple
