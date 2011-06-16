@@ -1,26 +1,4 @@
-require 'rquery/element'
-
-module Document
-
-  def self.title
-    `return document.title;`
-  end
-
-  def self.title=(str)
-    `return document.title = str;`
-  end
-
-  def self.body
-    @body ||= Element.from_native `document.getElementsByTagName('body')[0]`
-  end
-
-  def self.head
-    @head ||= Element.from_native `document.getElementsByTagName('head')[0]`
-  end
-
-  def self.scripts
-    Element['script']
-  end
+module Vienna
 
   @ready = false
   @ready_blocks = []
@@ -70,6 +48,5 @@ module Document
     }
 
   })();`
-
 end
 
