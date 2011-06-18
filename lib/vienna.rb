@@ -5,6 +5,7 @@ require 'vienna/node_set'
 require 'vienna/document'
 require 'vienna/ready'
 require 'vienna/event'
+require 'vienna/event_dispatcher'
 
 require 'vienna/http_request'
 

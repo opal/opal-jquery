@@ -1,6 +1,11 @@
+require 'vienna/event_dispatcher'
+
 module Vienna
 
   class HttpRequest
+    include EventDispatcher
+
+    dispatch :wow_son
 
     attr_reader :response
 
@@ -9,14 +14,6 @@ module Vienna
       @completed = false
       @response = ''
       `self.$xhr = new XMLHttpRequest();`
-      self
-    end
-
-    def get(options = {})
-      self
-    end
-
-    def post(options = {})
       self
     end
 
@@ -50,6 +47,57 @@ module Vienna
       @failure.call self if @failure
     end
 
+    # Define standard http methods to send request
+    [:get, :post].each do |method|
+      define_method(method) do |options = {}|
+        __send_request__ method, options
+      end
+    end
+
+    def status
+      `try {
+        return self.$xhr.status || 0;
+      } catch (e) {
+        return 0;
+      }`
+    end
+
+    def status_text
+      `try {
+        return self.$xhr.statusText || "";
+      } catch (e) {
+        return "";
+      }`
+    end
+
+    def success?
+      `var status = 0;
+
+      try {
+        status = self.$xhr.status || 0;
+      } catch (e) {}
+
+      if (status >= 200 && status < 300) { return Qtrue; }
+
+      return (status == 0 && self.$xhr.responseText) ? Qtrue : Qfalse;`
+    end
+
+    def failure?
+      !success?
+    end
+
+    alias_method :response_text, :response
+
+    def state_changed
+      `var xhr = self.$xhr;
+
+      if (xhr.readyState == 4) {
+        #{ @response = `xhr.responseText` };
+        #{ success? ? succeed : fail };
+      }`
+      self
+    end
+
     def __send_request__(method, options)
       method = method.to_s
 
@@ -58,15 +106,10 @@ module Vienna
       xhr.open(method.toUpperCase(), url, true);
 
       xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-          xhr.onreadystatechange = null;
-
-          #{ @response = `(xhr.responseText || '')` };
-        }
+        #{ state_changed };
       };
 
       xhr.send(null);
-
 
       return self;`
     end

@@ -10,7 +10,11 @@ require 'vienna'
 
 def try_http
   http = VN::HttpRequest.new("index.html").get
-  http.success { puts "successful!" }
+  http.success { puts "successful!"; puts "status: #{http.status}" }
   http.failure { puts "something went wrong :(" }
+end
+
+def try_http2
+  http = VN::HttpRequest.new("index2.html").get
 end
 
