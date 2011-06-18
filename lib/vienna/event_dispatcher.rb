@@ -11,6 +11,7 @@ module Vienna
       def dispatch(event)
         define_method(event) do |&blk|
           upon event, &blk
+          self
         end
       end
     end # ClassMethods
@@ -23,8 +24,8 @@ module Vienna
 
     def trigger(event)
       dispatchers = @event_dispatchers
-      return unless disptachers && disptachers[event]
-      disptachers[event].each { |b| b.call }
+      return unless dispatchers && dispatchers[event]
+      dispatchers[event].each { |b| b.call }
     end
   end
 end

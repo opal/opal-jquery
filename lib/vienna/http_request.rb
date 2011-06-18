@@ -5,7 +5,8 @@ module Vienna
   class HttpRequest
     include EventDispatcher
 
-    dispatch :wow_son
+    dispatch :success
+    dispatch :failure
 
     attr_reader :response
 
@@ -15,36 +16,6 @@ module Vienna
       @response = ''
       `self.$xhr = new XMLHttpRequest();`
       self
-    end
-
-    # Returns self for chaining
-    def success(&blk)
-      if @completed
-        # call anyway?
-      else
-        @success = blk
-      end
-      self
-    end
-
-    # Returns self for chaining
-    def failure(&blk)
-      if @completed
-        # ...
-      else
-        @failure = blk
-      end
-      self
-    end
-
-    # Called on self when the request succeeds
-    def succeed
-      @success.call self if @success
-    end
-
-    # Called on self once the request fails/timeouts etc
-    def fail
-      @failure.call self if @failure
     end
 
     # Define standard http methods to send request
@@ -93,7 +64,7 @@ module Vienna
 
       if (xhr.readyState == 4) {
         #{ @response = `xhr.responseText` };
-        #{ success? ? succeed : fail };
+        #{ trigger(success? ? :success : :failure) };
       }`
       self
     end
