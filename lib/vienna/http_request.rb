@@ -5,10 +5,21 @@ module Vienna
   class HttpRequest
     include EventDispatcher
 
-    dispatch :success
-    dispatch :failure
+    dispatches :success
+    dispatches :failure
 
     attr_reader :response
+
+    # Ready states from native (XMLHttpRequest) to symbols. These are
+    # used internally to report back the status of the request by some
+    # dispatchable methods
+    READY_STATES = {
+      0   => :uninitialized,
+      1   => :loading,
+      2   => :loaded,
+      3   => :interactive,
+      4   => :complete
+    }
 
     def initialize(url)
       @url = url
@@ -64,7 +75,7 @@ module Vienna
 
       if (xhr.readyState == 4) {
         #{ @response = `xhr.responseText` };
-        #{ trigger(success? ? :success : :failure) };
+        #{ dispatch(success? ? :success : :failure) };
       }`
       self
     end

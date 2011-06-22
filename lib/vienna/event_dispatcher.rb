@@ -8,21 +8,21 @@ module Vienna
 
     module ClassMethods
 
-      def dispatch(event)
+      def dispatches(event)
         define_method(event) do |&blk|
-          upon event, &blk
+          on event, &blk
           self
         end
       end
     end # ClassMethods
 
-    def upon(event, &block)
+    def on(event, &block)
       @event_dispatchers ||= {}
       @event_dispatchers[event] ||= []
       @event_dispatchers[event] << block
     end
 
-    def trigger(event)
+    def dispatch(event)
       dispatchers = @event_dispatchers
       return unless dispatchers && dispatchers[event]
       dispatchers[event].each { |b| b.call }
