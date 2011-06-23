@@ -1,5 +1,5 @@
-module Vienna
-  class Document < Node
+module RQuery
+  class Document < Element
 
     def to_s
       "<document>"
@@ -22,7 +22,7 @@ module Vienna
     end
 
     def scripts
-      raise "Should return NodeSet of nodes"
+      raise "Should return ElementSet of elements"
     end
 
     def self.new(*a)

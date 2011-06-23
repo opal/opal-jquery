@@ -4,7 +4,7 @@ VERSION = File.read("VERSION").strip
 
 copyright = <<-EOS
 /*!
- * Vienna v#{VERSION}
+ * RQuery v#{VERSION}
  * http://opalscript.org
  * Copyright 2011, Adam Beynon
  * Released under the MIT license.
@@ -25,12 +25,24 @@ file "extras" do
   mkdir_p "extras"
 end
 
-file "extras/vienna-#{VERSION}.js" => "extras" do
-  File.open("extras/vienna-#{VERSION}.js", "w+") do |file|
+file "extras/rquery-#{VERSION}.js" => "extras" do
+  File.open("extras/rquery-#{VERSION}.js", "w+") do |file|
     file.write copyright
     file.write Opal::Gem.new(Dir.getwd).bundle
   end
 end
 
-task :opal => "extras/vienna-#{VERSION}.js"
+file "extras/rquery-#{VERSION}.test.js" => "extras" do
+  File.open("extras/rquery-#{VERSION}.test.js", "w+") do |file|
+    file.write copyright
+    file.write Opal::Gem.new(Dir.getwd).bundle :test => true
+  end
+end
+
+task :clean do
+  rm_rf Dir['extras/rquery*.js']
+end
+
+task :opal  => "extras/rquery-#{VERSION}.js"
+task :ospec => "extras/rquery-#{VERSION}.test.js"
 

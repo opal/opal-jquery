@@ -1,4 +1,4 @@
-require 'vienna/event_dispatcher'
+require 'rquery/event_dispatcher'
 
 module Vienna
 

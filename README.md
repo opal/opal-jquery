@@ -1,4 +1,4 @@
-Vienna
+RQuery
 ======
 
 DOM library for opal/ruby.

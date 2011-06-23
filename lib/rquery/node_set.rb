@@ -1,5 +1,5 @@
-module Vienna
-  class NodeSet < Array
+module RQuery
+  class ElementSet < Array
 
     def initialize(nodes)
       push *nodes
