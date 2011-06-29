@@ -3,8 +3,8 @@ require 'rquery/event'
 module Event::DomEvents
 
   EVENTS = [
-    :click, :mouse_up, :mouse_down,
-    :key_down, :key_press, :key_up
+    :click, :mouseup, :mousedown,
+    :keydown, :keypress, :keyup
   ]
 
   EVENTS.each do |evt|
@@ -14,9 +14,7 @@ module Event::DomEvents
   end
 
   # Adds the block as a listener for the given event `event`. The
-  # event may be a string or symbol and be either a rubyish name,
-  # e.g. "mouse_down" or a native javascriptish name, e.g.
-  # "mousedown".
+  # event may be a string or symbol.
   #
   # This method returns the passed in block so it can be saved for
   # later removing from the handler list.
@@ -29,7 +27,7 @@ module Event::DomEvents
   #
   # And the given Ruby code:
   #
-  #     Document[:foo].on(:mouse_down) do |e|
+  #     Document[:foo].on(:mousedown) do |e|
   #       puts "#{e} was clicked"
   #     end
   #
@@ -42,8 +40,7 @@ module Event::DomEvents
   def listen(event, &block)
     raise "no block given" unless block_given?
     event = event.to_s
-    `var native = event.replace('_', '');
-    var el = self.$el;
+    `var el = self.$el;
 
     var func = function(evt) {
       var e = #{ Event.from_native `evt` };
@@ -54,9 +51,9 @@ module Event::DomEvents
     block.$rquery_handler = func;
 
     if (el.addEventListener) {
-      el.addEventListener(native, func, false);
+      el.addEventListener(event, func, false);
     } else {
-      el.attachEvent('on' + native, func);
+      el.attachEvent('on' + event, func);
     }`
     block
   end
@@ -69,17 +66,16 @@ module Event::DomEvents
   # argument - it does not need to be passed in as a block.
   def unlisten(event, block)
     event = event.to_s
-    `var native = event.replace('_', '');
-    var handler = block.$rquery_handler, el = self.$el;
+    `var handler = block.$rquery_handler, el = self.$el;
 
     if (!handler) {
       #{ raise "block is not an event handler" };
     }
 
     if (el.addEventListener) {
-      el.removeEventListener(native, handler, false);
+      el.removeEventListener(event, handler, false);
     } else {
-      el.detachEvent('on' + native, handler);
+      el.detachEvent('on' + event, handler);
     }`
     block
   end

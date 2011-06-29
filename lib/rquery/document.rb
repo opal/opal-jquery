@@ -1,5 +1,7 @@
+require 'rquery/dom_events'
 
 module Document
+  extend Event::DomEvents
 
   def self.[](selector)
     return find_by_id selector if selector.is_a? Symbol
@@ -48,6 +50,8 @@ module Document
   def self.scripts
     raise "Should return ElementSet of elements"
   end
+
+  `self.$el = document;`
 
   @ready = false
   @ready_blocks = []

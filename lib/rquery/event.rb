@@ -79,6 +79,62 @@ class Event
     @key = key
   end
 
+  # Returns the type of the event, which is derived from the native
+  # event. The type is a symbol that matches the usual javascript
+  # event names.
+  #
+  # @example
+  #
+  #   Document[:some_element].mousedown { |e| puts e.type }
+  #   # => :mousedown
+  #
+  # @return [Symbol]
+  def type
+    `return $rb.Y(self.$evt.type);`
+  end
+
+  # Returns the x position that the event took place at which is the
+  # number of pixels from the left of the page including any pixels that
+  # have scrolled out of view.
+  #
+  # @return [Numeric]
+  def page_x
+    `var evt = self.$evt, x;
+    x = evt.pageX || evt.clientX + document.scrollLeft;
+    return x;`
+  end
+
+  # Returns the y position that the event took place at which is the
+  # number of pixels from the top of the page including any pixels that
+  # have scrolled out of view.
+  #
+  # @return [Numeric]
+  def page_y
+    `var evt = self.$evt, y;
+    y = evt.pageY || evt.clientY + document.scrollTop;
+    return y;`
+  end
+
+  # Returns the x position that the event took place at in relation to
+  # the browser's viewport.
+  #
+  # @return [Numeric]
+  def client_x
+    `var evt = self.$evt, x;
+    x = evt.pageX ? evt.pageX - window.pageXOffset : evt.clientX;
+    return x;`
+  end
+
+  # Returns the y position that the event took place at in relation to
+  # the browser viewport.
+  #
+  # @return [Numeric]
+  def client_y
+    `var evt = self.$evt, y;
+    y = evt.pageY ? evt.pageY - window.pageYOffset : evt.clientY;
+    return y;`
+  end
+
   # Create an instance from a native js event
   def self.from_native(evt)
     `var res = #{ allocate };
