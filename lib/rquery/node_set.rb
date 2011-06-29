@@ -1,5 +1,5 @@
-module RQuery
-  class ElementSet < Array
+class Element
+  class Set < Array
 
     def initialize(nodes)
       push *nodes

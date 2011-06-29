@@ -1,4 +1,4 @@
-module Vienna
+module RQuery
 
   module EventDispatcher
 

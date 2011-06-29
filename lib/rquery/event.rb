@@ -15,13 +15,6 @@ class Event
     46  => :delete
   }
 
-  # Create an instance from a native js event
-  def self.from_native(evt)
-    `var res = #{ allocate };
-    res.$evt = evt;
-    return res;`
-  end
-
   def initialize
     raise EventInitializedError, "Events cannot be manually created"
   end
@@ -59,7 +52,7 @@ class Event
     `var target = self.$evt.target;
     if (!target) { target = self.$et.srcElement || document; }`
 
-    @target = RQuery.from_native `target`
+    @target = Element.from_native `target`
   end
 
   def alt?
@@ -84,6 +77,13 @@ class Event
     `var code = self.$evt.which || self.$evt.keyCode;`
     key = KEY_CODES[`code`] || `$runtime.Y(String.fromCharCode(code))`
     @key = key
+  end
+
+  # Create an instance from a native js event
+  def self.from_native(evt)
+    `var res = #{ allocate };
+    res.$evt = evt;
+    return res;`
   end
 end # Event
 
