@@ -1,152 +1,179 @@
-require 'rquery/element/sizzle'
-require 'rquery/element/attributes'
-
+# Wraps native jQuery object and can therefore hold one or more real
+# elements. This does NOT subclass Array, but does include the
+# Enumerable module for convenience and it does implement many of the
+# Array methods. This does not subclass array because the internal
+# structure is a lot more complex as each individal element must be
+# converted into a jquery instance on reference.
 class Element
-  include Event::DomEvents
+  # include Enumerable
 
-  def initialize(type = :div)
-    `self.$el = document.createElement(#{ type.to_s });`
+  native_prototype `$.fn`
+
+  # Returns the number of elements in the collection.
+  #
+  # @return [Numeric]
+  def size
+    `return self.length;`
+  end
+
+  alias_method :length, :size
+
+
+  # @group Attributes
+
+  # Adds the given class `name` to each element in the receiver. Multiple
+  # classes can be added by separating their names with a space. This will
+  # not overwrite the current classes, but instead appends the given class
+  # names to the existing classname attribute.
+  #
+  # @param [String] name The class name(s) to add
+  # @return [self]
+  def add_class(name)
+    `self.addClass(name);`
     self
   end
+
+  # Returns `true` if the given class `name` is present in any of the
+  # elements in the receiver. `false` otherwise. This method will still
+  # return `true` even if the matching element has other classes also
+  # assigned to it.
   #
-  # Removes all child nodes from the receiver element.
-  #
-  # @example HTML
-  #
-  #     <div id="some_element">
-  #       <div></div>
-  #       <span>Hello</span>
-  #     </div>
-  #
-  # @example Ruby
-  #
-  #     Document[:some_element].clear
-  #
-  # @example Result HTML
-  #
-  #     <div id="some_element></div>
-  #
-  # @return [Element] returns the receiver
-  def clear
-    `var el = self.$el;
-    while (el.firstChild) { el.removeChild(el.firstChild); }
-    return self;`
+  # @param [String] name The class name to check
+  # @return [true, false]
+  def has_class?(name)
+    `return self.hasClass(name) ? Qtrue : Qfalse;`
   end
 
-  # Returns true if the element does not have any child nodes or text
-  # content, false otherwise. If an element is empty then it only
-  # contains whitespace.
+  # Removes the given class `name` from each of the elements in the
+  # receiver. Multiple classes can be removed at once by separating
+  # each class with a space.
   #
-  # @example HTML
-  #
-  #     <div id="a">
-  #       <span></span>
-  #     </div>
-  #
-  # @example Ruby
-  #
-  #     Document[:a].empty?           # => false
-  #     Document[:a].clear.empty?     # => true
-  #
-  # @return [Boolean]
-  def empty?
-    `return /^\s*$/.test(self.$el.innerHTML) ? Qtrue : Qfalse;`
+  # @param [String] name The class name(s) to remove
+  # @return [self]
+  def remove_class(name)
+    `self.removeClass(name);`
+    self
   end
 
-  # Returns the element's next sibling, if one is present. If there
-  # is not a next sibiling then nil is returned. RQuery ensures that
-  # only an element can be returned and will skip any whitespace or
-  # text nodes.
+  # Goes through each element in the receiver and adds the given class
+  # if it does not already have it, or removes it otherwise. Multiple
+  # classes may be passed in and each checked individually against each
+  # element in the receiver.
   #
-  # @example HTML
-  #
-  #     <div id=foo">
-  #       <p id="baz">Hello</p>
-  #       <p id="bar">Goodbye</p>
-  #       <p id="buzz">Bore da</p>
-  #     </div>
-  #
-  # @example Try to get next sibling
-  #
-  #     Document[:baz].next     # => #<Element: div id="bar">
-  #     Document[:bar].next     # => #<Element: div id="buzz">
-  #
-  # @example Try to get next sibling which doesn't exist
-  #
-  #     Document[:buzz].next    # => nil
-  #
-  # @return [Element, nil]
-  def next
-    `var elem = self.$el.nextSibling;
+  # @param [String] name The class name(s) to add/remove
+  # @return [self]
+  def toggle_class(name)
+    `self.toggleClass(name);`
+    self
+  end
 
-    while (elem) {
-      if (elem.nodeType == 1) {
-        return #{ Element.from_native `elem` };
+  # Gets the attribute value for `name` from the first element in the
+  # receiver. Only the first element will be checked for attributes and
+  # if the receiver is empty then `nil` will be returned. To retrieve
+  # attributes for each element in the receiver, either select an
+  # element directly, or loop over the receiver with {#each}.
+  #
+  # @param [String] name Attr name
+  # @param [String] val optional attribute value to set
+  # @return
+  def attr(name, val = nil)
+    `if (val == nil) {
+      var res = self.attr(name);
+      return res == undefined ? nil : res;
+    } else {
+      return self.attr(name, val);
+    }`
+  end
+
+  ['src', 'id', 'href'].each do |a|
+    define_method(a) {
+      `var res = self.attr(a); return res == undefined ? nil : res;`
+    }
+    define_method("#{a}=") { |val| `return self.attr(a, val);` }
+  end
+
+  def id
+    `return self.attr('id');`
+  end
+
+  # @endgroup
+
+  # @group Traversing
+
+  # Calls the given block once for each element in the receiver where the
+  # given element is passed to the block. Each element is an instance of
+  # the `Element` class and is the only item in the collection. Currently,
+  # if no block is given then an exception is raised.
+  #
+  # @return [self]
+  def each
+    raise "no block given" unless block_given?
+
+    `for (var i = 0, length = self.length; i < length; i++) {`
+      yield `$(self[i])`
+    `}`
+
+    self
+  end
+
+  # Returns a new instance containing only those items for which the given
+  # block evaluates to a true value. Each element in the receiver is passed
+  # into the block in turn. This returns a new instance and does not
+  # alter the receiver.
+  #
+  # @return [Element]
+  def select
+    raise "no block given" unless block_given?
+
+    `var result = $(), arg;
+
+    for (var i = 0, ii = self.length; i < ii; i++) {
+      arg = self[i];
+
+      if (#{yield `$(self[i])`}.$r) {
+        result[result.length++] = arg;
       }
-      elem = elem.nextSibling;
     }
 
-    return nil;`
+    return result;`
   end
 
-  def prev
-    `var elem = self.$el.previousSibling;
+  # Returns a new instance with all elements for which the block is not
+  # true. This does not affect the receiver as a new instance is returned.
+  #
+  # @return [Element]
+  def reject
+    raise "no block given" unless block_given?
 
-    while (elem) {
-      if (elem.nodeType == 1) {
-        return #{ Node.from_native `elem` };
+    `var result = $(), arg;
+
+    for (var i = 0, ii = self.length; i < ii; i++) {
+      arg = self[i];
+
+      if (!#{yield `$(self[i])`}.$r) {
+        result[result.length++] = arg;
       }
-      elem = elem.previousSibling;
     }
 
-    return nil;`
+    return result;`
   end
 
-  def tag
-    `var tag = self.$el.tagName;
-    return tag ? tag.toLowerCase() : "";`
-  end
+  # @endgroup
 
-  def parent
-    `var el = self.$el.parentNode;
+  # @group Events
 
-    if (el) {
-      return #{ self.class.from_native `el` };
-    }
+  [:click, :mousedown, :mouseup].each do |evt|
+    name = evt.to_s
+    define_method(evt) do |&block|
+      `var func = function(evt) {
+        return #{block.call evt} == Qfalse ? false : true;
+      };
 
-    return nil;`
-  end
-
-  # @return [NodeSet]
-  def children
-    `var children = #{ ElementSet.new }, node = self.$el.firstChild;
-
-    while (node) {
-      if (node.nodeType === 1) {
-        children.push(#{ Element.from_native `node` });
-      }
-      node = node.nextSibling;
-    }
-    return children;`
-  end
-
-  def to_s
-    t = tag
-    attrs = []
-
-    if t == 'script'
-      attrs << "src=#{src.inspect}" if src
-      "#<Element: script #{ attrs.join ' ' }>"
-    else
-      attrs << "id=#{id.inspect}" if id
-      "#<Element: #{t} #{attrs.join ' ' }>"
+      self[name](func);`
+      self
     end
   end
 
-  def self.from_native(elem)
-    `var res = #{ allocate };
-    res.$el = elem;
-    return res;`
-  end
+  # @endgroup
 end
 
