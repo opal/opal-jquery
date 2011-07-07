@@ -1,105 +1,80 @@
-require 'rquery/dom_events'
+Document = `$(document)`
 
-module Document
-  extend Event::DomEvents
+class << Document
 
-  def self.[](selector)
-    return find_by_id selector if selector.is_a? Symbol
-    `if (/^#([\w\-]*)$/.test(selector)) {
-      var el;
-      if (el = document.getElementById(selector.substr(1))) {
-        return #{ Element.from_native `el` };
-      }
-      return nil;
-    }
-    var els = Sizzle(selector);
-    var nodes = [];
-
-    for (var i = 0, ii = els.length; i < ii; i++) {
-      nodes.push(#{ Element.from_native `els[i]` });
-    }
-
-    return #{ Element::Set.new `nodes` };`
+  # Top level and main selector entrance point. The given selector
+  # string is matched against the document so that any element in
+  # the page may be matched. The result is a new RQuery instance
+  # which holds all the matched elements, and may also be 0 in
+  # length if no elements were matched.
+  #
+  # @param [String] selector Selector to match against document
+  # @return [RQuery]
+  def [](selector)
+    `return $(selector);`
   end
 
-  # @param {String} id
-  def self.find_by_id(id)
-    id = id.to_s
-    `var el = document.getElementById(id);
+  # Handles special cases of method missing. If the method name looks
+  # like a element id then it will check the document to see if a
+  # matching element is found. If it is, then it is returned as a
+  # RQuery instance, otherwise `nil` is returned. If the method name
+  # does not look like an element id then super is called which just
+  # yields a NoMethodError.
+  #
+  # @example
+  #
+  #     Document.some_existing_id     # => [<some_element>]
+  #     Document.non_existing_id      # => nil
+  #     Document.foo = "bar"          # => NoMethodError
+  #
+  # @return [RQuery, nil]
+  def method_missing(sym, *)
+    `var id = #{ sym.to_s };
 
-    if (el) return #{ Element.from_native `el` };
-    return nil;`
+    if (/^([\w\-]*)$/.test(id)) {
+      var el = document.getElementById(id);
+      if (!el) return nil;
+      return $(el);
+    }
+    else {
+      #{ super sym };
+    }`
   end
 
-  def self.title
+  def inspect
+    "Document"
+  end
+
+  # Returns the title of the document as a string.
+  #
+  # @return [String]
+  def title
     `return document.title;`
   end
 
-  def self.title=(str)
+  # Sets the document title using the given string.
+  #
+  # @param [String] str Document title
+  # @return [String]
+  def title=(str)
     `return document.title = str;`
   end
 
-  def self.body
-    @body ||= Element.from_native `document.getElementsByTagName('body')[0]`
-  end
-
-  def self.head
-    @head ||= Element.from_native `document.getElementsByTagName('head')[0]`
-  end
-
-  def self.scripts
-    raise "Should return ElementSet of elements"
-  end
-
-  `self.$el = document;`
-
-  @ready = false
-  @ready_blocks = []
-
-  # Takes a block and yields it once the host document is ready. If this is
-  # called post document load then the block will be called instantly. If no
-  # block is given then this method simply returns `true` or `false`
-  # depending on whether the document has already loaded.
+  # Blocks passed to this method will be called once the document is
+  # loaded, or instantly if the document has already loaded. This is
+  # useful to hold off DOM manipulation until the runtime can be sure
+  # that the document content is fully loaded.
   #
-  # @return [true, false]
-  def self.ready?(&blk)
-    if block_given?
-      if @ready
-        yield
-      else
-        @ready_blocks << blk
-      end
-    end
-    @ready
+  # @return [self]
+  def ready(&blk)
+    raise "no block given" unless block_given?
+
+    `var fn = function() {
+      #{ blk.call };
+    };
+
+    self.ready(fn);`
+    self
   end
-
-  def self.__handle_ready__
-    return unless @ready
-    blocks = @ready_blocks
-
-    block.call while block = blocks.pop
-  end
-
-  `(function() {
-    var ready_function;
-
-    if (document.addEventListener) {
-      document.addEventListener("DOMContentLoaded", ready_function, false);
-
-      ready_function = function() {
-        document.removeEventListener("DOMContentLoaded", ready_function, false);
-        #{ @ready = true };
-        #{ __handle_ready__ };
-      };
-    }
-    else {
-      window.attachEvent("onload", ready_function);
-    }
-
-    if (document.readyState == "complete") {
-      setTimeout(ready_function, 0);
-    }
-
-  })();`
 end
 
