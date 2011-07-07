@@ -49,3 +49,5 @@ require 'rquery/document'
 
 require 'rquery/event'
 
+require 'rquery/ajax'
+
