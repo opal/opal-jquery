@@ -59,19 +59,6 @@ class RQuery
     return result;`
   end
 
-  # Returns a new RQuery instance with the element at the given index
-  # as the only element. Index may be negative, in which case the
-  # index will be taken from the end of this internal array. If there
-  # is no matching index, then `nil` is returned.
-  #
-  # @param [Numeric] idx Index to get
-  # @return [RQuery, nil]
-  def at(idx)
-    `if (idx < 0) idx += self.length;
-    if (idx < 0 || idx >= self.length) return nil;
-    return $(self[idx]);`
-  end
-
   # Returns the first `count` number of elements from the receiver, or
   # just the first if count is not given. If a count is given and this
   # collection is empty, then an empty RQuery instance is returned. If

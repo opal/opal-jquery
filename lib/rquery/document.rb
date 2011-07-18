@@ -1,3 +1,12 @@
+require 'rquery/element'
+
+# The `Document` object is an `Element` instance with the native
+# document object as its only member. This object is used for performing
+# document wide selectors using {Document.[]}.
+#
+# `Document` also provides the `ready` method which takes a block and
+# yields it once the document is fully loaded. This is equivalent to the
+# jQuery.ready() function.
 Document = `$(document)`
 
 class << Document
@@ -14,34 +23,11 @@ class << Document
     `return $(selector);`
   end
 
-  # Handles special cases of method missing. If the method name looks
-  # like a element id then it will check the document to see if a
-  # matching element is found. If it is, then it is returned as a
-  # RQuery instance, otherwise `nil` is returned. If the method name
-  # does not look like an element id then super is called which just
-  # yields a NoMethodError.
+  # Returns a printable version of the receiver, which is simply
+  # 'Document'.
   #
-  # @example
-  #
-  #     Document.some_existing_id     # => [<some_element>]
-  #     Document.non_existing_id      # => nil
-  #     Document.foo = "bar"          # => NoMethodError
-  #
-  # @return [RQuery, nil]
-  def method_missing(sym, *)
-    `var id = #{ sym.to_s };
-
-    if (/^([\w\-]*)$/.test(id)) {
-      var el = document.getElementById(id);
-      if (!el) return nil;
-      return $(el);
-    }
-    else {
-      #{ super sym };
-    }`
-  end
-
-  def inspect
+  # @return [String]
+  def to_s
     "Document"
   end
 
@@ -65,15 +51,38 @@ class << Document
   # useful to hold off DOM manipulation until the runtime can be sure
   # that the document content is fully loaded.
   #
+  # @example
+  #
+  #   puts "pre"
+  #
+  #   Document.ready do
+  #     puts "in ready"
+  #   end
+  #
+  #   puts "post"
+  #
+  #   # => "pre"
+  #   # => "post"
+  #   # => "in ready"
+  #
+  # Asynchronous block calling
+  # --------------------------
+  #
+  # This method is potentially async. If the document is already loaded
+  # then the block will be called straight away. If however the document
+  # is not loaded, then the block will execute after the code in the
+  # containing scope (see example above).
+  #
   # @return [self]
   def ready(&blk)
     raise "no block given" unless block_given?
 
     `var fn = function() {
-      #{ blk.call };
+      opal.run(function(){ #{ blk.call }; });
     };
 
     self.ready(fn);`
+
     self
   end
 end
