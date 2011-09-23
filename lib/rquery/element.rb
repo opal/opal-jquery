@@ -1,111 +1,153 @@
-# Represents a collection of actual elements, not always just 1. This is
-# the same as a jQuery of zepto instance which may contain 0, 1, or many
-# actual elements.
+# Represents a native element. This class is used to wrap a native
+# element.
 class Element
-
-  # Make instances toll free to native jquery/zepto instances
-  native_prototype `$.fn`
-
-  # Returns the number of actual elements in this collection.
+  # Search the document for an element with the given id. If found,
+  # it is returned. If one cannot be found then `nil` is returned
+  # instead.
   #
-  # @return [Numeric]
-  def size
-    `return self.length;`
+  # @param [String] id the element id to search for
+  # @return [Element] the found element.
+  def self.find_by_id(id)
+    `var elm = document.getElementById(id);
+
+    if (elm) { return #{ from_native `elm` }; }
+
+    return nil;`
   end
 
-  alias_method :length, :size
-
-  # Returns a string representation of the receiver.
+  # Removes all child nodes from the receiver. This will remove both
+  # element children as well as plain text nodes, even if they are
+  # whitespace.
   #
-  # @return [String]
-  def to_s
-    `var description = [], elm;
+  # @example
+  #
+  #     # Given HTML:
+  #     #
+  #     # <div id="some_element">
+  #     #   <div></div>
+  #     #   <span>Hello</span>
+  #     # </div>
+  #
+  #     Element.find_by_id('some_element').clear
+  #     # => <div id="some_element"></div>
+  #
+  # @return [Element] returns the receiver
+  def clear
+    `var el = self._native;
+    while (el.firstChild) { el.removeChild(el.firstChild); }
+    return self;`
+  end
 
-    for (var i = 0, ii = self.length; i < ii; i++) {
-      elm = self[i];
-      description.push('<' + elm.tagName.toLowerCase() + '>');
+  # Returns `true` if the element is empty, `false` otherwise. An
+  # element is empty if it doesn't have any child nodes or text
+  # content.
+  #
+  # An element is still empty even if it contains whitespace as
+  # whitespace is not counted as content.
+  #
+  # @example
+  #
+  #     # Given HTML:
+  #     #
+  #     # <div id="foo">
+  #     #   <span id="bar">baz</span>
+  #     # </div>
+  #
+  #     foo = Element.find_by_id 'foo'
+  #     bar = Element.find_by_id 'bar'
+  #
+  #     foo.empty?   # => false
+  #     bar.empty?   # => false
+  #     bar.clear
+  #     bar.empty?   # => true
+  #
+  # @return [Boolean] returns if receiver is empty
+  def empty?
+    `return /^\s*$/.test(self.$el.innerHTML);`
+  end
+
+  # Returns this elements next sibling, if one exists. If the receiver
+  # does not have a next sibiling then `nil` is returned.
+  #
+  # Only actual element nodes may be returned, as whitespace or text
+  # nodes are ignored.
+  #
+  # @example
+  #
+  #     # Given HTML:
+  #     #
+  #     # <div id="foo">
+  #     #   <div id="bar"></div>
+  #     #   <div id="baz"></div>
+  #     #   <div id="buz"></div>
+  #     # </div>
+  #
+  #     Element.find_by_id('bar').next  # => #<Element id="baz">
+  #     Element.find_by_id('baz').next  # => #<Element id="buz">
+  #     Element.find_by_id('buz').next  # => nil
+  #
+  # @return [Element] next element
+  def next
+    `var elm = self._native.nextSibling;
+
+    while (elm) {
+      if (elm.nodeType == 1) {
+        return #{ Element.from_native `elm` };
+      }
+      elm = elm.nextSibling;
     }
 
-    return '[' + description.join(', ') + ']';`
+    return nil;`
   end
 
-  # @group Traversing
-
-  # Returns a new Element instance with the element at the given index
-  # as the only member. The `index` may be nagative, in which case the
-  # index will be counted from the end of the collection. If there is no
-  # member at the requested index then `nil` is returned.
+  # Returns this elements previous sibling. `nil` is returned if the
+  # element does not have a prev sibling.
   #
-  # @param [Numeric] index The index to retrieve
-  # @return [Element, nil]
-  def at(index)
-    `var size = self.length;
-
-    if (index < 0) index += size;
-    if (index < 0 || index >= size) return nil;
-    return $(self[index]);`
-  end
-
-  # @endgroup
-
-  # @group Manipulation
-
-  # Returns the text content of the first member in this collection.
+  # Whitespace and text nodes are not included and will be skipped
+  # ensuring that only regular element nodes are returned.
   #
-  # @return [String]
-  def text
-    `return self.text() || '';`
-  end
-
-  # Set the text content of all the members in the receiver.
+  # @example
   #
-  # @param [String] str String content to set
-  # @return [String]
-  def text=(str)
-    `self.text(str);
-    return str;`
-  end
-
-  # Returns the inner html of the first member in this collection as a
-  # string. If this is empty then an empty string is returned.
+  #     # Given HTML:
+  #     #
+  #     # <div id="foo">
+  #     #   <div id="bar"></div>
+  #     #   <div id="baz"></div>
+  #     #   <div id="buz"></div>
+  #     # </div>
   #
-  # @return [String]
-  def html
-    `return self.html() || '';`
-  end
-
-  # Sets the inner html of all the members in this collection to the
-  # given string representing the html. This is set on all members.
+  #     Element.find_by_id('bar').prev  # => nil
+  #     Element.find_by_id('baz').prev  # => #<Element id="bar">
+  #     Element.find_by_id('buz').prev  # => #<Element id="baz">
   #
-  # @param [String] str The html string to set
-  # @return [String]
-  def html=(str)
-    `self.html(str);
-    return str;`
+  # @return [Element] previous element
+  def prev
+    `var elm = self._native.previousSibling;
+
+    while (elm) {
+      if (elm.nodeType == 1) {
+        return #{ Element.from_native `elm` };
+      }
+      elm = elm.previousSibling;
+    }
+
+    return nil;`
   end
 
-  # @endgroup
-
-  # @group Event handlers
-
-  [:click, :mousedown, :mouseup].each do |evt|
-    define_method(evt) do |&block|
-      bind evt, &block
-    end
+  # Returns the tag of the receiver element. This will always be lowercase.
+  #
+  # @example
+  #
+  #     # <div id="foo"></div>
+  #     Element.find_by_id('foo').tag    # => "div"
+  #
+  # @return [String] tag name of the receiver
+  def tag
+    `var tag = self._native.tagName;
+    return tag ? tag.toLowerCase() : '';`
   end
-
-  def bind(event, &block)
-    raise "Element#bind - no block given" unless block_given?
-
-    `var handler = function() {
-      opal.run(function() {#{ block.call }; });
-    };
-
-    self.bind(#{ event.to_s }, handler);`
-
-    block
-  end
-
-  # @endgroup
 end
+
+Element.find_by_id('adam').clear
+Element.find_by_id('ben').clear
 
