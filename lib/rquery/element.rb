@@ -1,13 +1,19 @@
-# Represents a native element. This class is used to wrap a native
-# element.
 class Element
+  ##
+  # The +id+ attribute of the receiver element. Returns +nil+ if no
+  # id is assigned to the element.
+
+  attr_accessor :id
+
+  ##
   # Search the document for an element with the given id. If found,
   # it is returned. If one cannot be found then `nil` is returned
   # instead.
   #
-  # @param [String] id the element id to search for
-  # @return [Element] the found element.
-  def self.find_by_id(id)
+  #     Element.find_by_id :foo     # => #<Element:0x000000>
+  #     Element.find_by_id :bar     # => nil
+
+  def self.find_by_id id
     `var elm = document.getElementById(id);
 
     if (elm) { return #{ from_native `elm` }; }
@@ -15,37 +21,23 @@ class Element
     return nil;`
   end
 
-  # Removes all child nodes from the receiver. This will remove both
-  # element children as well as plain text nodes, even if they are
-  # whitespace.
-  #
-  # @example
-  #
-  #     # Given HTML:
-  #     #
-  #     # <div id="some_element">
-  #     #   <div></div>
-  #     #   <span>Hello</span>
-  #     # </div>
-  #
-  #     Element.find_by_id('some_element').clear
-  #     # => <div id="some_element"></div>
-  #
-  # @return [Element] returns the receiver
-  def clear
-    `var el = self._native;
-    while (el.firstChild) { el.removeChild(el.firstChild); }
-    return self;`
+  def self.body
+    @body ||= self.from_native `document.body`
   end
 
-  # Returns `true` if the element is empty, `false` otherwise. An
+  def self.new type = :div
+    self.from_native `document.createElement(type)`
+  end
+
+  ##
+  # Returns +true+ if the element is empty, +false+ otherwise. An
   # element is empty if it doesn't have any child nodes or text
   # content.
   #
   # An element is still empty even if it contains whitespace as
   # whitespace is not counted as content.
   #
-  # @example
+  # Usage:
   #
   #     # Given HTML:
   #     #
@@ -60,11 +52,49 @@ class Element
   #     bar.empty?   # => false
   #     bar.clear
   #     bar.empty?   # => true
-  #
-  # @return [Boolean] returns if receiver is empty
+
   def empty?
-    `return /^\s*$/.test(self.$el.innerHTML);`
+    /^\s*$/ === @innerHTML
   end
+
+  ##
+  # Removes all child nodes from the receiver. This will remove both
+  # element children as well as plain text nodes, even if they are
+  # whitespace.
+  #
+  # Usage:
+  #
+  #     # Given HTML:
+  #     #
+  #     # <div id="some_element">
+  #     #   <div></div>
+  #     #   <span>Hello</span>
+  #     # </div>
+  #
+  #     Element.find_by_id('some_element').clear
+  #     # => <div id="some_element"></div>
+
+  def clear
+    `var el = self;
+    while (el.firstChild) { el.removeChild(el.firstChild); }
+    return self;`
+  end
+
+  def html= html
+    @innerHTML = html
+  end
+
+  def append elem
+    `self.appendChild(elem)`
+  end
+
+  alias_method :<<, :append
+
+  def remove elem
+    `self.removeChild(elem)`
+  end
+
+  ##
 
   # Returns this elements next sibling, if one exists. If the receiver
   # does not have a next sibiling then `nil` is returned.
@@ -147,7 +177,3 @@ class Element
     return tag ? tag.toLowerCase() : '';`
   end
 end
-
-Element.find_by_id('adam').clear
-Element.find_by_id('ben').clear
-

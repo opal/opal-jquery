@@ -1,1 +1,1 @@
-require 'rquery/element.rb'
+require 'rquery/element'

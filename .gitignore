@@ -6,5 +6,6 @@ extras
 *.gem
 .yardoc
 /examples/**/*.js
-vienna*.js
+/vendor
+/rquery*.js
 
