@@ -21,7 +21,7 @@ describe "Element#empty?" do
   end
 
   after do
-    Element.body.remove @div
+    @div.remove
   end
 
   it "returns true if the element has no children" do

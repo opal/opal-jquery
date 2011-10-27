@@ -10,7 +10,7 @@ describe "Element.find_by_id" do
   end
 
   after do
-    Element.body.remove @div
+    @div.remove
   end
 
   it "should return nil when no elements with the given id exist" do

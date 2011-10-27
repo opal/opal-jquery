@@ -90,8 +90,14 @@ class Element
 
   alias_method :<<, :append
 
-  def remove elem
-    `self.removeChild(elem)`
+  def remove
+    `var parent = self.parentNode;
+
+    if (parent) {
+      parent.removeChild(self);
+    }
+
+    return self;`
   end
 
   ##

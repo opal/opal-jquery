@@ -18,7 +18,7 @@ describe "Element#clear" do
   end
 
   after do
-    Element.body.remove @div
+    @div.remove
   end
 
   it "removes all child nodes and returns self" do
