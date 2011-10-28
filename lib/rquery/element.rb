@@ -1,3 +1,5 @@
+require 'rquery/boot_element'
+
 class Element
   ##
   # The +id+ attribute of the receiver element. Returns +nil+ if no
@@ -149,29 +151,6 @@ class Element
 
   ##
   # :call-seq:
-  #   elm.collect(sym)      -> ary
-  #
-  # Returns an array of all elements relative to +self+. +prop+ should
-  # be a native property name of the receiver element that points to a
-  # relative element (e.g. `parentNode`).
-  #
-  #   elm.collect(:parentNode)
-  #   # => [<body>, <html>]
-  #
-  def collect prop
-    `var elem = self, result = [];
-
-    while (elem = elem[prop]) {
-      if (elem.nodeType === 1) {
-        result.push( #{ Element.from_native `elem` } );
-      }
-    }
-
-    return result;`
-  end
-
-  ##
-  # :call-seq:
   #   elm.ancestors     -> ary
   #
   # Returns an array of all of +self+ ancestors.
@@ -234,36 +213,13 @@ class Element
   #     Element.find_by_id('buz').next  # => nil
   #
   def next
-    `var elm = self._native.nextSibling;
-
-    while (elm) {
-      if (elm.nodeType == 1) {
-        return #{ Element.from_native `elm` };
-      }
-      elm = elm.nextSibling;
-    }
-
-    return nil;`
+    collect_one :nextSibling
   end
 
-  def == other
-    `self === other`
-  end
-
-  def html= html
-    @innerHTML = html
-  end
-
-  def append elem
-    `self.appendChild(elem)`
-  end
-
-  alias_method :<<, :append
-
-
-
-
-
+  ##
+  # :call-seq:
+  #   elm.prev    -> element
+  #
   # Returns this elements previous sibling. `nil` is returned if the
   # element does not have a prev sibling.
   #
@@ -284,19 +240,28 @@ class Element
   #     Element.find_by_id('baz').prev  # => #<Element id="bar">
   #     Element.find_by_id('buz').prev  # => #<Element id="baz">
   #
-  # @return [Element] previous element
   def prev
-    `var elm = self._native.previousSibling;
-
-    while (elm) {
-      if (elm.nodeType == 1) {
-        return #{ Element.from_native `elm` };
-      }
-      elm = elm.previousSibling;
-    }
-
-    return nil;`
+    collect_one :previousSibling
   end
+
+  def == other
+    `self === other`
+  end
+
+  def html= html
+    @innerHTML = html
+  end
+
+  def append elem
+    `self.appendChild(elem)`
+  end
+
+  alias_method :<<, :append
+
+
+
+
+
 
   # Returns the tag of the receiver element. This will always be lowercase.
   #
@@ -309,5 +274,37 @@ class Element
   def tag
     `var tag = self._native.tagName;
     return tag ? tag.toLowerCase() : '';`
+  end
+
+  ##
+  # :call-seq:
+  #   elm[sym]    -> str
+  #   elm[sym]    -> nil
+  #
+  # Returns the value of +self+ attribute named +attribute+, or +nil+ if
+  # it does not exist.
+  #
+  # This method handles any cross browser issues internally.
+  #
+  # :method: []
+  #
+  alias_method :[], :get_attribute
+
+  ##
+  # :call-seq:
+  #   elm.has_class?(name)    -> true
+  #   elm.has_class?(name)    -> false
+  #
+  # Returns +true+ if the receiver has the given class +name+.
+  #
+  def has_class?(name)
+    `
+      var full = self.className;
+
+      if (full === name) return true;
+      if (full === '') return false;
+
+      return (new RegExp("(^|\\s+)" + name + "(\\s+|$)")).test(full);
+    `
   end
 end

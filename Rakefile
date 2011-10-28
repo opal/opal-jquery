@@ -8,7 +8,7 @@ Opal::BundleTask.new do |t|
   t.config :test do
     t.out = 'rquery.test.js'
 
-    t.files = Dir['{lib,spec}/**/*.rb']
+    t.files = Dir['{lib,spec}/**/*.{rb,js}']
 
     t.gem 'opaltest', git: 'git://github.com/adambeynon/opaltest.git'
 
