@@ -294,8 +294,16 @@ class Element
     `self === other`
   end
 
-  def html= html
-    `self.innerHTML = html`
+  def html= str
+    `self.innerHTML = str`
+  end
+
+  def html
+    `self.innerHTML`
+  end
+
+  def text
+    `self.innerText`
   end
 
   def append elem
@@ -352,5 +360,22 @@ class Element
 
       return (new RegExp("(^|\\s+)" + name + "(\\s+|$)")).test(full);
     `
+  end
+
+  def add_class name
+    unless has_class? name
+      `self.className += (self.className ? ' ' : '') + name;`
+    end
+
+    self
+  end
+
+  def remove_class name
+    `self.className = self.className.replace(new RegExp("(^|\\s+)" + name + "(\\s+|$)"), '')`
+    self
+  end
+
+  def class_name
+    `self.className`
   end
 end
