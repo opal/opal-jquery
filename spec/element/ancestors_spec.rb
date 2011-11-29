@@ -21,7 +21,7 @@ describe "Element#ancestors" do
   it "should return an array of elements including <html>" do
     @div.ancestors.should == [Element.body, Element.html]
     Element.body.ancestors.should == [Element.html]
-    Element.find_by_id('bar').ancestors.size.should == 4
+    Element.query('#bar').ancestors.size.should == 4
   end
 
   it "should return an empty array when called on <html>" do

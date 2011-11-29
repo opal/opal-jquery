@@ -21,12 +21,12 @@ describe "Element#remove" do
   end
 
   it "should return the element upon removal" do
-    bar1 = Element.find_by_id('bar1')
+    bar1 = Element.query('#bar1')
     bar1.remove.should == bar1
   end
 
   it "should completely remove the element from its parent" do
-    Element.find_by_id('bar2').remove
-    Element.find_by_id('foo2').empty?.should be_true
+    Element.query('#bar2').remove
+    Element.query('#foo2').empty?.should be_true
   end
 end

@@ -16,22 +16,22 @@ describe "Element#[]" do
   end
 
   it "should return present attributes using the given name" do
-    a = Element.find_by_id('aref_spec_1')
+    a = Element.query '#aref_spec_1'
     a['onclick'].should == "alert('foo');"
 
-    b = Element.find_by_id('aref_spec_2')
+    b = Element.query '#aref_spec_2'
     b['href'].should == 'bar.html'
     b['title'].should == 'click me'
   end
 
   it "should except both string and symbol values" do
-    b = Element.find_by_id('aref_spec_2')
+    b = Element.query '#aref_spec_2'
     b['href'].should == 'bar.html'
     b[:href].should == 'bar.html'
   end
 
   it "should return nil when the element does not have the given attribute" do
-    a = Element.find_by_id('aref_spec_1')
+    a = Element.query '#aref_spec_1'
     a['href'].should == nil
     a[:href].should == nil
 

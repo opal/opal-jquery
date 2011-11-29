@@ -1,38 +1,62 @@
+require 'rquery/sizzle'
 require 'rquery/boot_element'
 
 class Element
   ##
-  # The +id+ attribute of the receiver element. Returns +nil+ if no
-  # id is assigned to the element.
-
-  attr_accessor :id
+  # Helper function to give the native element the class and method
+  # table properties so that it can act like a regular ruby object.
+  #
+  # This is inlined purely for performance: converting lots of
+  # elements will add overhead we wish to avoid.
+  `
+    function wrap_element(elm) {
+      elm.$k = self;
+      elm.$m = self.$m_tbl;
+      return elm;
+    };
+  `
 
   ##
-  # Search the document for an element with the given id. If found,
-  # it is returned. If one cannot be found then `nil` is returned
-  # instead.
+  # Main query method. If given a string selector that looks like an id,
+  # then a single element, or nil, will be returned.
   #
-  #     Element.find_by_id :foo     # => #<Element:0x000000>
-  #     Element.find_by_id :bar     # => nil
+  # If a generic selector is given then an array of elements will be
+  # returned.
+  #
+  # Usage:
+  #
+  #     Element.query '#foo'      # => #<Element foo>
+  #     Element.query 'p'         # => [#<Element>, ...]
+  def self.query sel
+    `
+      if (sel && typeof(sel) === 'string' && sel.charAt(0) === '#') {
+        var elm = document.getElementById(sel.substr(1));
 
-  def self.find_by_id id
-    `var elm = document.getElementById(id);
+        if (elm) {
+          return wrap_element(elm);
+        }
+      }
 
-    if (elm) { return #{ from_native `elm` }; }
+      var arr = Sizzle(sel);
 
-    return nil;`
+      for (var i = 0, ii = arr.length; i < ii; i++) {
+        arr[i] = wrap_element(arr[i]);
+      }
+
+      return arr;
+    `
   end
 
   def self.body
-    @body ||= self.from_native `document.body`
+    `wrap_element(document.body)`
   end
 
   def self.html
-    @html ||= self.from_native `document.body.parentNode`
+    `wrap_element(document.body.parentNode)`
   end
 
   def self.new type = :div
-    self.from_native `document.createElement(type)`
+    `wrap_element(document.createElement(type))`
   end
 
   ##
@@ -46,12 +70,14 @@ class Element
   #   Element.find_by_id('foo').inspect     # => <div id="foo">
   #
   def inspect
-    `var str = "<" + self.tagName.toLowerCase(), val;
+    `
+      var str = "<" + self.tagName.toLowerCase(), val;
 
-    if (val = self.id) { str += ' id="' + val + '"'; }
-    if (val = self.className) { str += ' class="' + val + '"'; }
+      if (val = self.id) { str += ' id="' + val + '"'; }
+      if (val = self.className) { str += ' class="' + val + '"'; }
 
-    return str + '>';`
+      return str + '>';
+    `
   end
 
   ##
@@ -82,13 +108,15 @@ class Element
   #     </div>
   #
   def remove
-    `var parent = self.parentNode;
+    `
+      var parent = self.parentNode;
 
-    if (parent) {
-      parent.removeChild(self);
-    }
+      if (parent) {
+        parent.removeChild(self);
+      }
 
-    return self;`
+      return self;
+    `
   end
 
   ##
@@ -144,9 +172,15 @@ class Element
   #     # => <div id="some_element"></div>
   #
   def clear
-    `var el = self;
-    while (el.firstChild) { el.removeChild(el.firstChild); }
-    return self;`
+    `
+      var el = self;
+
+      while (el.firstChild) {
+        el.removeChild(el.firstChild);
+      }
+
+      return self;
+    `
   end
 
   ##
@@ -244,12 +278,24 @@ class Element
     collect_one :previousSibling
   end
 
+  ##
+  # The +id+ attribute of the receiver element. Returns +nil+ if no
+  # id is assigned to the element.
+
+  def id
+    `self.id`
+  end
+
+  def id= id
+    `self.id = id`
+  end
+
   def == other
     `self === other`
   end
 
   def html= html
-    @innerHTML = html
+    `self.innerHTML = html`
   end
 
   def append elem

@@ -15,10 +15,10 @@ describe "Element#next_siblings" do
 
     Element.body << @div
 
-    @p_a = Element.find_by_id('a')
-    @p_b = Element.find_by_id('b')
-    @p_c = Element.find_by_id('c')
-    @p_d = Element.find_by_id('d')
+    @p_a = Element.query '#a'
+    @p_b = Element.query '#b'
+    @p_c = Element.query '#c'
+    @p_d = Element.query '#d'
   end
 
   after do

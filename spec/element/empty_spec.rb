@@ -25,12 +25,12 @@ describe "Element#empty?" do
   end
 
   it "returns true if the element has no children" do
-    Element.find_by_id('foo').empty?.should == true
-    Element.find_by_id('baz').empty?.should == false
-    Element.find_by_id('biz').empty?.should == false
+    Element.query('#foo').empty?.should == true
+    Element.query('#baz').empty?.should == false
+    Element.query('#biz').empty?.should == false
   end
 
   it "returns true if there is just whitespace in the element" do
-    Element.find_by_id('bar').empty?.should == true
+    Element.query('#bar').empty?.should == true
   end
 end

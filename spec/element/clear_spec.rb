@@ -22,12 +22,12 @@ describe "Element#clear" do
   end
 
   it "removes all child nodes and returns self" do
-    e = Element.find_by_id 'foo'
+    e = Element.query '#foo'
     e.clear.should == e
   end
 
   it "leaves the element empty" do
-    e = Element.find_by_id 'bar'
+    e = Element.query '#bar'
     e.clear
     e.empty?.should == true
   end
