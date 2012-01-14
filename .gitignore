@@ -1,11 +1,4 @@
 .DS_Store
-doc
-extras
-/pkg
-/tmp
 *.gem
-.yardoc
-/examples/**/*.js
-/vendor
-/rquery*.js
-
+/*.js
+Gemfile.lock
