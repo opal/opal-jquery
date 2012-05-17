@@ -1,39 +1,53 @@
-require File.expand_path('../../spec_helper', __FILE__)
-
 describe "Element#add_class" do
   before do
-    @div = Element.new :div
+    @div = Element.new
+
+    @div.id   = 'add-class-spec'
     @div.html = <<-HTML
-      <div id="add_class1"></div>
-      <div id="add_class2" class="bar"></div>
+      <div id="foo" class="apples"></div>
+      <div id="bar"></div>
+      <div id="baz" class="lemons bananas"></div>
+      <div id="buz" class="mangos"></div>
     HTML
 
-    Element.body << @div
+    @div.append_to_body
   end
 
   after do
     @div.remove
   end
 
-  it "adds the given class to the receivers class list" do
-    a = Element.query '#add_class1'
-    a.has_class?('foo').should == false
-    a.add_class('foo')
-    a.has_class?('foo').should == true
+  it "should add the given class_name onto the element" do
+    foo = Element.id 'foo'
+    foo.add_class 'oranges'
+    foo.class_name.should == 'apples oranges'
+
+    bar = Element.id 'bar'
+    bar.add_class 'pineapples'
+    bar.class_name.should == 'pineapples'
   end
 
-  it "does not modify class if reciever already has class name" do
-    a = Element.query '#add_class2'
-    a.has_class?('bar').should == true
-    a.add_class('bar')
-    a.has_class?('bar').should == true
+  it "should not add the class if the element already has given class" do
+    baz = Element.id 'baz'
+    baz.add_class 'lemons'
+    baz.class_name.should == 'lemons bananas'
+
+    baz.add_class 'bananas'
+    baz.class_name.should == 'lemons bananas'
+
+    baz.add_class 'grapes'
+    baz.class_name.should == 'lemons bananas grapes'
+
+    buz = Element.id 'buz'
+    buz.add_class 'mangos'
+    buz.class_name.should == 'mangos'
+
+    buz.add_class 'melons'
+    buz.class_name.should == 'mangos melons'
   end
 
   it "returns self" do
-    a = Element.query('#add_class1')
-    b = Element.query('#add_class2')
-
-    a.add_class('foo').should equal(a)
-    b.add_class('bar').should equal(b)
+    spec = Element.id('add-class-spec')
+    spec.add_class('wow').should == spec
   end
 end

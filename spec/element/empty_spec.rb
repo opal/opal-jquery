@@ -1,36 +1,31 @@
-require File.expand_path('../../spec_helper', __FILE__)
-
 describe "Element#empty?" do
   before do
-    @div = Element.new :div
-    @div.id = :empty_spec
+    @div = Element.new
+
+    @div.id   = 'empty_spec'
     @div.html = <<-HTML
       <div id="foo"></div>
-      <div id="bar">
-
-      </div>
-
+      <div id="bar"></div>
       <div id="baz">
         <span></span>
       </div>
-
       <div id="biz">Hello</div>
     HTML
 
-    Element.body << @div
+    @div.append_to_body
   end
 
   after do
     @div.remove
   end
 
-  it "returns true if the element has no children" do
-    Element.query('#foo').empty?.should == true
-    Element.query('#baz').empty?.should == false
-    Element.query('#biz').empty?.should == false
+  it "returns true if the element has no children, false otherwise" do
+    Element.find_by_id('foo').empty?.should be_true
+    Element.find_by_id('baz').empty?.should be_false
+    Element.find_by_id('biz').empty?.should be_false
   end
 
   it "returns true if there is just whitespace in the element" do
-    Element.query('#bar').empty?.should == true
+    Element.find_by_id('bar').empty?.should be_true
   end
 end
