@@ -179,6 +179,31 @@ class Element
 
   # @!endgroup
 
+  # @!group Events
+
+  def on(name, &block)
+    return unless block_given?
+
+    %x{
+      var el = this.el;
+
+      var func = function(evt) {
+        block.call(block._s);
+        return true;
+      };
+
+      if (el.addEventListener) {
+        el.addEventListener(name, func, false);
+      }
+      else {
+        el.attachEvent(name, func);
+      }
+    }
+    block
+  end
+
+  # @!endgroup
+
   # Returns an array of elements matching the given css selector that
   # are within the context of this element. That means, that only
   # elements that are decendants of this element will be matched.
