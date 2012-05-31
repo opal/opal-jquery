@@ -17,6 +17,7 @@ There are two handy methods for quickly getting access to elements:
 
 ```ruby
 Element.id 'foo'
+# => [<div id="foo">]
 ```
 
 This will get the element with the given id and return a new `Element`
@@ -28,6 +29,7 @@ use:
 
 ```ruby
 Element.find '.some-class'
+# => [<div id="apple" class="some-class">, <div class="some-class">]
 ```
 
 Any valid css selector that works with jquery can be used with `.find`.
@@ -35,8 +37,8 @@ Any valid css selector that works with jquery can be used with `.find`.
 Finally, you can create a new element using the normal constructor:
 
 ```ruby
-Element.new       # => new div element
-Element.new 'p'   # => new p element
+Element.new       # => [<div>]
+Element.new 'p'   # => [<div>]
 ```
 
 ### Interacting with elements
