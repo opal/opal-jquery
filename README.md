@@ -65,6 +65,43 @@ el.remove_class 'woosh'
 el.class_name           # => "kapow"
 ```
 
+#### CSS Styles
+
+```html
+<div id="foo" style="color:red"></div>
+```
+
+```ruby
+foo = Element.id 'foo'
+
+foo.css 'color'           # => "red"
+foo.css 'color', 'blue'
+foo.css 'color'           # => "blue"
+```
+
+Of course there will be browser differences as some browsers return
+RGB colors, some hex colors and some return the real name.
+
+#### Attributes
+
+Accessing attributes (jquery `attr()` method) is a little easier in
+rquery:
+
+```html
+<div id="foo" title="Hello"></div>
+```
+
+```ruby
+foo = Element.id 'foo'
+
+foo[:title]                 # => "Hello"
+foo[:title] = "Goodbye"
+foo[:title]                 # => "Goodbye"
+```
+
+Strings and symbols can be used for the names interchangeably. If the
+requested attribute does not exist, then `nil` is returned.
+
 ## License
 
 RQuery is released under the MIT License

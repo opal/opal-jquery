@@ -6,8 +6,6 @@ require 'opal'
 Opal::BuilderTask.new do |t|
   t.name = 'rquery'
   t.dependencies = ['opal-spec']
-  t.main = 'rquery'
-  t.specs_main = 'opal-spec/autorun'
 end
 
 desc "Build all examples"

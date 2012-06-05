@@ -20,6 +20,21 @@ class Element < `jQuery`
     `$(document.createElement(tag))`
   end
 
+  def [](name)
+    %x{
+      var attr = this.attr(name);
+      return attr == null ? nil : attr;
+    }
+  end
+
+  def []=(name, value)
+    `this.attr(name, value)`
+  end
+
+  def add_class(name)
+    `this.addClass(name)`
+  end
+
   def append_to_body
     `this.appendTo(document.body)`
   end
@@ -43,6 +58,17 @@ class Element < `jQuery`
       }
     }
     name
+  end
+
+  def css(name, value)
+    %x{
+      if (value == null) {
+        return this.css(name);
+      }
+      else {
+        return this.css(name, value);
+      }
+    }
   end
 
   def each
@@ -123,6 +149,10 @@ class Element < `jQuery`
 
   def remove
     `this.remove()`
+  end
+
+  def remove_class(name)
+    `this.removeClass(name)`
   end
 
   alias size length
