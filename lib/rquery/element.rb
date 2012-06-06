@@ -39,6 +39,22 @@ class Element < `jQuery`
     `this.appendTo(document.body)`
   end
 
+  def at(index)
+    %x{
+      var length = this.length;
+
+      if (index < 0) {
+        index += length;
+      }
+
+      if (index < 0 || index >= length) {
+        return nil;
+      }
+
+      return $(this[index]);
+    }
+  end
+
   def class_name
     %x{
       var first = this[0];
@@ -76,6 +92,10 @@ class Element < `jQuery`
       yield `$(this[i])`
     `}`
     self
+  end
+
+  def first
+    `this.length ? this.first() : nil`
   end
 
   def has_class?(name)
@@ -156,4 +176,12 @@ class Element < `jQuery`
   end
 
   alias size length
+
+  def value
+    `this.val()`
+  end
+
+  def value=(val)
+    `this.val(val)`
+  end
 end
