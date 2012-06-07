@@ -1,3 +1,5 @@
+require 'rquery'
+
 Document.ready? do
   count  = 0
   target = Element.id 'target'
