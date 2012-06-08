@@ -34,6 +34,10 @@ class Element < `fn`
     `$(document.createElement(tag))`
   end
 
+  def self.parse(str)
+    `$(str)`
+  end
+
   def [](name)
     `this.attr(name) || ""`
   end

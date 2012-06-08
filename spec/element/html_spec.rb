@@ -1,14 +1,13 @@
 describe "Element#html" do
   before do
-    @div = Element.new
+    @div = Element.parse <<-HTML
+      <div id="html-spec">
+        <div id="foo">Hey there</div>
+        <div id="bar"><p>Erm</p></div>
 
-    @div.id = "html-spec"
-    @div.html = <<-HTML
-      <div id="foo">Hey there</div>
-      <div id="bar"><p>Erm</p></div>
-
-      <div class="bridge">Hello</div>
-      <div class="bridge">Hello as well</div>
+        <div class="bridge">Hello</div>
+        <div class="bridge">Hello as well</div>
+      </div>
     HTML
 
     @div.append_to_body

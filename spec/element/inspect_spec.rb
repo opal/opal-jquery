@@ -1,12 +1,11 @@
 describe "Element#inspect" do
   before do
-    @div = Element.new
-
-    @div.id = 'inspect-spec'
-    @div.html = <<-HTML
-      <div id="foo"></div>
-      <div class="bar"></div>
-      <p id="lol" class="bar"></div>
+    @div = Element.parse <<-HTML
+      <div id="insert-spec">
+        <div id="foo"></div>
+        <div class="bar"></div>
+        <p id="lol" class="bar"></div>
+      </div>
     HTML
 
     @div.append_to_body

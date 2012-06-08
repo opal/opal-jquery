@@ -1,16 +1,15 @@
 describe "Element#value" do
   before do
-    @div = Element.new
+    @div = Element.parse <<-HTML
+      <div id="value-spec">
+        <select id="foo">
+          <option selected="selected">Hello</option>
+          <option>World</option>
+        </select>
 
-    @div.id = 'value-spec'
-    @div.html = <<-HTML
-      <select id="foo">
-        <option selected="selected">Hello</option>
-        <option>World</option>
-      </select>
-
-      <input id="bar" type="text" value="Blah"></input>
-      <div id="baz"></div>
+        <input id="bar" type="text" value="Blah"></input>
+        <div id="baz"></div>
+      </div>
     HTML
 
     @div.append_to_body

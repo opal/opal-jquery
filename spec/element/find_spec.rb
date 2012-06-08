@@ -1,12 +1,11 @@
 describe "Element.find" do
   before do
-    @div = Element.new
-
-    @div.id = 'find-spec'
-    @div.html = <<-HTML
-      <div class="find-foo"></div>
-      <div class="find-bar"></div>
-      <div class="find-foo"></div>
+    @div = Element.parse <<-HTML
+      <div id="find-spec">
+        <div class="find-foo"></div>
+        <div class="find-bar"></div>
+        <div class="find-foo"></div>
+      </div>
     HTML
 
     @div.append_to_body

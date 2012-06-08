@@ -1,16 +1,15 @@
 describe "Element#remove_clas" do
   before do
-    @div = Element.new
+    @div = Element.parse <<-HTML
+      <div id="remove-class-spec">
+        <div id="foo"></div>
 
-    @div.id = 'remove-class-spec'
-    @div.html = <<-HTML
-      <div id="foo"></div>
+        <div id="bar" class="lemons"></div>
+        <div id="baz" class="apples oranges"></div>
+        <div id="buz" class="pineapples mangos"></div>
 
-      <div id="bar" class="lemons"></div>
-      <div id="baz" class="apples oranges"></div>
-      <div id="buz" class="pineapples mangos"></div>
-
-      <div id="bleh" class="fruit"></div>
+        <div id="bleh" class="fruit"></div>
+      </div>
     HTML
 
     @div.append_to_body

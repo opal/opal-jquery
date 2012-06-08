@@ -1,11 +1,10 @@
 describe "Element.id" do
   before do
-    @div = Element.new
-
-    @div.id = 'element-id-spec'
-    @div.html = <<-HTML
-      <div id="foo"></div>
-      <div id="bar"></div>
+    @div = Element.parse <<-HTML
+      <div id="element-id-spec">
+        <div id="foo"></div>
+        <div id="bar"></div>
+      </div>
     HTML
 
     @div.append_to_body

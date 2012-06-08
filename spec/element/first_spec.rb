@@ -1,12 +1,11 @@
 describe "Element#first" do
   before do
-    @div = Element.new
-
-    @div.id = 'first-spec'
-    @div.html = <<-HTML
-      <div id="foo" class="bar"></div>
-      <div id="buz" class="bar"></div>
-      <div id="biz" class="bar"></div>
+    @div = Element.parse <<-HTML
+      <div id="first-spec">
+        <div id="foo" class="bar"></div>
+        <div id="buz" class="bar"></div>
+        <div id="biz" class="bar"></div>
+      </div>
     HTML
 
     @div.append_to_body
