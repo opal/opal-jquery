@@ -1,6 +1,6 @@
-describe "Element#[]" do
+describe "DOM#[]" do
   before do
-    @div = Element.new
+    @div = DOM.new
 
     @div.id = 'attr-reference-spec'
     @div.html = <<-HTML
@@ -17,11 +17,11 @@ describe "Element#[]" do
   end
 
   it "should retrieve the attr value from the element" do
-    Element.id('foo')[:title].should == "Hello there!"
+    DOM.id('foo')[:title].should == "Hello there!"
   end
 
   it "should return an empty string for an empty attribute value" do
-    Element.id('bar')[:title].should == ""
-    Element.id('baz')[:title].should == ""
+    DOM.id('bar')[:title].should == ""
+    DOM.id('baz')[:title].should == ""
   end
 end

@@ -12,8 +12,7 @@
   }
 }
 
-class Element < `fn`
-
+class DOM < `fn`
   def self.find(selector)
     `$(selector)`
   end
@@ -180,6 +179,10 @@ class Element < `fn`
       });
     }
     block
+  end
+
+  def parent
+    `this.parent()`
   end
 
   def remove

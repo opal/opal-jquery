@@ -1,6 +1,6 @@
-describe "Element#each" do
+describe "DOM#each" do
   before do
-    @div = Element.new
+    @div = DOM.new
 
     @div.id = 'each-spec'
     @div.html = <<-HTML
@@ -18,7 +18,7 @@ describe "Element#each" do
 
   it "should loop over each element passing element to block" do
     result = []
-    Element.find('.foo').each do |e|
+    DOM.find('.foo').each do |e|
       result << e.id
     end
 
@@ -26,7 +26,7 @@ describe "Element#each" do
   end
 
   it "should not call the block with an empty element set" do
-    Element.find('.bad-each-class').each do
+    DOM.find('.bad-each-class').each do
       raise "shouldn't get here"
     end
   end

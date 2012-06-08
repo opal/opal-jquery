@@ -1,6 +1,6 @@
-describe "Element.id" do
+describe "DOM.id" do
   before do
-    @div = Element.parse <<-HTML
+    @div = DOM.parse <<-HTML
       <div id="element-id-spec">
         <div id="foo"></div>
         <div id="bar"></div>
@@ -15,11 +15,11 @@ describe "Element.id" do
   end
 
   it "should return a new instance with the element with given id" do
-    Element.id('foo').should be_kind_of(Element)
-    Element.id('bar').id.should == 'bar'
+    DOM.id('foo').should be_kind_of(DOM)
+    DOM.id('bar').id.should == 'bar'
   end
 
   it "should return nil if no element could be found" do
-    Element.id('bad-element-id').should be_nil
+    DOM.id('bad-element-id').should be_nil
   end
 end

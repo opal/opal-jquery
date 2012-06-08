@@ -1,6 +1,6 @@
-describe "Element#at" do
+describe "DOM#at" do
   before do
-    @div = Element.new
+    @div = DOM.new
 
     @div.id = 'at-spec'
     @div.html = <<-HTML
@@ -17,7 +17,7 @@ describe "Element#at" do
   end
 
   it "returns the element at the given index" do
-    foos = Element.find '.foo'
+    foos = DOM.find '.foo'
     foos.length.should == 3
 
     foos.at(0).id.should == "blah"
@@ -26,7 +26,7 @@ describe "Element#at" do
   end
 
   it "counts from the last index for negative values" do
-    foos = Element.find '.foo'
+    foos = DOM.find '.foo'
 
     foos.at(-1).id.should == "bluh"
     foos.at(-2).id.should == "bleh"
@@ -34,7 +34,7 @@ describe "Element#at" do
   end
 
   it "returns nil for indexes outside range" do
-    foos = Element.find '.foo'
+    foos = DOM.find '.foo'
 
     foos.at(-4).should == nil
     foos.at(4).should == nil

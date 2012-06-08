@@ -1,6 +1,6 @@
-describe "Element#inspect" do
+describe "DOM#inspect" do
   before do
-    @div = Element.parse <<-HTML
+    @div = DOM.parse <<-HTML
       <div id="insert-spec">
         <div id="foo"></div>
         <div class="bar"></div>
@@ -16,11 +16,11 @@ describe "Element#inspect" do
   end
 
   it "should return a string representation of the elements" do
-    Element.id('foo').inspect.should == '[<div id="foo">]'
-    Element.find('.bar').inspect.should == '[<div class="bar">, <p id="lol" class="bar">]'
+    DOM.id('foo').inspect.should == '[<div id="foo">]'
+    DOM.find('.bar').inspect.should == '[<div class="bar">, <p id="lol" class="bar">]'
   end
 
   it "should return '[]' when called on empty element set" do
-    Element.find('.inspect-spec-none').inspect.should == '[]'
+    DOM.find('.inspect-spec-none').inspect.should == '[]'
   end
 end

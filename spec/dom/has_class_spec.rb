@@ -1,6 +1,6 @@
-describe "Element#has_class?" do
+describe "DOM#has_class?" do
   before do
-    @div = Element.parse <<-HTML
+    @div = DOM.parse <<-HTML
       <div id="has-class-spec">
         <div id="foo" class="apples"></div>
         <div id="bar" class="lemons bananas"></div>
@@ -20,8 +20,8 @@ describe "Element#has_class?" do
   end
 
   it "should return true if the element has the given class" do
-    Element.id('foo').has_class?("apples").should be_true
-    Element.id('foo').has_class?("oranges").should be_false
-    Element.id('bar').has_class?("lemons").should be_true
+    DOM.id('foo').has_class?("apples").should be_true
+    DOM.id('foo').has_class?("oranges").should be_false
+    DOM.id('bar').has_class?("lemons").should be_true
   end
 end

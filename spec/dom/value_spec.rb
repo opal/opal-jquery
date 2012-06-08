@@ -1,6 +1,6 @@
-describe "Element#value" do
+describe "DOM#value" do
   before do
-    @div = Element.parse <<-HTML
+    @div = DOM.parse <<-HTML
       <div id="value-spec">
         <select id="foo">
           <option selected="selected">Hello</option>
@@ -20,21 +20,21 @@ describe "Element#value" do
   end
 
   it "should return the selected value of select elements" do
-    Element.id('foo').value.should == "Hello"
+    DOM.id('foo').value.should == "Hello"
   end
 
   it "should return the value of normal input fields" do
-    Element.id('bar').value.should == "Blah"
+    DOM.id('bar').value.should == "Blah"
   end
 
   it "should return an empty string for elements with no value attr" do
-    Element.id('baz').value.should == ""
+    DOM.id('baz').value.should == ""
   end
 end
 
-describe "Element#value=" do
+describe "DOM#value=" do
   before do
-    @div = Element.new
+    @div = DOM.new
 
     @div.id = 'value-set-spec'
     @div.html = <<-HTML
@@ -49,7 +49,7 @@ describe "Element#value=" do
   end
 
   it "should set the value of the element to the given value" do
-    foo = Element.id 'foo'
+    foo = DOM.id 'foo'
     foo.value.should == ""
 
     foo.value = "Hi"

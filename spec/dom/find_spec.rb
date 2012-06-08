@@ -1,6 +1,6 @@
-describe "Element.find" do
+describe "DOM.find" do
   before do
-    @div = Element.parse <<-HTML
+    @div = DOM.parse <<-HTML
       <div id="find-spec">
         <div class="find-foo"></div>
         <div class="find-bar"></div>
@@ -16,18 +16,18 @@ describe "Element.find" do
   end
 
   it "should find all elements matching CSS selector" do
-    foo = Element.find '.find-foo'
-    foo.should be_kind_of(Element)
+    foo = DOM.find '.find-foo'
+    foo.should be_kind_of(DOM)
     foo.length.should == 2
 
-    bar = Element.find '.find-bar'
-    bar.should be_kind_of(Element)
+    bar = DOM.find '.find-bar'
+    bar.should be_kind_of(DOM)
     bar.length.should == 1
   end
 
-  it "should return an empty Element instance with length 0 when no matching" do
-    baz = Element.find '.find-baz'
-    baz.should be_kind_of(Element)
+  it "should return an empty DOM instance with length 0 when no matching" do
+    baz = DOM.find '.find-baz'
+    baz.should be_kind_of(DOM)
     baz.length.should == 0
   end
 end

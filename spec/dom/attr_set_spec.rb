@@ -1,6 +1,6 @@
-describe "Element#[]=" do
+describe "DOM#[]=" do
   before do
-    @div = Element.new
+    @div = DOM.new
 
     @div.id = 'attr-set-spec'
     @div.html = <<-HTML
@@ -16,7 +16,7 @@ describe "Element#[]=" do
   end
 
   it "should set the attr value on the element" do
-    bar = Element.id 'bar'
+    bar = DOM.id 'bar'
     bar[:title].should == ""
 
     bar[:title] = "Oranges"
@@ -24,7 +24,7 @@ describe "Element#[]=" do
   end
 
   it "should replace the old value for the attribute" do
-    foo = Element.id 'foo'
+    foo = DOM.id 'foo'
     foo[:title].should == "Apples"
 
     foo[:title] = "Pineapple"
