@@ -1,4 +1,18 @@
-class Element < `jQuery`
+%x{
+  var fn;
+
+  if (typeof(jQuery) !== 'undefined') {
+    fn = jQuery;
+  }
+  else if (typeof(Zepto) !== 'undefined') {
+    fn = Zepto.fn.constructor;
+  }
+  else {
+    #{ raise "no DOM library found"};
+  }
+}
+
+class Element < `fn`
 
   def self.find(selector)
     `$(selector)`
