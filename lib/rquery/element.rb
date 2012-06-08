@@ -35,10 +35,7 @@ class Element < `fn`
   end
 
   def [](name)
-    %x{
-      var attr = this.attr(name);
-      return attr == null ? nil : attr;
-    }
+    `this.attr(name) || ""`
   end
 
   def []=(name, value)
@@ -192,7 +189,7 @@ class Element < `fn`
   alias size length
 
   def value
-    `this.val()`
+    `this.val() || ""`
   end
 
   def value=(val)

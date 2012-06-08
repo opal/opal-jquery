@@ -20,11 +20,8 @@ describe "Element#[]" do
     Element.id('foo')[:title].should == "Hello there!"
   end
 
-  it "should return nil for an undefined value" do
-    Element.id('bar')[:title].should == nil
-  end
-
   it "should return an empty string for an empty attribute value" do
+    Element.id('bar')[:title].should == ""
     Element.id('baz')[:title].should == ""
   end
 end

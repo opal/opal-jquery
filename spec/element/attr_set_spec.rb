@@ -17,7 +17,7 @@ describe "Element#[]=" do
 
   it "should set the attr value on the element" do
     bar = Element.id 'bar'
-    bar[:title].should == nil
+    bar[:title].should == ""
 
     bar[:title] = "Oranges"
     bar[:title].should == "Oranges"

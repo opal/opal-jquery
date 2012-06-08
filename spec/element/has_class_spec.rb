@@ -25,10 +25,4 @@ describe "Element#has_class?" do
     Element.id('foo').has_class?("oranges").should be_false
     Element.id('bar').has_class?("lemons").should be_true
   end
-
-  it "should return true if any of the elements has the class name" do
-    Element.find('.tom').has_class?("arthur").should be_true
-    Element.find('.tom').has_class?("tom").should be_true
-    Element.find('.tom').has_class?("julie").should be_false
-  end
 end
