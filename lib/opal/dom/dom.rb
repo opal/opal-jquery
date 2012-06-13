@@ -79,6 +79,10 @@ class DOM < `fn`
     }
   end
 
+  def children
+    `this.children()`
+  end
+
   def class_name
     %x{
       var first = this[0];
