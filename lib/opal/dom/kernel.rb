@@ -3,4 +3,8 @@ module Kernel
     `alert(msg)`
     nil
   end
+
+  def DOM(selector)
+    `$(selector)`
+  end
 end
