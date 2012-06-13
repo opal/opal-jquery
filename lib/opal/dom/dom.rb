@@ -45,12 +45,22 @@ class DOM < `fn`
     `this.attr(name, value)`
   end
 
+  def <<(str)
+    `this.append(str)`
+  end
+
   def add_class(name)
     `this.addClass(name)`
   end
 
+  alias append <<
+
   def append_to_body
     `this.appendTo(document.body)`
+  end
+
+  def append_to_head
+    `this.appendTo(document.head)`
   end
 
   def at(index)
