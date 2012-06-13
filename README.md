@@ -1,14 +1,16 @@
-# RQuery
+# opal-dom
 
-RQuery is a jQuery wrapper for Opal, which gives ruby access to the DOM.
+opal-dom is a jQuery wrapper for Opal, which gives ruby access to the
+DOM. It is also compatible with zepto.
 
-## Element
+## DOM
 
-The `Element` class is toll-free bridged onto instances of jquery. This
-means that any jquery object is also an `Element` instance, and both
-can be used interoperably.
+The `DOM` class is toll-free bridged onto instances of jquery. This
+means that any jquery object is also an `DOM` instance, and both
+can be used interoperably. It will bridge to zepto if jquery is not
+present.
 
-This also means that an `Element` instance actually represents 0 or
+This also means that an `DOM` instance actually represents 0 or
 more real elements from the document.
 
 ### Finding Elements
@@ -16,11 +18,11 @@ more real elements from the document.
 There are two handy methods for quickly getting access to elements:
 
 ```ruby
-Element.id 'foo'
+DOM.id 'foo'
 # => [<div id="foo">]
 ```
 
-This will get the element with the given id and return a new `Element`
+This will get the element with the given id and return a new `DOM`
 instance (jquery object) that wraps the matched element. If no element
 with the given id was found, then nil is returned.
 
@@ -28,7 +30,7 @@ To find multiple elements, using a class name for instance, you can
 use:
 
 ```ruby
-Element.find '.some-class'
+DOM.find '.some-class'
 # => [<div id="apple" class="some-class">, <div class="some-class">]
 ```
 
@@ -37,8 +39,8 @@ Any valid css selector that works with jquery can be used with `.find`.
 Finally, you can create a new element using the normal constructor:
 
 ```ruby
-Element.new       # => [<div>]
-Element.new 'p'   # => [<div>]
+DOM.new       # => [<div>]
+DOM.new 'p'   # => [<div>]
 ```
 
 ### Interacting with elements
@@ -50,7 +52,7 @@ Element.new 'p'   # => [<div>]
 ```
 
 ```ruby
-el = Element.id 'foo'
+el = DOM.id 'foo'
 
 el.class_name           # => true
 el.has_class? 'woosh'   # => false
@@ -72,7 +74,7 @@ el.class_name           # => "kapow"
 ```
 
 ```ruby
-foo = Element.id 'foo'
+foo = DOM.id 'foo'
 
 foo.css 'color'           # => "red"
 foo.css 'color', 'blue'
@@ -92,7 +94,7 @@ rquery:
 ```
 
 ```ruby
-foo = Element.id 'foo'
+foo = DOM.id 'foo'
 
 foo[:title]                 # => "Hello"
 foo[:title] = "Goodbye"
@@ -104,4 +106,4 @@ requested attribute does not exist, then `nil` is returned.
 
 ## License
 
-RQuery is released under the MIT License
+opal-dom is released under the MIT License
