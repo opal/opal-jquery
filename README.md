@@ -56,7 +56,7 @@ Finally, you can create a new element using the normal constructor:
 
 ```ruby
 DOM.new       # => [<div>]
-DOM.new 'p'   # => [<div>]
+DOM.new 'p'   # => [<p>]
 ```
 
 ### Interacting with elements
