@@ -1,9 +1,7 @@
-require 'rquery'
-
 Document.ready? do
   count  = 0
-  target = Element.id 'target'
-  output = Element.id 'count'
+  target = DOM('#target')
+  output = DOM('#count')
 
   target.on :click do
     count += 1

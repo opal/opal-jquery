@@ -4,7 +4,7 @@ Bundler.setup
 require 'opal'
 
 Opal::BuilderTask.new do |t|
-  t.name = 'rquery'
+  t.name = 'opal-dom'
   t.dependencies = ['opal-spec']
 end
 
