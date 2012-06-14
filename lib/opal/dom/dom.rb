@@ -51,11 +51,11 @@ class DOM < `fn`
   #
   # @example Given HTML String
   #
-  #     DOM.find('ul').append '<li>list content</li>'
+  #   DOM.find('ul').append '<li>list content</li>'
   #
   # @example Given an existing DOM node
   #
-  #     DOM.id('checkout') << Dom.id('total-price-label')
+  #   DOM.id('checkout') << Dom.id('total-price-label')
   #
   # @param [String, DOM] content HTML string or DOM content
   # @return [DOM] returns receiver
@@ -72,11 +72,11 @@ class DOM < `fn`
   #
   # @example Given HTML String
   #
-  #     DOM.find('.label').after '<p>Content after label</>'
+  #   DOM.find('.label').after '<p>Content after label</>'
   #
   # @example Given existing DOM nodes
   #
-  #     DOM.find('.price').after DOM.id('checkout-link')
+  #   DOM.find('.price').after DOM.id('checkout-link')
   #
   # @param [String, DOM] content HTML string or dom content
   # @return [DOM] returns self
@@ -92,7 +92,7 @@ class DOM < `fn`
   #
   # @example
   #
-  #     DOM.parse('<p>Hello</p>').append_to DOM.id('foo')
+  #   DOM.parse('<p>Hello</p>').append_to DOM.id('foo')
   #
   # @param [DOM] target the target to insert into
   # @return [DOM] returns the receiver
@@ -108,6 +108,18 @@ class DOM < `fn`
     `this.appendTo(document.head)`
   end
 
+  # Returns the element at the given index as a new `DOM` instance.
+  # Negative indexes can be used and are counted from the end. If the
+  # given index is outside the range then `nil` is returned.
+  #
+  # @example
+  #
+  #   DOM('.foo')[0]    # => first element in collection
+  #   DOM('.foo')[-1]   # => last element from collection
+  #   DOM('.foo')[100]  # => returns nil if index outside range
+  #
+  # @param [Numeric] index the index to get
+  # @return [DOM, nil] returns new collection with returned element
   def at(index)
     %x{
       var length = this.length;
@@ -124,10 +136,47 @@ class DOM < `fn`
     }
   end
 
+  # Insert the given content into the DOM before each element in this
+  # collection. The content may be a raw HTML string or a `DOM`
+  # instance containing elements.
+  #
+  # @example
+  #
+  #   # Given a string
+  #   DOM('.foo').before '<p class="title"></p>'
+  #
+  #   # Using an existing element
+  #   DOM('.bar').before DOM('#other-title')
+  #
+  # @param [DOM, String] content the content to insert before
+  # @return [DOM] returns the receiver
+  def before(content)
+    `this.before(content)`
+  end
+
+  # Returns a new collection containing the immediate children of each
+  # element in this collection. The result may be empty if no children
+  # are present.
+  #
+  # @example
+  #
+  #   DOM('#foo').children  # => DOM instance
+  #
+  # @return [DOM] returns new DOM collection
   def children
     `this.children()`
   end
 
+  # Returns the CSS class name of the firt element in this collection.
+  # If the collection is empty then an empty string is returned. Only
+  # the class name of the first element will ever be returned.
+  #
+  # @example
+  #
+  #   DOM('<p class="foo"></p>').class_name
+  #   # => "foo"
+  #
+  # @return [String] the class name
   def class_name
     %x{
       var first = this[0];
@@ -140,15 +189,41 @@ class DOM < `fn`
     }
   end
 
+  # Sets the CSS class name of every element in this collection to the
+  # given string. This does not append the class names, it replaces
+  # the entire current class name.
+  #
+  # @example
+  #
+  #   DOM('#foo').class_name = "title"
+  #
+  # @param [String] name the class name to set on each element
+  # @return [DOM] returns the receiver
   def class_name=(name)
     %x{
       for (var i = 0, length = this.length; i < length; i++) {
         this[i].className = name;
       }
     }
-    name
+    self
   end
 
+  # Get or set css properties on each element in this collection. If
+  # only the `name` is given, then that css property name is read from
+  # the first element in the collection and returned. If the `value`
+  # property is also given then the given css property is set to the
+  # given value for each of the elements in this collection.
+  #
+  # @example
+  #
+  #   foo = DOM '#foo'
+  #   foo.css 'background-color'            # => "red"
+  #   foo.css 'background-color', 'green'
+  #   foo.css 'background-color'            # => "green"
+  #
+  # @param [String] name the css property to get/set
+  # @param [String] value optional value to set
+  # @return [String, DOM] returns css value or the receiver
   def css(name, value)
     %x{
       if (value == null) {
@@ -160,11 +235,34 @@ class DOM < `fn`
     }
   end
 
+  # Yields each element in this collection in turn. The yielded element
+  # is wrapped as a `DOM` instance.
+  #
+  # @example
+  #
+  #   DOM('.foo').each { |e| puts "The element id: #{e.id}" }
+  #
+  # @return returns the receiver
   def each
     `for (var i = 0, length = this.length; i < length; i++) {`
       yield `$(this[i])`
     `}`
     self
+  end
+
+  # Find all the elements that match the given `selector` within the
+  # scope of elements in this given collection. Might return an empty
+  # collection if no elements match.
+  #
+  # @example
+  #
+  #   form = DOM('#login-form')
+  #   form.find 'input, select'
+  #
+  # @param [String] selector the selector to match elements against
+  # @return [DOM] returns new collection
+  def find(selector)
+    `this.find(selector)`
   end
 
   def first
@@ -246,6 +344,10 @@ class DOM < `fn`
 
   def parent
     `this.parent()`
+  end
+
+  def prev
+    `this.prev()`
   end
 
   def remove

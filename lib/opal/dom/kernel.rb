@@ -10,6 +10,7 @@ module Kernel
   # into a useable element instance.
   #
   # @example
+  #
   #   # search for an element by id
   #   DOM('#foo')                 # => [<div id="foo">]
   #

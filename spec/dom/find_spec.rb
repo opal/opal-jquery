@@ -31,3 +31,35 @@ describe "DOM.find" do
     baz.length.should == 0
   end
 end
+
+describe "DOM#find" do
+  before do
+    @div = DOM <<-HTML
+      <div id="find-spec">
+        <div id="foo">
+          <p class="bar"></p>
+          <p class="baz"></p>
+          <p class="bar"></p>
+        </div>
+        <div id="bar"></div>
+      </div>
+    HTML
+
+    @div.append_to_body
+  end
+
+  after do
+    @div.remove
+  end
+
+  it "should match all elements within scope of receiver" do
+    foo = DOM '#foo'
+    foo.find('.bar').size.should == 2
+    foo.find('.baz').size.should == 1
+  end
+
+  it "should return an empty collection if there are no matching elements" do
+    bar = DOM '#bar'
+    bar.find('.woosh').size.should == 0
+  end
+end
