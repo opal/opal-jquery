@@ -11,13 +11,13 @@ module Kernel
   #
   # @example
   #   # search for an element by id
-  #   DOM('#foo')                 => [<div id="foo">]
+  #   DOM('#foo')                 # => [<div id="foo">]
   #
   #   # search for all matching elements
-  #   DOM('.bar')                 => [<p class="bar">, <p class="bar">]
+  #   DOM('.bar')                 # => [<p class="bar">, <p class="bar">]
   #
   #   # parse html string into element
-  #   DOM('<p id="baz">Hey</p>')  => [<p id="baz">] 
+  #   DOM('<p id="baz">Hey</p>')  # => [<p id="baz">] 
   #
   # @param [String] selector selector to search for or html string
   # @return [DOM] returns element instance which may be empty

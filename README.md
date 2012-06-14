@@ -21,13 +21,13 @@ raw HTML string into a DOM instance:
 
 ```ruby
 # search for an element by id
-DOM('#foo')                 => [<div id="foo">]
+DOM('#foo')                 # => [<div id="foo">]
 
 # search for all matching elements
-DOM('.bar')                 => [<p class="bar">, <p class="bar">]
+DOM('.bar')                 # => [<p class="bar">, <p class="bar">]
 
 # parse html string into element
-DOM('<p id="baz">Hey</p>')  => [<p id="baz">] 
+DOM('<p id="baz">Hey</p>')  # => [<p id="baz">] 
 ```
 
 There are also two handy methods for quickly getting access to
