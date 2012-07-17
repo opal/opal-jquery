@@ -1,11 +1,11 @@
 require 'bundler'
 Bundler.setup
 
-require 'opal'
+require 'opal/rake_task'
 
-Opal::BuilderTask.new do |t|
-  t.name = 'opal-dom'
-  t.dependencies = ['opal-spec']
+Opal::RakeTask.new do |t|
+  t.name = 'opal-jquery'
+  t.dependencies = %w(opal-spec opal-dom)
 end
 
 desc "Build all examples"

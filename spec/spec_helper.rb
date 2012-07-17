@@ -1,1 +1,1 @@
-Spec::Runner.new.run
+Spec::Runner.autorun

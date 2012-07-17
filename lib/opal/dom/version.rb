@@ -1,3 +1,3 @@
-class DOM
-  VERSION = '0.0.1'
-end
+# class DOM
+#   VERSION = '0.0.1'
+# end

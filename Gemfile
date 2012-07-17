@@ -1,5 +1,5 @@
 source :rubygems
 
-gem "opal", :path => "~/Development/opal"
-
-gem "opal-spec", path: "~/Development/opal-spec"
+gem "opal", :git => 'git://github.com/adambeynon/opal.git'
+gem "opal-spec", :git => 'git://github.com/adambeynon/opal-spec.git'
+gem "opal-dom", :git => 'git://github.com/adambeynon/opal-dom.git'
