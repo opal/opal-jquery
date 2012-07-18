@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/opal-query/version', __FILE__)
+require File.expand_path('../lib/opal-jquery/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name         = 'opal-query'
-  s.version      = OpalQuery::VERSION
+  s.version      = OpalJQuery::VERSION
   s.author       = 'Adam Beynon'
   s.email        = 'adam@adambeynon.com'
   s.homepage     = 'http://opalrb.org'

@@ -4,7 +4,7 @@ Bundler.setup
 require 'opal/rake_task'
 
 Opal::RakeTask.new do |t|
-  t.name = 'opal-query'
+  t.name = 'opal-jquery'
   t.dependencies = %w(opal-spec)
 end
 
