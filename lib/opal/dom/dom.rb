@@ -38,11 +38,11 @@ class DOM < `fn`
   end
 
   def [](name)
-    `this.attr(name) || ""`
+    `#{self}.attr(name) || ""`
   end
 
   def []=(name, value)
-    `this.attr(name, value)`
+    `#{self}.attr(name, value)`
   end
 
   # Add the given content to inside each element in the receiver. The
@@ -60,11 +60,11 @@ class DOM < `fn`
   # @param [String, DOM] content HTML string or DOM content
   # @return [DOM] returns receiver
   def <<(str)
-    `this.append(str)`
+    `#{self}.append(str)`
   end
 
   def add_class(name)
-    `this.addClass(name)`
+    `#{self}.addClass(name)`
   end
 
   # Add the given content after each element in the receiver. The given
@@ -81,13 +81,13 @@ class DOM < `fn`
   # @param [String, DOM] content HTML string or dom content
   # @return [DOM] returns self
   def after(content)
-    `this.after(content)`
+    `#{self}.after(content)`
   end
 
   alias append <<
 
-  # Appends the elements in this object into the target element. This
-  # method is the reverse of using `#append` on the target with this
+  # Appends the elements in #{self} object into the target element. #{self}
+  # method is the reverse of using `#append` on the target with #{self}
   # instance as the argument.
   #
   # @example
@@ -97,15 +97,15 @@ class DOM < `fn`
   # @param [DOM] target the target to insert into
   # @return [DOM] returns the receiver
   def append_to(target)
-    `this.appendTo(target)`
+    `#{self}.appendTo(target)`
   end
 
   def append_to_body
-    `this.appendTo(document.body)`
+    `#{self}.appendTo(document.body)`
   end
 
   def append_to_head
-    `this.appendTo(document.head)`
+    `#{self}.appendTo(document.head)`
   end
 
   # Returns the element at the given index as a new `DOM` instance.
@@ -122,7 +122,7 @@ class DOM < `fn`
   # @return [DOM, nil] returns new collection with returned element
   def at(index)
     %x{
-      var length = this.length;
+      var length = #{self}.length;
 
       if (index < 0) {
         index += length;
@@ -132,11 +132,11 @@ class DOM < `fn`
         return nil;
       }
 
-      return $(this[index]);
+      return $(#{self}[index]);
     }
   end
 
-  # Insert the given content into the DOM before each element in this
+  # Insert the given content into the DOM before each element in #{self}
   # collection. The content may be a raw HTML string or a `DOM`
   # instance containing elements.
   #
@@ -151,11 +151,11 @@ class DOM < `fn`
   # @param [DOM, String] content the content to insert before
   # @return [DOM] returns the receiver
   def before(content)
-    `this.before(content)`
+    `#{self}.before(content)`
   end
 
   # Returns a new collection containing the immediate children of each
-  # element in this collection. The result may be empty if no children
+  # element in #{self} collection. The result may be empty if no children
   # are present.
   #
   # @example
@@ -164,10 +164,10 @@ class DOM < `fn`
   #
   # @return [DOM] returns new DOM collection
   def children
-    `this.children()`
+    `#{self}.children()`
   end
 
-  # Returns the CSS class name of the firt element in this collection.
+  # Returns the CSS class name of the firt element in #{self} collection.
   # If the collection is empty then an empty string is returned. Only
   # the class name of the first element will ever be returned.
   #
@@ -179,7 +179,7 @@ class DOM < `fn`
   # @return [String] the class name
   def class_name
     %x{
-      var first = this[0];
+      var first = #{self}[0];
 
       if (!first) {
         return "";
@@ -189,8 +189,8 @@ class DOM < `fn`
     }
   end
 
-  # Sets the CSS class name of every element in this collection to the
-  # given string. This does not append the class names, it replaces
+  # Sets the CSS class name of every element in #{self} collection to the
+  # given string. #{self} does not append the class names, it replaces
   # the entire current class name.
   #
   # @example
@@ -201,18 +201,18 @@ class DOM < `fn`
   # @return [DOM] returns the receiver
   def class_name=(name)
     %x{
-      for (var i = 0, length = this.length; i < length; i++) {
-        this[i].className = name;
+      for (var i = 0, length = #{self}.length; i < length; i++) {
+        #{self}[i].className = name;
       }
     }
     self
   end
 
-  # Get or set css properties on each element in this collection. If
+  # Get or set css properties on each element in #{self} collection. If
   # only the `name` is given, then that css property name is read from
   # the first element in the collection and returned. If the `value`
   # property is also given then the given css property is set to the
-  # given value for each of the elements in this collection.
+  # given value for each of the elements in #{self} collection.
   #
   # @example
   #
@@ -227,15 +227,15 @@ class DOM < `fn`
   def css(name, value)
     %x{
       if (value == null) {
-        return this.css(name);
+        return #{self}.css(name);
       }
       else {
-        return this.css(name, value);
+        return #{self}.css(name, value);
       }
     }
   end
 
-  # Yields each element in this collection in turn. The yielded element
+  # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.
   #
   # @example
@@ -244,14 +244,14 @@ class DOM < `fn`
   #
   # @return returns the receiver
   def each
-    `for (var i = 0, length = this.length; i < length; i++) {`
-      yield `$(this[i])`
+    `for (var i = 0, length = #{self}.length; i < length; i++) {`
+      yield `$(#{self}[i])`
     `}`
     self
   end
 
   # Find all the elements that match the given `selector` within the
-  # scope of elements in this given collection. Might return an empty
+  # scope of elements in #{self} given collection. Might return an empty
   # collection if no elements match.
   #
   # @example
@@ -262,28 +262,28 @@ class DOM < `fn`
   # @param [String] selector the selector to match elements against
   # @return [DOM] returns new collection
   def find(selector)
-    `this.find(selector)`
+    `#{self}.find(selector)`
   end
 
   def first
-    `this.length ? this.first() : nil`
+    `#{self}.length ? #{self}.first() : nil`
   end
 
   def has_class?(name)
-    `this.hasClass(name)`
+    `#{self}.hasClass(name)`
   end
 
   def html
-    `this.html() || ""`
+    `#{self}.html() || ""`
   end
 
   def html=(content)
-    `this.html(content)`
+    `#{self}.html(content)`
   end
 
   def id
     %x{
-      var first = this[0];
+      var first = #{self}[0];
 
       if (!first) {
         return "";
@@ -295,13 +295,13 @@ class DOM < `fn`
 
   def id=(id)
     %x{
-      var first = this[0];
+      var first = #{self}[0];
 
       if (first) {
         first.id = id;
       }
 
-      return this;
+      return #{self};
     }
   end
 
@@ -309,8 +309,8 @@ class DOM < `fn`
     %x{
       var val, el, str, result = [];
 
-      for (var i = 0, length = this.length; i < length; i++) {
-        el  = this[i];
+      for (var i = 0, length = #{self}.length; i < length; i++) {
+        el  = #{self}[i];
         str = "<" + el.tagName.toLowerCase();
 
         if (val = el.id) str += (' id="' + val + '"');
@@ -324,18 +324,18 @@ class DOM < `fn`
   end
 
   def length
-    `this.length`
+    `#{self}.length`
   end
 
   def next
-    `this.next()`
+    `#{self}.next()`
   end
 
   def on(name, &block)
     return unless block_given?
 
     %x{
-      this.on(name, function() {
+      #{self}.on(name, function() {
         return #{ block.call };
       });
     }
@@ -343,19 +343,19 @@ class DOM < `fn`
   end
 
   def parent
-    `this.parent()`
+    `#{self}.parent()`
   end
 
   def prev
-    `this.prev()`
+    `#{self}.prev()`
   end
 
   def remove
-    `this.remove()`
+    `#{self}.remove()`
   end
 
   def remove_class(name)
-    `this.removeClass(name)`
+    `#{self}.removeClass(name)`
   end
 
   alias size length
@@ -363,10 +363,10 @@ class DOM < `fn`
   alias succ next
 
   def value
-    `this.val() || ""`
+    `#{self}.val() || ""`
   end
 
   def value=(val)
-    `this.val(val)`
+    `#{self}.val(val)`
   end
 end

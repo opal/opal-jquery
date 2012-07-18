@@ -5,7 +5,7 @@ require 'opal/rake_task'
 
 Opal::RakeTask.new do |t|
   t.name = 'opal-jquery'
-  t.dependencies = %w(opal-spec opal-dom)
+  t.dependencies = %w(opal-spec)
 end
 
 desc "Build all examples"
