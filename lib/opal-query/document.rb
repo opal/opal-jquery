@@ -1,19 +1,39 @@
-# module Document
-#   def self.body_ready?
-#     `!!(document && document.body)`
-#   end
+module Document
+  def self.[](selector)
+    `$(#{selector})`
+  end
 
-#   def self.ready?(&block)
-#     %x{
-#       if (block === nil) {
-#         return nil;
-#       }
+  def self.find(selector)
+    self[selector]
+  end
 
-#       $(function() {
-#         #{ block.call };
-#       });
+  def self.id(id)
+    %x{
+      var el = document.getElementById(id);
 
-#       return nil;
-#     }
-#   end
-# end
+      if (!el) {
+        return nil;
+      }
+
+      return $(el);
+    }
+  end
+
+  def self.parse(str)
+    `$(str)`
+  end
+
+  def self.ready?(&block)
+    %x{
+      if (block === nil) {
+        return nil;
+      }
+
+      $(function() {
+        #{ block.call };
+      });
+
+      return nil;
+    }
+  end
+end

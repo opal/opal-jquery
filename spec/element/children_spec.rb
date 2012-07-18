@@ -1,6 +1,6 @@
-describe "DOM#children" do
+describe "Element#children" do
   before do
-    @div = DOM.parse <<-HTML
+    @div = Document.parse <<-HTML
       <div id="children-spec">
         <div id="foo"></div>
         <div id="bar">
@@ -21,12 +21,12 @@ describe "DOM#children" do
   end
 
   it "should return a new collection of all direct children of element" do
-    DOM.id('foo').children.size.should == 0
-    DOM.id('bar').children.size.should == 2
+    Document.id('foo').children.size.should == 0
+    Document.id('bar').children.size.should == 2
   end
 
   it "should only return direct children" do
-    c = DOM.id('baz').children
+    c = Document.id('baz').children
     c.size.should == 1
   end
 end

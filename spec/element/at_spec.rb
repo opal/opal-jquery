@@ -1,12 +1,11 @@
-describe "DOM#at" do
+describe "Element#at" do
   before do
-    @div = DOM.new
-
-    @div.id = 'at-spec'
-    @div.html = <<-HTML
-      <div class="foo" id="blah"></div>
-      <div class="foo" id="bleh"></div>
-      <div class="foo" id="bluh"></div>
+    @div = Document.parse <<-HTML
+      <div id="at-spec">
+        <div class="foo" id="blah"></div>
+        <div class="foo" id="bleh"></div>
+        <div class="foo" id="bluh"></div>
+      </div>
     HTML
 
     @div.append_to_body
@@ -17,7 +16,7 @@ describe "DOM#at" do
   end
 
   it "returns the element at the given index" do
-    foos = DOM.find '.foo'
+    foos = Document.find '.foo'
     foos.length.should == 3
 
     foos.at(0).id.should == "blah"
@@ -26,7 +25,7 @@ describe "DOM#at" do
   end
 
   it "counts from the last index for negative values" do
-    foos = DOM.find '.foo'
+    foos = Document.find '.foo'
 
     foos.at(-1).id.should == "bluh"
     foos.at(-2).id.should == "bleh"
@@ -34,7 +33,7 @@ describe "DOM#at" do
   end
 
   it "returns nil for indexes outside range" do
-    foos = DOM.find '.foo'
+    foos = Document.find '.foo'
 
     foos.at(-4).should == nil
     foos.at(4).should == nil

@@ -1,12 +1,11 @@
-describe "DOM#each" do
+describe "Element#each" do
   before do
-    @div = DOM.new
-
-    @div.id = 'each-spec'
-    @div.html = <<-HTML
-      <div class="foo" id="each-a"></div>
-      <div class="bar" id="each-b"></div>
-      <div class="foo" id="each-c"></div>
+    @div = Document.parse <<-HTML
+      <div id="each-spec">
+        <div class="foo" id="each-a"></div>
+        <div class="bar" id="each-b"></div>
+        <div class="foo" id="each-c"></div>
+      </div>
     HTML
 
     @div.append_to_body
@@ -18,7 +17,7 @@ describe "DOM#each" do
 
   it "should loop over each element passing element to block" do
     result = []
-    DOM.find('.foo').each do |e|
+    Document.find('.foo').each do |e|
       result << e.id
     end
 
@@ -26,7 +25,7 @@ describe "DOM#each" do
   end
 
   it "should not call the block with an empty element set" do
-    DOM.find('.bad-each-class').each do
+    Document.find('.bad-each-class').each do
       raise "shouldn't get here"
     end
   end

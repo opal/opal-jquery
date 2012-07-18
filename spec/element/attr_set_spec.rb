@@ -1,11 +1,10 @@
-describe "DOM#[]=" do
+describe "Element#[]=" do
   before do
-    @div = DOM.new
-
-    @div.id = 'attr-set-spec'
-    @div.html = <<-HTML
-      <div id="foo" title="Apples"></div>
-      <div id="bar"></div>
+    @div = Document.parse <<-HTML
+      <div id="attr-set-spec">
+        <div id="foo" title="Apples"></div>
+        <div id="bar"></div>
+      </div>
     HTML
 
     @div.append_to_body

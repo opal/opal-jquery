@@ -1,6 +1,6 @@
-describe "DOM#before" do
+describe "Element#before" do
   before do
-    @div = DOM <<-HTML
+    @div = Document.parse <<-HTML
       <div id="before-spec">
         <div id="some-header" class="kapow"></div>
         <div id="foo" class="before-spec-first"></div>
@@ -17,17 +17,17 @@ describe "DOM#before" do
   end
 
   it "should insert the given html string before each element" do
-    el = DOM('.before-spec-first')
+    el = Document['.before-spec-first']
     el.size.should == 2
 
     el.before '<p class="woosh"></p>'
 
-    DOM('#foo').prev.class_name.should == "woosh"
-    DOM('#bar').prev.class_name.should == "woosh"
+    Document['#foo'].prev.class_name.should == "woosh"
+    Document['#bar'].prev.class_name.should == "woosh"
   end
 
   it "should insert the given DOM element before this element" do
-    DOM('#baz').before DOM('#some-header')
-    DOM('#baz').prev.id.should == "some-header"
+    Document['#baz'].before Document['#some-header']
+    Document['#baz'].prev.id.should == "some-header"
   end
 end
