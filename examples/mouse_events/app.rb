@@ -1,9 +1,8 @@
 Document.ready? do
   count  = 0
-  target = DOM('#target')
-  output = DOM('#count')
+  output = query("#count")
 
-  target.on :click do
+  query("#target").on :click do
     count += 1
     output.html = "Click count: #{count}"
   end
