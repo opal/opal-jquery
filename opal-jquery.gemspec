@@ -2,7 +2,7 @@
 require File.expand_path('../lib/opal-jquery/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name         = 'opal-query'
+  s.name         = 'opal-jquery'
   s.version      = OpalJQuery::VERSION
   s.author       = 'Adam Beynon'
   s.email        = 'adam@adambeynon.com'
