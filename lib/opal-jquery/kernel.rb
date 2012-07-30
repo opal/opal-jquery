@@ -6,11 +6,7 @@ module Kernel
 
   # @depreciated
   def DOM(selector)
-    puts "Kernel#DOM() is now depreciated. Use Kernel#query()"
-    query(selector)
-  end
-
-  def query(selector)
-    `$(selector)`
+    puts "Kernel#DOM() is now depreciated. Use Document[]"
+    Document[selector]
   end
 end
