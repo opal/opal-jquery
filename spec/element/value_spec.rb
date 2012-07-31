@@ -1,6 +1,6 @@
-describe "DOM#value" do
+describe "Element#value" do
   before do
-    @div = DOM.parse <<-HTML
+    @div = Document.parse <<-HTML
       <div id="value-spec">
         <select id="foo">
           <option selected="selected">Hello</option>
@@ -20,25 +20,24 @@ describe "DOM#value" do
   end
 
   it "should return the selected value of select elements" do
-    DOM.id('foo').value.should == "Hello"
+    Document.id('foo').value.should == "Hello"
   end
 
   it "should return the value of normal input fields" do
-    DOM.id('bar').value.should == "Blah"
+    Document.id('bar').value.should == "Blah"
   end
 
   it "should return an empty string for elements with no value attr" do
-    DOM.id('baz').value.should == ""
+    Document.id('baz').value.should == ""
   end
 end
 
-describe "DOM#value=" do
+describe "Element#value=" do
   before do
-    @div = DOM.new
-
-    @div.id = 'value-set-spec'
-    @div.html = <<-HTML
-      <input type="text" id="foo" value=""></input>
+    @div = Document.parse <<-HTML
+      <div id="value-set-spec">
+        <input type="text" id="foo" value=""></input>
+      </div>
     HTML
 
     @div.append_to_body
@@ -49,7 +48,7 @@ describe "DOM#value=" do
   end
 
   it "should set the value of the element to the given value" do
-    foo = DOM.id 'foo'
+    foo = Document.id 'foo'
     foo.value.should == ""
 
     foo.value = "Hi"

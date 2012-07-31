@@ -1,6 +1,6 @@
-describe "DOM#next" do
+describe "Element#next" do
   before do
-    @div = DOM.parse <<-HTML
+    @div = Document.parse <<-HTML
       <div id="next-spec">
         <div id="foo"></div>
         <div id="bar"></div>
@@ -15,10 +15,10 @@ describe "DOM#next" do
   end
 
   it "should return the next sibling" do
-    DOM.id('foo').next.id.should == "bar"
+    Document.id('foo').next.id.should == "bar"
   end
 
   it "should return an empty instance when no next element" do
-    DOM.id('bar').next.size.should == 0
+    Document.id('bar').next.size.should == 0
   end
 end

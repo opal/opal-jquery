@@ -1,6 +1,6 @@
-describe "DOM#parent" do
+describe "Element#parent" do
   before do
-    @div = DOM.parse <<-HTML
+    @div = Document.parse <<-HTML
       <div id="foo">
         <div id="bar">
           <div id="baz"></div>
@@ -17,8 +17,8 @@ describe "DOM#parent" do
   end
 
   it "should return the parent of the element" do
-    DOM.id('bar').parent.id.should == "foo"
-    DOM.id('baz').parent.id.should == "bar"
-    DOM.id('buz').parent.id.should == "bar"
+    Document.id('bar').parent.id.should == "foo"
+    Document.id('baz').parent.id.should == "bar"
+    Document.id('buz').parent.id.should == "bar"
   end
 end

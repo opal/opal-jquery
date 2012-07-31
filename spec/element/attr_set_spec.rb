@@ -15,7 +15,7 @@ describe "Element#[]=" do
   end
 
   it "should set the attr value on the element" do
-    bar = DOM.id 'bar'
+    bar = Document.id 'bar'
     bar[:title].should == ""
 
     bar[:title] = "Oranges"
@@ -23,7 +23,7 @@ describe "Element#[]=" do
   end
 
   it "should replace the old value for the attribute" do
-    foo = DOM.id 'foo'
+    foo = Document.id 'foo'
     foo[:title].should == "Apples"
 
     foo[:title] = "Pineapple"
