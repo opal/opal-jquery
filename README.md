@@ -25,3 +25,14 @@ Document['#foo'].on :click do
   puts "foo was clicked"
 end
 ```
+
+## HTTP (Ajax) requests
+
+The `HTTP` class is provided which wraps simple jquery ajax requests.
+
+```ruby
+HTTP.get("/users/1.json") do |response|
+  puts response.body
+  # => "{\"name\": \"Adam Beynon\"}"
+end
+```
