@@ -16,6 +16,8 @@ Document['.foo']
 ```ruby
 Document.id 'bar'
 # => (<div id="bar">)
+Document.id 'doesnt-exist'
+# => nil
 ```
 
 ```ruby
