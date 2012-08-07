@@ -1,4 +1,3 @@
-require 'opal-jquery/dom'
 require 'opal-jquery/document'
 require 'opal-jquery/element'
 require 'opal-jquery/kernel'

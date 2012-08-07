@@ -1,6 +1,15 @@
 # opal-jquery
 
+[![Build Status](https://secure.travis-ci.org/adambeynon/opal-jquery.png?branch=master)](http://travis-ci.org/adambeynon/opal-jquery)
+
 Gives Opal access to jquery/zepto.
+
+## Element
+
+Instances of the `Element` class are just jquery/zepto objects. This
+means that all methods of `Element` are copied onto the jquery
+prototype so any instance can be used inside opal, and any opal version
+in javascript.
 
 ## Finding elements
 
