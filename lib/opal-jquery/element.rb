@@ -315,6 +315,8 @@ class Element < `fn`
 
   alias succ next
 
+  alias_native :text=, :text
+
   def value
     `#{self}.val() || ""`
   end

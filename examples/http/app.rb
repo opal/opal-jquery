@@ -22,4 +22,11 @@ Document.ready? do
       end
     end
   end
+
+  # Parsing JSON Responses
+  Document['#json'].on :click do
+    HTTP.get("content/users.json") do |response|
+      Document['#json-result'].text = response.json.inspect
+    end
+  end
 end

@@ -45,3 +45,30 @@ HTTP.get("/users/1.json") do |response|
   # => "{\"name\": \"Adam Beynon\"}"
 end
 ```
+
+By default, the block will be called when the request is successfull
+and when it fails. To test whether the response was a success, use the
+`ok?` method:
+
+```ruby
+HTTP.get("/users/1.json") do |response|
+  if response.ok?
+    alert "Success!"
+  else
+    alert "Error (#{response.status_code})"
+  end
+end
+```
+
+Here the `status_code` is also used to report the error.
+
+For JSON responses, the `json` method is useful for parsing the response
+body into ruby objects (Hash, Array, String, etc):
+
+```ruby
+HTTP.get("/users/1.json") do |response|
+  puts response.json
+end
+
+# => { "name": "Adam Beynon", "age": 26, "id": 1 }
+```
