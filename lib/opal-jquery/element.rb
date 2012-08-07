@@ -33,9 +33,7 @@ class Element < `fn`
     `#{self}.attr(name) || ""`
   end
 
-  def []=(name, value)
-    `#{self}.attr(name, value)`
-  end
+  alias_native :[]=, :attr
 
   # Add the given content to inside each element in the receiver. The
   # content may be a HTML string or a `DOM` instance. The inserted
@@ -51,13 +49,9 @@ class Element < `fn`
   #
   # @param [String, DOM] content HTML string or DOM content
   # @return [DOM] returns receiver
-  def <<(str)
-    `#{self}.append(str)`
-  end
+  alias_native :<<, :append
 
-  def add_class(name)
-    `#{self}.addClass(name)`
-  end
+  alias_native :add_class, :addClass
 
   # Add the given content after each element in the receiver. The given
   # content may be a HTML string, or a `DOM` instance.
@@ -72,9 +66,7 @@ class Element < `fn`
   #
   # @param [String, DOM] content HTML string or dom content
   # @return [DOM] returns self
-  def after(content)
-    `#{self}.after(content)`
-  end
+  alias_native :after, :after
 
   alias append <<
 
@@ -88,9 +80,7 @@ class Element < `fn`
   #
   # @param [DOM] target the target to insert into
   # @return [DOM] returns the receiver
-  def append_to(target)
-    `#{self}.appendTo(target)`
-  end
+  alias_native :append_to, :appendTo
 
   def append_to_body
     `#{self}.appendTo(document.body)`
@@ -142,9 +132,7 @@ class Element < `fn`
   #
   # @param [DOM, String] content the content to insert before
   # @return [DOM] returns the receiver
-  def before(content)
-    `#{self}.before(content)`
-  end
+  alias_native :before, :before
 
   # Returns a new collection containing the immediate children of each
   # element in #{self} collection. The result may be empty if no children
@@ -155,9 +143,7 @@ class Element < `fn`
   #   DOM('#foo').children  # => DOM instance
   #
   # @return [DOM] returns new DOM collection
-  def children
-    `#{self}.children()`
-  end
+  alias_native :children, :children
 
   # Returns the CSS class name of the firt element in #{self} collection.
   # If the collection is empty then an empty string is returned. Only
@@ -216,16 +202,7 @@ class Element < `fn`
   # @param [String] name the css property to get/set
   # @param [String] value optional value to set
   # @return [String, DOM] returns css value or the receiver
-  def css(name, value)
-    %x{
-      if (value == null) {
-        return #{self}.css(name);
-      }
-      else {
-        return #{self}.css(name, value);
-      }
-    }
-  end
+  alias_native :css, :css
 
   # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.
@@ -253,25 +230,19 @@ class Element < `fn`
   #
   # @param [String] selector the selector to match elements against
   # @return [DOM] returns new collection
-  def find(selector)
-    `#{self}.find(selector)`
-  end
+  alias_native :find, :find
 
   def first
     `#{self}.length ? #{self}.first() : nil`
   end
 
-  def has_class?(name)
-    `#{self}.hasClass(name)`
-  end
+  alias_native :has_class?, :hasClass
 
   def html
     `#{self}.html() || ""`
   end
 
-  def html=(content)
-    `#{self}.html(content)`
-  end
+  alias_native :html=, :html
 
   def id
     %x{
@@ -319,9 +290,7 @@ class Element < `fn`
     `#{self}.length`
   end
 
-  def next
-    `#{self}.next()`
-  end
+  alias_native :next, :next
 
   def on(name, &block)
     return unless block_given?
@@ -334,21 +303,13 @@ class Element < `fn`
     block
   end
 
-  def parent
-    `#{self}.parent()`
-  end
+  alias_native :parent, :parent
 
-  def prev
-    `#{self}.prev()`
-  end
+  alias_native :prev, :prev
 
-  def remove
-    `#{self}.remove()`
-  end
+  alias_native :remove, :remove
 
-  def remove_class(name)
-    `#{self}.removeClass(name)`
-  end
+  alias_native :remove_class, :removeClass
 
   alias size length
 
@@ -358,7 +319,5 @@ class Element < `fn`
     `#{self}.val() || ""`
   end
 
-  def value=(val)
-    `#{self}.val(val)`
-  end
+  alias_native :value=, :val
 end
