@@ -9,7 +9,7 @@ Opal::RakeTask.new do |t|
 end
 
 desc "Run phantom tests"
-task :test => [:opal] do
+task :test do
   src = %w(build/opal.js build/opal-spec.js vendor/jquery.js build/opal-jquery.js build/specs.js)
   out = 'build/phantom_runner.js'
   File.open(out, 'w+') do |o|
