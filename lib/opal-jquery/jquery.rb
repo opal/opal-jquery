@@ -12,7 +12,7 @@
   }
 }
 
-class Element < `fn`
+class JQuery < `fn`
   def self.find(selector)
     `$(selector)`
   end

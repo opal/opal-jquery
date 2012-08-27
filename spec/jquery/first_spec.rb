@@ -1,4 +1,4 @@
-describe "Element#first" do
+describe "JQuery#first" do
   before do
     @div = Document.parse <<-HTML
       <div id="first-spec">

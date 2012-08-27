@@ -1,4 +1,4 @@
-describe "Element#before" do
+describe "JQuery#before" do
   before do
     @div = Document.parse <<-HTML
       <div id="before-spec">

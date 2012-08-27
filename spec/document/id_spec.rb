@@ -15,7 +15,7 @@ describe "Document.id" do
   end
 
   it "should return a new instance with the element with given id" do
-    Document.id('foo').should be_kind_of(Element)
+    Document.id('foo').should be_kind_of(JQuery)
     Document.id('bar').id.should == 'bar'
   end
 

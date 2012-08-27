@@ -1,4 +1,4 @@
-describe "Element#at" do
+describe "JQuery#at" do
   before do
     @div = Document.parse <<-HTML
       <div id="at-spec">

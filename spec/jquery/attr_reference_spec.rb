@@ -1,4 +1,4 @@
-describe "Element#[]" do
+describe "JQuery#[]" do
   before do
     @div = Document.parse <<-HTML
       <div id="attr-reference-spec">

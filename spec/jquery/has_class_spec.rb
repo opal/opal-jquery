@@ -1,4 +1,4 @@
-describe "Element#has_class?" do
+describe "JQuery#has_class?" do
   before do
     @div = Document.parse <<-HTML
       <div id="has-class-spec">

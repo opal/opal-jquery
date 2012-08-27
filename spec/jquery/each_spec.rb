@@ -1,4 +1,4 @@
-describe "Element#each" do
+describe "JQuery#each" do
   before do
     @div = Document.parse <<-HTML
       <div id="each-spec">

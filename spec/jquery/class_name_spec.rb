@@ -1,4 +1,4 @@
-describe "Element#class_name" do
+describe "JQuery#class_name" do
   before do
     @div = Document.parse <<-HTML
       <div id="class-name-spec">
@@ -38,7 +38,7 @@ describe "Element#class_name" do
   end
 end
 
-describe "Element#class_name=" do
+describe "JQuery#class_name=" do
   before do
     @div = Document.parse <<-HTML
       <div id="class-name-set-spec">

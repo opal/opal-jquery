@@ -1,7 +1,7 @@
-describe "Element#succ" do
+describe "JQuery#next" do
   before do
     @div = Document.parse <<-HTML
-      <div id="succ-spec">
+      <div id="next-spec">
         <div id="foo"></div>
         <div id="bar"></div>
       </div>
@@ -15,10 +15,10 @@ describe "Element#succ" do
   end
 
   it "should return the next sibling" do
-    Document.id('foo').succ.id.should == "bar"
+    Document.id('foo').next.id.should == "bar"
   end
 
   it "should return an empty instance when no next element" do
-    Document.id('bar').succ.size.should == 0
+    Document.id('bar').next.size.should == 0
   end
 end

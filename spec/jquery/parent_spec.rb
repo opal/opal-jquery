@@ -1,4 +1,4 @@
-describe "Element#parent" do
+describe "JQuery#parent" do
   before do
     @div = Document.parse <<-HTML
       <div id="foo">

@@ -1,4 +1,4 @@
-describe "Element#children" do
+describe "JQuery#children" do
   before do
     @div = Document.parse <<-HTML
       <div id="children-spec">

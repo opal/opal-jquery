@@ -1,4 +1,4 @@
-describe "Element#css" do
+describe "JQuery#css" do
   before do
     @div = Document.parse <<-HTML
       <div id="css-spec">

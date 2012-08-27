@@ -4,10 +4,10 @@
 
 Gives Opal access to jquery/zepto.
 
-## Element
+## JQuery
 
-Instances of the `Element` class are just jquery/zepto objects. This
-means that all methods of `Element` are copied onto the jquery
+Instances of the `JQuery` class are just jquery/zepto objects. This
+means that all methods of `JQuery` are copied onto the jquery
 prototype so any instance can be used inside opal, and any opal version
 in javascript.
 

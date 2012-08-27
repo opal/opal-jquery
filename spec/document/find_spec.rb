@@ -17,17 +17,17 @@ describe "Document.find" do
 
   it "should find all elements matching CSS selector" do
     foo = Document.find '.find-foo'
-    foo.should be_kind_of(Element)
+    foo.should be_kind_of(JQuery)
     foo.length.should == 2
 
     bar = Document.find '.find-bar'
-    bar.should be_kind_of(Element)
+    bar.should be_kind_of(JQuery)
     bar.length.should == 1
   end
 
   it "should return an empty Element instance with length 0 when no matching" do
     baz = Document.find '.find-baz'
-    baz.should be_kind_of(Element)
+    baz.should be_kind_of(JQuery)
     baz.length.should == 0
   end
 end

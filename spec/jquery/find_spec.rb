@@ -1,4 +1,4 @@
-describe "Element#find" do
+describe "JQuery#find" do
   before do
     @div = Document.parse <<-HTML
       <div id="find-spec">

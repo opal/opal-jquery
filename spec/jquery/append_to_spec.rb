@@ -1,4 +1,4 @@
-describe "Element#append_to" do
+describe "JQuery#append_to" do
   before do
     @div = Document.parse <<-HTML
       <div id="foo"></div>

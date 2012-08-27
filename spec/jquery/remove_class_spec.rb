@@ -1,4 +1,4 @@
-describe "Element#remove_class" do
+describe "JQuery#remove_class" do
   before do
     @div = Document.parse <<-HTML
       <div id="remove-class-spec">

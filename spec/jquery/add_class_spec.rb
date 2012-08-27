@@ -1,4 +1,4 @@
-describe "Element#add_class" do
+describe "JQuery#add_class" do
   before do
     @div = Document.parse <<-HTML
       <div id="add-class-spec">

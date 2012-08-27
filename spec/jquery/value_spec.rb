@@ -1,4 +1,4 @@
-describe "Element#value" do
+describe "JQuery#value" do
   before do
     @div = Document.parse <<-HTML
       <div id="value-spec">
@@ -32,7 +32,7 @@ describe "Element#value" do
   end
 end
 
-describe "Element#value=" do
+describe "JQuery#value=" do
   before do
     @div = Document.parse <<-HTML
       <div id="value-set-spec">
