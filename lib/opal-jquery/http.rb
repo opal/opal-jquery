@@ -9,27 +9,37 @@ class HTTP
     self.new url, :GET, opts, block
   end
 
-  def initialize(url, method, options, handler)
-    @url    = url
-    @method = method
-    @ok     = true
+  def self.post(url, opts={}, &block)
+    self.new url, :POST, opts, block
+  end
 
-    http = self
+  def initialize(url, method, options, handler)
+    @url     = url
+    @method  = method
+    @ok      = true
+    http     = self
+    settings = options.to_native
 
     %x{
-      $.ajax({
-        url: url,
-        type: method,
-        success:  function(str) {
-          http.body = str;
-          return #{ handler.call `http` };
-        },
-        error: function(xhr, str) {
-          // result
-          http.ok = false;
-          return #{ handler.call `http` };
+      settings.data = settings.payload;
+      settings.url  = url;
+      settings.type = method;
+
+      settings.success = function(str) {
+        http.body = str;
+
+        if (typeof(str) === 'object') {
+          http.json = #{ JSON.from_object `str` };
         }
-      });
+        return #{ handler.call `http` };
+      };
+
+      settings.error = function(xhr, str) {
+        http.ok = false;
+        return #{ handler.call `http` };
+      };
+
+      $.ajax(settings);
     }
   end
 
@@ -46,7 +56,7 @@ class HTTP
   #
   # @return [Object] returns the parsed json
   def json
-    JSON.parse @body
+    @json || JSON.parse(@body)
   end
 
   # Returns true if the request succeeded, false otherwise.

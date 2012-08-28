@@ -29,4 +29,15 @@ Document.ready? do
       Document['#json-result'].text = response.json.inspect
     end
   end
+
+  # Payload data
+  Document['#payload'].on :click do
+    data = { first_name: 'Adam', last_name: 'Beynon' }
+    HTTP.get("content/users.json", payload: data) do |response|
+      Document['#payload-get-result'].text = response.json.inspect
+    end
+    HTTP.post("content/users.json", payload: data) do |response|
+      Document['#payload-post-result'].text = response.json.inspect
+    end
+  end
 end
