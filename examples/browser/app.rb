@@ -1,5 +1,5 @@
 Document.ready? do
-  DOM('#alerter').on :click do
+  Document['#alerter'].on :click do
     alert "You clicked me!"
   end
 end

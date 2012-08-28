@@ -2,4 +2,3 @@
 *.gem
 Gemfile.lock
 build
-examples/*/*.js
