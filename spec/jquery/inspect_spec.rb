@@ -16,11 +16,11 @@ describe "JQuery#inspect" do
   end
 
   it "should return a string representation of the elements" do
-    Document.id('foo').inspect.should == '(<div id="foo">)'
-    Document.find('.bar').inspect.should == '(<div class="bar">, <p id="lol" class="bar">)'
+    Document.id('foo').inspect.should == '[<div id="foo">]'
+    Document.find('.bar').inspect.should == '[<div class="bar">, <p id="lol" class="bar">]'
   end
 
   it "should return '[]' when called on empty element set" do
-    Document['.inspect-spec-none'].inspect.should == '()'
+    Document['.inspect-spec-none'].inspect.should == '[]'
   end
 end

@@ -282,7 +282,7 @@ class JQuery < `fn`
         result.push(str + '>');
       }
 
-      return '(' + result.join(', ') + ')';
+      return '[' + result.join(', ') + ']';
     }
   end
 
