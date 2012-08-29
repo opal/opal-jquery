@@ -40,4 +40,13 @@ Document.ready? do
       Document['#payload-post-result'].text = response.json.inspect
     end
   end
+
+  # Manual callbacks
+  Document['#manual'].on :click do
+    first = HTTP.get("content/users.json")
+    first.callback { Document['#manual-callback-result'].text = "Callback called!" }
+
+    second = HTTP.get("content/users2.json")
+    second.errback { Document['#manual-errback-result'].text = "Errback called!" }
+  end
 end

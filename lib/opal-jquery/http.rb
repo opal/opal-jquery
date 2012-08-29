@@ -1,3 +1,9 @@
+# Wraps jQuery's ajax request into a ruby class.
+#
+#     HTTP.get("/users/1.json") do |response|
+#       puts "Got response!"
+#     end
+#
 class HTTP
   attr_reader :body
   attr_reader :error_message
@@ -6,19 +12,23 @@ class HTTP
   attr_reader :url
   
   def self.get(url, opts={}, &block)
-    self.new url, :GET, opts, block
+    self.new(url, :GET, opts, block).send!
   end
 
   def self.post(url, opts={}, &block)
-    self.new url, :POST, opts, block
+    self.new(url, :POST, opts, block).send!
   end
 
-  def initialize(url, method, options, handler)
+  def initialize(url, method, options, handler=nil)
     @url     = url
     @method  = method
     @ok      = true
     http     = self
     settings = options.to_native
+
+    if handler
+      @callback = @errback = handler
+    end
 
     %x{
       settings.data = settings.payload;
@@ -31,16 +41,31 @@ class HTTP
         if (typeof(str) === 'object') {
           http.json = #{ JSON.from_object `str` };
         }
-        return #{ handler.call `http` };
+
+        return #{ http.succeed };
       };
 
       settings.error = function(xhr, str) {
-        http.ok = false;
-        return #{ handler.call `http` };
+        return #{ http.fail };
       };
-
-      $.ajax(settings);
     }
+
+    @settings = settings
+  end
+
+  def callback(&block)
+    @callback = block
+    self
+  end
+
+  def errback(&block)
+    @errback = block
+    self
+  end
+
+  def fail
+    @ok = false
+    @errback.call self if @errback
   end
 
   # Parses the http response body through json. If the response is not
@@ -72,5 +97,17 @@ class HTTP
   # @return [Boolean] true if request was successful
   def ok?
     @ok
+  end
+
+  # Actually send this request
+  #
+  # @return [HTTP] returns self
+  def send!
+    `$.ajax(#{ @settings })`
+    self
+  end
+
+  def succeed
+    @callback.call self if @callback
   end
 end
