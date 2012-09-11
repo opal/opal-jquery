@@ -292,17 +292,32 @@ class JQuery < `fn`
 
   alias_native :next, :next
 
-  def on(name, selector=nil, &block)
+  def off(event_name, selector, handler=nil)
+    %x{
+      if (handler === nil) {
+        handler = selector;
+        #{self}.off(event_name, handler._jq);
+      }
+      else {
+        #{self}.off(event_name, selector, handler._jq);
+      }
+    }
+    
+    handler
+  end
+
+  def on(event_name, selector=nil, &block)
     return unless block_given?
 
     %x{
-      var handler = function() { return #{ block.call } };
+      var handler = function(e) { return #{ block.call `e` } };
+      block._jq = handler;
 
       if (selector === nil) {
-        #{self}.on(name, handler);
+        #{self}.on(event_name, handler);
       }
       else {
-        #{self}.on(name, selector, handler);
+        #{self}.on(event_name, selector, handler);
       }
     }
 
