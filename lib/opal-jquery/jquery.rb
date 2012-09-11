@@ -292,14 +292,20 @@ class JQuery < `fn`
 
   alias_native :next, :next
 
-  def on(name, &block)
+  def on(name, selector=nil, &block)
     return unless block_given?
 
     %x{
-      #{self}.on(name, function() {
-        return #{ block.call };
-      });
+      var handler = function() { return #{ block.call } };
+
+      if (selector === nil) {
+        #{self}.on(name, handler);
+      }
+      else {
+        #{self}.on(name, selector, handler);
+      }
     }
+
     block
   end
 
@@ -316,6 +322,8 @@ class JQuery < `fn`
   alias succ next
 
   alias_native :text=, :text
+
+  alias_native :trigger, :trigger
 
   def value
     `#{self}.val() || ""`
