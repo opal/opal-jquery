@@ -2,42 +2,30 @@
 
 [![Build Status](https://secure.travis-ci.org/adambeynon/opal-jquery.png?branch=master)](http://travis-ci.org/adambeynon/opal-jquery)
 
-Gives Opal access to jquery/zepto.
+opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
+and providing a nice ruby syntax for dealing with jquery instances.
+opal-jquery is [hosted on github](http://github.com/adambeynon/opal-jquery).
 
-## JQuery
-
-Instances of the `JQuery` class are just jquery/zepto objects. This
-means that all methods of `JQuery` are copied onto the jquery
-prototype so any instance can be used inside opal, and any opal version
-in javascript.
-
-## Finding elements
-
-### General selectors
+jQuery instances are toll-free bridged to instances of the ruby class
+`JQuery`, so they can be used interchangeably. The `Document` module also
+exists, which provides the simple top level css selector method:
 
 ```ruby
-Document['.foo']
-# => (<div class="foo bar">, <div class="foo">)
-```
+elements = Document['.foo']
+# => [<div class="foo">, ...]
 
-### By id
+elements.class
+# => JQuery
 
-```ruby
-Document.id 'bar'
-# => (<div id="bar">)
-Document.id 'doesnt-exist'
-# => nil
-```
-
-```ruby
-Document['#foo'].on :click do
-  puts "foo was clicked"
+elements.on(:click) do
+  alert "element was clicked"
 end
 ```
 
-## HTTP (Ajax) requests
+## HTTP/AJAX requests
 
-The `HTTP` class is provided which wraps simple jquery ajax requests.
+jQuery's Ajax implementation is also wrapped in the top level HTTP
+class.
 
 ```ruby
 HTTP.get("/users/1.json") do |response|
@@ -46,29 +34,64 @@ HTTP.get("/users/1.json") do |response|
 end
 ```
 
-By default, the block will be called when the request is successfull
-and when it fails. To test whether the response was a success, use the
-`ok?` method:
+The block passed to this method is used as the handler when the request
+succeeds, as well as when it fails. To determine whether the request
+was successful, use the `ok?` method:
 
 ```ruby
-HTTP.get("/users/1.json") do |response|
+HTTP.get("/users/2.json") do |response|
   if response.ok?
-    alert "Success!"
+    alert "successful!"
   else
-    alert "Error (#{response.status_code})"
+    alert "request failed :("
   end
 end
 ```
 
-Here the `status_code` is also used to report the error.
-
-For JSON responses, the `json` method is useful for parsing the response
-body into ruby objects (Hash, Array, String, etc):
+It is also possible to use a different handler for each case:
 
 ```ruby
-HTTP.get("/users/1.json") do |response|
+request = HTTP.get("/users/3.json")
+
+request.callback {
+  puts "Request worked!"
+}
+
+request.errback {
+  puts "Request didn't work :("
+}
+```
+
+The request is actually triggered inside the `HTTP.get` method, but due
+to the async nature of the request, the callback and errback handlers can
+be added anytime before the request returns.
+
+### Handling responses
+
+Web apps deal with json responses quite frequently, so there is a useful
+`#json` helper method to get the json content from a request:
+
+```ruby
+HTTP.get("/users.json") do |response|
+  puts response.body
   puts response.json
 end
 
-# => { "name": "Adam Beynon", "age": 26, "id": 1 }
+# => "[{\"name\": \"Adam\"},{\"name\": \"Ben\"}]"
+# => [{"name" => "Adam"}, {"name" => "Ben"}]
+```
+
+The `#body` method will always return the raw response string.
+
+If an error is encountered, then the `#status_code` method will hold the
+specific error code from the underlying request:
+
+```ruby
+request = HTTP.get("/users/3.json")
+
+request.callback { puts "it worked!" }
+
+request.errback { |response|
+  puts "failed with status #{response.status_code}"
+}
 ```
