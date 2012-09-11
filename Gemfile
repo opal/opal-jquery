@@ -2,5 +2,5 @@ source :rubygems
 
 gem "rake"
 
-gem "opal", :git => 'git://github.com/adambeynon/opal.git'
-gem "opal-spec", :git => 'git://github.com/adambeynon/opal-spec.git'
+gem "opal", :git => 'git://github.com/opal/opal.git'
+gem "opal-spec", :git => 'git://github.com/opal/opal-spec.git'

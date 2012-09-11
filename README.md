@@ -1,10 +1,10 @@
 # opal-jquery
 
-[![Build Status](https://secure.travis-ci.org/adambeynon/opal-jquery.png?branch=master)](http://travis-ci.org/adambeynon/opal-jquery)
+[![Build Status](https://secure.travis-ci.org/opal/opal-jquery.png?branch=master)](http://travis-ci.org/opal/opal-jquery)
 
 opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
 and providing a nice ruby syntax for dealing with jquery instances.
-opal-jquery is [hosted on github](http://github.com/adambeynon/opal-jquery).
+opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
 
 jQuery instances are toll-free bridged to instances of the ruby class
 `JQuery`, so they can be used interchangeably. The `Document` module also
