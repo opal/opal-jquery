@@ -72,11 +72,20 @@ describe Document do
     end
   end
 
-  describe ".parse" do
+  describe '.parse' do
     it "should return a new instance with parsed element as single element" do
       foo = Document.parse '<div id="foo" class="bar"></div>'
       foo.id.should == 'foo'
       foo.class_name.should == 'bar'
+    end
+  end
+
+  describe '.title and .title=' do
+    it 'sets/gets the page title' do
+      current = Document.title
+      Document.title = 'hello from opal'
+      Document.title.should == 'hello from opal'
+      Document.title = current
     end
   end
 end

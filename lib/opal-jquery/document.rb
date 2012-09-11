@@ -36,4 +36,12 @@ module Document
       return nil;
     }
   end
+
+  def self.title
+    `document.title`
+  end
+
+  def self.title=(title)
+    `document.title = title`
+  end
 end
