@@ -1,1 +1,1 @@
-Spec::Runner.autorun
+OSpec::Runner.autorun
