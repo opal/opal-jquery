@@ -1,1 +1,1 @@
-OSpec::Runner.autorun
+OpalSpec::Runner.autorun

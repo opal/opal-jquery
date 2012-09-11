@@ -6,12 +6,12 @@ require 'opal/rake_task'
 Opal::RakeTask.new do |t|
   t.name         = 'opal-jquery'
   t.parser       = true # opal-parser for examples
-  t.dependencies = %w(ospec)
+  t.dependencies = %w(opal-spec)
 end
 
 desc "Run phantom tests"
 task :test do
-  src = %w(build/opal.js build/ospec.js vendor/jquery.js build/opal-jquery.js build/specs.js)
+  src = %w(build/opal.js build/opal-spec.js vendor/jquery.js build/opal-jquery.js build/specs.js)
   out = 'build/phantom_runner.js'
   File.open(out, 'w+') do |o|
     src.each { |s| o.write File.read(s) }
