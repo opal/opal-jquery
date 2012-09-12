@@ -16,7 +16,7 @@ describe HTTP do
 
     async 'returns false when the request failed' do
       HTTP.get('data/non_existant.txt') do |response|
-        run_async { response.ok?.should be_true }
+        run_async { response.ok?.should be_false }
       end
     end
   end
