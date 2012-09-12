@@ -1,5 +1,3 @@
-# opal-jquery
-
 opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
 and providing a nice ruby syntax for dealing with jquery instances.
 opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
@@ -20,7 +18,7 @@ elements.on(:click) do
 end
 ```
 
-## HTTP/AJAX requests
+### HTTP/AJAX requests
 
 jQuery's Ajax implementation is also wrapped in the top level HTTP
 class.
@@ -64,7 +62,7 @@ The request is actually triggered inside the `HTTP.get` method, but due
 to the async nature of the request, the callback and errback handlers can
 be added anytime before the request returns.
 
-### Handling responses
+#### Handling responses
 
 Web apps deal with json responses quite frequently, so there is a useful
 `#json` helper method to get the json content from a request:
