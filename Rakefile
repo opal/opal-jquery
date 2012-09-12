@@ -5,7 +5,7 @@ require 'opal/rake_task'
 
 Opal::RakeTask.new do |t|
   t.name         = 'opal-jquery'
-  t.parser       = true # opal-parser for examples
+  # t.parser       = true # opal-parser for examples
   t.dependencies = %w(opal-spec)
 end
 
