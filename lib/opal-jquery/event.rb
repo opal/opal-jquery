@@ -18,4 +18,8 @@ class Event < `$.Event`
   def type
     `#{self}.type`
   end
+
+  def which
+    `#{self}.which`
+  end
 end

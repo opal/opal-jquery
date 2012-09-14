@@ -236,6 +236,8 @@ class Element < `fn`
     `#{self}.length ? #{self}.first() : nil`
   end
 
+  alias_native :focus, :focus
+
   alias_native :has_class?, :hasClass
 
   def html
