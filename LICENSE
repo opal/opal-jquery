@@ -1,29 +1,3 @@
-# opal-jquery
-
-[![Build Status](https://secure.travis-ci.org/opal/opal-jquery.png?branch=master)](http://travis-ci.org/opal/opal-jquery)
-
-opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
-and providing a nice ruby syntax for dealing with jquery instances.
-opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
-
-See the [website for documentation](http://opal.github.com/opal-jquery).
-
-## Running Specs
-
-Get the dependencies:
-
-    $ bundle install
-
-Build dependencies, opal-jquery and it's specs into `build/`:
-
-    $ rake opal
-
-Run the tests inside a phantom.js runner:
-
-    $ rake test
-
-##  License
-
 Copyright (C) 2012 by Adam Beynon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
