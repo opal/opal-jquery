@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.author       = 'Adam Beynon'
   s.email        = 'adam@adambeynon.com'
   s.homepage     = 'http://opal.github.com'
-  s.summary      = 'Opal access to jquery/zepto'
-  s.description  = 'Opal DOM library for jquery/zepto.'
+  s.summary      = 'Opal access to jquery'
+  s.description  = 'Opal DOM library for jquery'
 
   s.files          = `git ls-files`.split("\n")
   s.executables    = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }

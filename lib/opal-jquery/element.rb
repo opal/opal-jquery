@@ -1,18 +1,6 @@
-%x{
-  var fn;
-
-  if (typeof(jQuery) !== 'undefined') {
-    fn = jQuery;
-  }
-  else if (typeof(Zepto) !== 'undefined') {
-    fn = Zepto.fn.constructor;
-  }
-  else {
-    #{ raise "no DOM library found"};
-  }
-}
-
-class Element < `fn`
+# Instances of Element are just jquery instances, and wrap 1 or more
+# native dom elements.
+class Element < `jQuery`
   def self.find(selector)
     `$(selector)`
   end

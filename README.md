@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/opal/opal-jquery.png?branch=master)](http://travis-ci.org/opal/opal-jquery)
 
-opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
+opal-jquery provides DOM access to opal by wrapping jquery
 and providing a nice ruby syntax for dealing with jquery instances.
 opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
 
