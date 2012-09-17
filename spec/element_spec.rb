@@ -15,28 +15,6 @@ describe Element do
   after do
     @div.remove
   end
-  
-  describe "#add_class" do
-    it "should add the given class name to the element" do
-      foo = Document.id 'foo'
-      foo.has_class?('lemons').should be_false
-      foo.add_class 'lemons'
-      foo.has_class?('lemons').should be_true
-    end
-
-    it "should not duplicate class names on an element" do
-      bar = Document.id 'bar'
-      bar.has_class?('apples').should be_true
-      bar.add_class 'apples'
-      bar.class_name.should == 'apples'
-    end
-
-    it "should return self" do
-      baz = Document.id 'baz'
-      baz.add_class('oranges').should equal(baz)
-      baz.add_class('oranges').should equal(baz)
-    end
-  end
 
   describe '#on' do
     it 'adds an event listener onto the elements' do
