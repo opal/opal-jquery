@@ -328,6 +328,8 @@ class Element < `jQuery`
 
   alias_native :text=, :text
 
+  alias_native :toggle_class, :toggleClass
+
   alias_native :trigger, :trigger
 
   def value
