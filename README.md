@@ -20,7 +20,7 @@ Build dependencies, opal-jquery and it's specs into `build/`:
 
 Run the tests inside a phantom.js runner:
 
-    $ rake test
+    $ rake
 
 ##  License
 

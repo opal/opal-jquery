@@ -6,9 +6,4 @@ Opal::RakeTask.new do |t|
   t.dependencies = %w(opal-spec)
 end
 
-desc "Run phantom tests"
-task :test do
-  sh "phantomjs vendor/opal_spec_runner.js spec/index.html"
-end
-
-task :default => :test
+task :default => 'opal:test'
