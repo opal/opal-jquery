@@ -14,7 +14,7 @@
   <a href="https://github.com/opal/opal-jquery"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
   <div class="container">
     <div class="page-header">
-      <h1>opal-jquery <small>jquery/zepto wrapper for opal</small></h1>
+      <h1>opal-jquery <small>jquery wrapper for opal</small></h1>
     </div><p>opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
 and providing a nice ruby syntax for dealing with jquery instances.
 opal-jquery is <a href="http://github.com/opal/opal-jquery">hosted on github</a>.</p>
@@ -31,6 +31,20 @@ exists, which provides the simple top level css selector method:</p>
 <span class="n">elements</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="ss">:click</span><span class="p">)</span> <span class="k">do</span>
   <span class="n">alert</span> <span class="s2">&quot;element was clicked&quot;</span>
 <span class="k">end</span>
+</pre>
+</div>
+
+<h3>Getting Started</h3>
+
+<h4>Installation</h4>
+
+<p>Install opal-jquery from RubyGems:</p>
+<div class="highlight"><pre>$ gem install opal-jquery
+</pre>
+</div>
+
+<p>Or include it in your Gemfile for Bundler:</p>
+<div class="highlight"><pre><span class="n">gem</span> <span class="s1">&#39;opal-jquery&#39;</span>
 </pre>
 </div>
 
@@ -102,6 +116,51 @@ specific error code from the underlying request:</p>
 <span class="p">}</span>
 </pre>
 </div>
+
+<p>opal-jquery provides DOM access to opal by wrapping jquery
+and providing a nice ruby syntax for dealing with jquery instances.
+opal-jquery is <a href="http://github.com/opal/opal-jquery">hosted on github</a>.</p>
+
+<p>See the <a href="http://opal.github.com/opal-jquery">website for documentation</a>.</p>
+
+<h2>Running Specs</h2>
+
+<p>Get the dependencies:</p>
+<div class="highlight"><pre>$ bundle install
+</pre>
+</div>
+
+<p>Build dependencies, opal-jquery and it&#39;s specs into <code>build/</code>:</p>
+<div class="highlight"><pre>$ rake opal
+</pre>
+</div>
+
+<p>Run the tests inside a phantom.js runner:</p>
+<div class="highlight"><pre>$ rake
+</pre>
+</div>
+
+<h2>License</h2>
+
+<p>Copyright (C) 2012 by Adam Beynon</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &quot;Software&quot;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
   </div>
 </body>
 </html>

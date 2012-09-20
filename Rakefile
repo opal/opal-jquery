@@ -16,8 +16,11 @@ task :build do
 
   File.open('index.html', 'w+') do |o|
     puts " * index.html"
+    # remove first 2 lines (header/build status), as pre.html has a docs version
+    src = File.read("../README.md").sub(/^(?:[^\n]*\n){4}/, '')
+
     o.write File.read('src/pre.html')
-    o.write markdown.render(File.read "src/index.md")
+    o.write markdown.render(src)
     o.write File.read('src/post.html')
   end
 end
