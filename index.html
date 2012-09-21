@@ -48,6 +48,109 @@ exists, which provides the simple top level css selector method:</p>
 </pre>
 </div>
 
+<h3>Interacting with the DOM</h3>
+
+<h4>Finiding elements</h4>
+
+<p>opal-jquery provides the <code>Document</code> module, which is the best way to
+find elements by css selector:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#header&#39;</span><span class="o">]</span>
+</pre>
+</div>
+
+<p>This method acts just like <code>$(&#39;selector&#39;)</code>, and can use any jquery
+compatible selector:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#navigation li:last&#39;</span><span class="o">]</span>
+</pre>
+</div>
+
+<p>The result is just a jquery instance, which is toll-free bridged to
+instances of the <code>Element</code> class in ruby:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">[</span><span class="s1">&#39;.foo&#39;</span><span class="o">].</span><span class="n">class</span>
+<span class="c1"># =&gt; Element</span>
+</pre>
+</div>
+
+<p>Instances of <code>Element</code> also have the <code>#find</code> method available for
+finding elements within the scope of each dom node represented by
+the instance:</p>
+<div class="highlight"><pre><span class="n">el</span> <span class="o">=</span> <span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#header&#39;</span><span class="o">]</span>
+<span class="n">el</span><span class="o">.</span><span class="n">find</span> <span class="s1">&#39;.foo&#39;</span>
+<span class="c1"># =&gt; #&lt;Element .... &gt;</span>
+</pre>
+</div>
+
+<h4>Running code on document ready</h4>
+
+<p>Just like jquery, opal-jquery requires the document to be ready to
+be able to fully interact with the page. Any top level access should
+use the <code>ready?</code> method:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">.</span><span class="n">ready?</span> <span class="k">do</span>
+  <span class="n">alert</span> <span class="s2">&quot;document is ready to go!&quot;</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+<p>The <code>Kernel#alert</code> method is shown above too.</p>
+
+<h4>Event handling</h4>
+
+<p>The <code>Element#on</code> method is used to attach event handlers to elements:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#header&#39;</span><span class="o">].</span><span class="n">on</span> <span class="ss">:click</span> <span class="k">do</span>
+  <span class="nb">puts</span> <span class="s2">&quot;The header was clicked!&quot;</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+<p>Selectors can also be passed as a second argument to handle events
+on certain children:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#header&#39;</span><span class="o">].</span><span class="n">on</span><span class="p">(</span><span class="ss">:click</span><span class="p">,</span> <span class="s1">&#39;.foo&#39;</span><span class="p">)</span> <span class="k">do</span>
+  <span class="nb">puts</span> <span class="s2">&quot;An element with a &#39;foo&#39; class was clicked&quot;</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+<p>An <code>Event</code> instance is optionally passed to block handlers as well,
+which is toll-free bridged to jquery events:</p>
+<div class="highlight"><pre><span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#my_link&#39;</span><span class="o">].</span><span class="n">on</span><span class="p">(</span><span class="ss">:click</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">evt</span><span class="o">|</span>
+  <span class="n">evt</span><span class="o">.</span><span class="n">stop_propagation</span>
+  <span class="nb">puts</span> <span class="s2">&quot;stopped the event!&quot;</span>
+<span class="k">end</span>
+</pre>
+</div>
+
+<h4>CSS styles and classnames</h4>
+
+<p>The various jquery methods are available on <code>Element</code> instances:</p>
+<div class="highlight"><pre><span class="n">foo</span> <span class="o">=</span> <span class="no">Document</span><span class="o">[</span><span class="s1">&#39;.foo&#39;</span><span class="o">]</span>
+
+<span class="n">foo</span><span class="o">.</span><span class="n">add_class</span> <span class="s1">&#39;blue&#39;</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">remove_class</span> <span class="s1">&#39;foo&#39;</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">toggle_class</span> <span class="s1">&#39;selected&#39;</span>
+</pre>
+</div>
+
+<p>There are also added convenience methods for opal-jquery:</p>
+<div class="highlight"><pre><span class="n">foo</span> <span class="o">=</span> <span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#header&#39;</span><span class="o">]</span>
+
+<span class="n">foo</span><span class="o">.</span><span class="n">class_name</span>
+<span class="c1"># =&gt; &#39;red lorry&#39;</span>
+
+<span class="n">foo</span><span class="o">.</span><span class="n">class_name</span> <span class="o">=</span> <span class="s1">&#39;yellow house&#39;</span>
+
+<span class="n">foo</span><span class="o">.</span><span class="n">class_name</span>
+<span class="c1"># =&gt; &#39;yellow house&#39;</span>
+</pre>
+</div>
+
+<p><code>Element#css</code> also exists for getting/setting css styles:</p>
+<div class="highlight"><pre><span class="n">el</span> <span class="o">=</span> <span class="no">Document</span><span class="o">[</span><span class="s1">&#39;#container&#39;</span><span class="o">]</span>
+<span class="n">el</span><span class="o">.</span><span class="n">css</span> <span class="s1">&#39;color&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span>
+<span class="n">el</span><span class="o">.</span><span class="n">css</span> <span class="s1">&#39;color&#39;</span>
+<span class="c1"># =&gt; &#39;blue&#39;</span>
+</pre>
+</div>
+
 <h3>HTTP/AJAX requests</h3>
 
 <p>jQuery&#39;s Ajax implementation is also wrapped in the top level HTTP
@@ -123,7 +226,7 @@ opal-jquery is <a href="http://github.com/opal/opal-jquery">hosted on github</a>
 
 <p>See the <a href="http://opal.github.com/opal-jquery">website for documentation</a>.</p>
 
-<h2>Running Specs</h2>
+<h3>Running Specs</h3>
 
 <p>Get the dependencies:</p>
 <div class="highlight"><pre>$ bundle install
@@ -140,7 +243,7 @@ opal-jquery is <a href="http://github.com/opal/opal-jquery">hosted on github</a>
 </pre>
 </div>
 
-<h2>License</h2>
+<h3>License</h3>
 
 <p>Copyright (C) 2012 by Adam Beynon</p>
 
