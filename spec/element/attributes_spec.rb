@@ -110,7 +110,7 @@ describe Element do
   describe '#html' do
     it "should return the html content of the element" do
       Document.id('html-foo').html.should == "Hey there"
-      Document.id('html-bar').html.should == "<p>Erm</p>"
+      Document.id('html-bar').html.downcase.should == "<p>erm</p>"
     end
 
     it "should only return html for first matched element" do
