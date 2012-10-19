@@ -237,6 +237,13 @@ See the [website for documentation](http://opal.github.com/opal-jquery).
 Get the dependencies:
 
     $ bundle install
+    
+You will need phantomjs to run the specs outside the browser.  It can
+be downloaded at [http://phantomjs.org/download.html](http://phantomjs.org/download.html)
+
+On osx you can install through homebrew
+
+    $ brew update; brew install phantomjs
 
 Build dependencies, opal-jquery and it's specs into `build/`:
 
@@ -245,6 +252,27 @@ Build dependencies, opal-jquery and it's specs into `build/`:
 Run the tests inside a phantom.js runner:
 
     $ rake
+    
+You can also run the tests in the browser by opening spec/index.html.
+
+### Development Tips
+
+The following rake task are pertinent to adding/changing
+functionality.
+
+* opal - builds the following js files:
+  * opal-jquery  - opal jquery
+  * opal.js      - the opal runtime
+  * opal-spec.js - opal spec framework
+  * specs.js     - the spec
+* opal:test - runs the specs.  It is the default rake task
+
+If you TDD, you may want to run
+
+    $ rake opal opal:test
+    
+Or use a guard script that does similar
+
 
 ###  License
 
