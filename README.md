@@ -40,7 +40,7 @@ gem 'opal-jquery'
 
 ### Interacting with the DOM
 
-#### Finiding elements
+#### Finding elements
 
 opal-jquery provides the `Document` module, which is the best way to
 find elements by css selector:
