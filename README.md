@@ -2,8 +2,8 @@
 
 [![Build Status](https://secure.travis-ci.org/opal/opal-jquery.png?branch=master)](http://travis-ci.org/opal/opal-jquery)
 
-opal-jquery provides DOM access to opal by wrapping jquery (or zepto)
-and providing a nice ruby syntax for dealing with jquery instances.
+opal-jquery provides DOM access to opal by wrapping jQuery (or zepto)
+and providing a nice ruby syntax for dealing with jQuery instances.
 opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
 
 jQuery instances are toll-free bridged to instances of the ruby class
@@ -40,23 +40,23 @@ gem 'opal-jquery'
 
 ### Interacting with the DOM
 
-#### Finiding elements
+#### Finding elements
 
 opal-jquery provides the `Document` module, which is the best way to
-find elements by css selector:
+find elements by CSS selector:
 
 ```ruby
 Document['#header']
 ```
 
-This method acts just like `$('selector')`, and can use any jquery
+This method acts just like `$('selector')`, and can use any jQuery
 compatible selector:
 
 ```ruby
 Document['#navigation li:last']
 ```
 
-The result is just a jquery instance, which is toll-free bridged to
+The result is just a jQuery instance, which is toll-free bridged to
 instances of the `Element` class in ruby:
 
 ```ruby
@@ -65,7 +65,7 @@ Document['.foo'].class
 ```
 
 Instances of `Element` also have the `#find` method available for
-finding elements within the scope of each dom node represented by
+finding elements within the scope of each DOM node represented by
 the instance:
 
 ```ruby
@@ -76,7 +76,7 @@ el.find '.foo'
 
 #### Running code on document ready
 
-Just like jquery, opal-jquery requires the document to be ready to
+Just like jQuery, opal-jquery requires the document to be ready to
 be able to fully interact with the page. Any top level access should
 use the `ready?` method:
 
@@ -119,7 +119,7 @@ end
 
 #### CSS styles and classnames
 
-The various jquery methods are available on `Element` instances:
+The various jQuery methods are available on `Element` instances:
 
 ```ruby
 foo = Document['.foo']
@@ -198,8 +198,8 @@ be added anytime before the request returns.
 
 #### Handling responses
 
-Web apps deal with json responses quite frequently, so there is a useful
-`#json` helper method to get the json content from a request:
+Web apps deal with JSON responses quite frequently, so there is a useful
+`#json` helper method to get the JSON content from a request:
 
 ```ruby
 HTTP.get("/users.json") do |response|
@@ -226,8 +226,8 @@ request.errback { |response|
 }
 ```
 
-opal-jquery provides DOM access to opal by wrapping jquery
-and providing a nice ruby syntax for dealing with jquery instances.
+opal-jquery provides DOM access to opal by wrapping jQuery
+and providing a nice ruby syntax for dealing with jQuery instances.
 opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
 
 See the [website for documentation](http://opal.github.com/opal-jquery).
