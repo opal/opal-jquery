@@ -337,4 +337,10 @@ class Element < `jQuery`
   end
 
   alias_native :value=, :val
+
+  # display functions
+  alias_native :hide, :hide
+  alias_native :show, :show
+  alias_native :toggle, :toggle
+  
 end
