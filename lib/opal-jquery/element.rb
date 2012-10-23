@@ -178,7 +178,8 @@ class Element < `jQuery`
   # only the `name` is given, then that css property name is read from
   # the first element in the collection and returned. If the `value`
   # property is also given then the given css property is set to the
-  # given value for each of the elements in #{self} collection.
+  # given value for each of the elements in #{self} collection. The
+  # property can also be a hash of properties and values.
   #
   # @example
   #
@@ -186,11 +187,20 @@ class Element < `jQuery`
   #   foo.css 'background-color'            # => "red"
   #   foo.css 'background-color', 'green'
   #   foo.css 'background-color'            # => "green"
+  #   foo.css :width => '200px'
   #
   # @param [String] name the css property to get/set
   # @param [String] value optional value to set
+  # @param [Hash] set of css properties and values
   # @return [String, DOM] returns css value or the receiver
-  alias_native :css, :css
+  def css(name, value=nil)
+    if value.nil? && name.is_a?(String)
+      return `$(#{self}).css(name)`
+    else
+      name.is_a?(Hash) ? `$(#{self}).css(#{name.to_native})` : `$(#{self}).css(name, value)`
+    end
+    self
+  end
 
   # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.

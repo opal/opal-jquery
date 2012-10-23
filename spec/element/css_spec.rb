@@ -4,6 +4,7 @@ describe "Element#css" do
       <div id="css-spec">
         <div id="foo" style="background-color:rgb(15,99,30); color:;"></div>
         <div id="bar"></div>
+        <div id="hash"></div>
       </div>
     HTML
 
@@ -31,7 +32,21 @@ describe "Element#css" do
 
     it "returns self" do
       bar = Document.id('bar')
-      bar.css('color', 'green').should equal(bar)
+      bar.css("background", "green").should equal(bar)
+    end
+  end
+
+  describe "with a set of names and values" do
+    it "should set the properties" do
+      hash = Document.id("hash")
+      hash.css(:width => "100px", :height => "200px")
+      hash.css("width").should be_kind_of(String) 
+      hash.css("height").should be_kind_of(String) 
+    end
+
+    it "should return self" do
+      hash = Document.id("hash")
+      hash.css(:border => "1px solid #000").should equal(hash)
     end
   end
 end
