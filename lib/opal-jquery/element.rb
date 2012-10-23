@@ -201,6 +201,30 @@ class Element < `jQuery`
     end
     self
   end
+  
+  # Set css values over time to create animations. The first parameter is a
+  # set of css properties and values to animate to. The first parameter
+  # also accepts a special :speed value to set animation speed. If a block
+  # is given, the block is run as a callback when the animation finishes.
+  #
+  # @example
+  #
+  #   foo = DOM "#foo"
+  #   foo.animate :height => "200px", "margin-left" => "10px"
+  #   bar.animate :top => "30px", :speed => 100 do
+  #     bar.add_class "finished"
+  #   end
+  # 
+  # @param [Hash] css properties and and values. Also accepts speed param.
+  # @return [DOM] receiver
+  def animate(params, &block)
+    speed = params.has_key?(:speed) ? params.delete(:speed) : 400
+    %x{
+      $(#{self}).animate(#{params.to_native}, #{speed}, function() {
+        #{block.call if block_given?}
+      })
+    } 
+  end
 
   # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.
