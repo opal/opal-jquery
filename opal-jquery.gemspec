@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version      = '0.0.1'
   s.author       = 'Adam Beynon'
   s.email        = 'adam.beynon@gmail.com'
-  s.homepage     = 'http://opal.github.com/opal-jquery'
+  s.homepage     = 'http://opalrb.org'
   s.summary      = 'Opal access to jquery'
   s.description  = 'Opal DOM library for jquery'
 
