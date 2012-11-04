@@ -241,6 +241,13 @@ class Element < `jQuery`
     self
   end
 
+
+  def map
+    lst=[]
+    each {|el| lst << yield(el) }
+    lst
+  end
+
   # Find all the elements that match the given `selector` within the
   # scope of elements in #{self} given collection. Might return an empty
   # collection if no elements match.
