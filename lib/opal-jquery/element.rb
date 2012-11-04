@@ -241,7 +241,13 @@ class Element < `jQuery`
     self
   end
 
-
+  # return a opal array mapped with block yielded for any element 
+  #
+  # @example
+  #
+  #  lst=Document.find('table.players td.surname').map  {|el| el.html } 
+  #
+  # @ return an Array
   def map
     lst=[]
     each {|el| lst << yield(el) }
