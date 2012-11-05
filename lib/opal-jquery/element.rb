@@ -241,17 +241,28 @@ class Element < `jQuery`
     self
   end
 
-  # return a opal array mapped with block yielded for any element 
+  # return an opal array mapped with block yielded for any element 
   #
   # @example
   #
   #  lst=Document.find('table.players td.surname').map  {|el| el.html } 
   #
-  # @ return an Array
+  # @return an Array
   def map
     lst=[]
     each {|el| lst << yield(el) }
     lst
+  end
+
+  # return an opal Array of elements
+  #
+  # @example
+  #
+  # Document.find('table.players td.surname').to_a.last
+  #
+  # @return an Array
+  def to_a
+    map {|el| el }
   end
 
   # Find all the elements that match the given `selector` within the
