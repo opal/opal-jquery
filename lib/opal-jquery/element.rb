@@ -245,13 +245,13 @@ class Element < `jQuery`
   #
   # @example
   #
-  #  lst=Document.find('table.players td.surname').map  {|el| el.html } 
+  #  list = Document.find('table.players td.surname').map  {|el| el.html } 
   #
   # @return an Array
   def map
-    lst=[]
-    each {|el| lst << yield(el) }
-    lst
+    list = []
+    each {|el| list << yield(el) }
+    list
   end
 
   # return an opal Array of elements

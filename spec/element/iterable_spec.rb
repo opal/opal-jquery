@@ -27,7 +27,7 @@ describe Element do
   describe '#each' do
     it "should change all td to pippa" do
       Document.find('table.players td').each do |el|
-        el.html= "pippa"
+        el.html = "pippa"
       end
 
       Document.find('table.players td').first.html.should == 'pippa'
