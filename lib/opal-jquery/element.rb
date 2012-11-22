@@ -316,6 +316,8 @@ class Element < `jQuery`
 
   alias_native :next, :next
 
+  alias_native :siblings, :siblings
+
   def off(event_name, selector, handler=nil)
     %x{
       if (handler === nil) {
@@ -334,7 +336,9 @@ class Element < `jQuery`
     return unless block_given?
 
     %x{
-      var handler = function(e) { return #{ block.call `e` } };
+      var handler = function(event, data, status, xhr) {
+        return #{ block.call `event, data, status, xhr` }
+      };
       block._jq = handler;
 
       if (selector === nil) {
