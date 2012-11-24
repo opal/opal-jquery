@@ -335,9 +335,12 @@ class Element < `jQuery`
   def on(event_name, selector=nil, &block)
     return unless block_given?
 
+    # The choice of allowing a maximum of four parameters is arbitrary.  arg1 is typically the
+    # event object and the rest are parameters passed by trigger().  For example, Rails 3 AJAX
+    # event handlers get passed up to three additional parameters in addition to the event object.
     %x{
-      var handler = function(event, data, status, xhr) {
-        return #{ block.call `event, data, status, xhr` }
+      var handler = function(arg1, arg2, arg3, arg4) {
+        return #{ block.call `arg1, arg2, arg3, arg4` }
       };
       block._jq = handler;
 
