@@ -148,3 +148,41 @@ describe "Element#succ" do
     Document.id('bar').succ.size.should == 0
   end
 end
+
+describe "Element#siblings" do
+  before do
+    @div = Document.parse <<-HTML
+      <div id="siblings-spec">
+        <div>
+          <div id="foo"></div>
+          <div id="bar"></div>
+          <div id="baz" class="special"></div>
+        </div>
+        <div>
+          <div id="uno"></div>
+        </div>
+      </div>
+    HTML
+
+    @div.append_to_body
+  end
+
+  after do
+    @div.remove
+  end
+
+  it "should return all siblings" do
+    Document.id('bar').siblings.size.should == 2
+    Document.id('bar').siblings.at(0).id.should == "foo"
+    Document.id('bar').siblings.at(1).id.should == "baz"
+  end
+
+  it "should return all siblings that match the selector" do
+    Document.id('bar').siblings('.special').size.should == 1
+    Document.id('bar').siblings('.special').at(0).id.should == "baz"
+  end
+
+  it "should return an empty instance when there are no siblings" do
+    Document.id('uno').siblings.size.should == 0
+  end
+end
