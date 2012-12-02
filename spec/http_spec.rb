@@ -1,3 +1,5 @@
+require "spec_helper"
+
 describe HTTP do
   describe '#body' do
     async 'returns the response body as a string' do

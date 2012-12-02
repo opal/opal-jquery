@@ -1,7 +1,7 @@
-describe Element do
-  before do
-    @div = Document.parse <<-HTML
+require "spec_helper"
 
+describe Element do
+  html <<-HTML
     <table class="players">
     <tr class="player">
     <td class="name">mario</td>
@@ -13,16 +13,7 @@ describe Element do
     </tr>
 
     </table>
-
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
-
+  HTML
 
   describe '#each' do
     it "should change all td to pippa" do
@@ -57,7 +48,5 @@ describe Element do
       Document.find('table.players td').to_a.select {|el| el.has_class?('surname') }.
       map {|el| el.class }.uniq  == ['surname']
     end
-    
   end
-
 end

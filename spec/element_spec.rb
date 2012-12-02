@@ -1,20 +1,12 @@
+require "spec_helper"
+
 describe Element do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="on-spec">
-        <div id="foo">
-          <div id="bar" class="apples"></div>
-        </div>
-        <div id="baz"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="foo">
+      <div id="bar" class="apples"></div>
+    </div>
+    <div id="baz"></div>
+  HTML
 
   describe '#on' do
     it 'adds an event listener onto the elements' do

@@ -1,20 +1,14 @@
+require "spec_helper"
+
 describe Document do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="foo" class="bar"></div>
-      <div class="woosh"></div>
-      <div class="woosh"></div>
-      <div class="find-foo"></div>
-      <div class="find-bar"></div>
-      <div class="find-foo"></div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="foo" class="bar"></div>
+    <div class="woosh"></div>
+    <div class="woosh"></div>
+    <div class="find-foo"></div>
+    <div class="find-bar"></div>
+    <div class="find-foo"></div>
+  HTML
 
   describe ".[]" do
     it "should be able to find elements with given id" do

@@ -1,19 +1,11 @@
+require "spec_helper"
+
 describe "Element#at" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="at-spec">
-        <div class="foo" id="blah"></div>
-        <div class="foo" id="bleh"></div>
-        <div class="foo" id="bluh"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div class="foo" id="blah"></div>
+    <div class="foo" id="bleh"></div>
+    <div class="foo" id="bluh"></div>
+  HTML
 
   it "returns the element at the given index" do
     foos = Document.find '.foo'

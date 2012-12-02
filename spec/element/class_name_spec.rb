@@ -1,23 +1,15 @@
+require "spec_helper"
+
 describe "Element#class_name" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="class-name-spec">
-        <div id="foo" class="whiskey"></div>
-        <div id="bar" class="scotch brandy"></div>
-        <div id="baz" class=""></div>
-        <div id="buz"></div>
+  html <<-HTML
+    <div id="foo" class="whiskey"></div>
+    <div id="bar" class="scotch brandy"></div>
+    <div id="baz" class=""></div>
+    <div id="buz"></div>
 
-        <div class="red dark"></div>
-        <div class="red light"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+    <div class="red dark"></div>
+    <div class="red light"></div>
+  HTML
 
   it "should return the elements' class name" do
     Document.id('foo').class_name.should == "whiskey"

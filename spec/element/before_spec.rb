@@ -1,20 +1,12 @@
+require "spec_helper"
+
 describe "Element#before" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="before-spec">
-        <div id="some-header" class="kapow"></div>
-        <div id="foo" class="before-spec-first"></div>
-        <div id="bar" class="before-spec-first"></div>
-        <div id="baz"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="some-header" class="kapow"></div>
+    <div id="foo" class="before-spec-first"></div>
+    <div id="bar" class="before-spec-first"></div>
+    <div id="baz"></div>
+  HTML
 
   it "should insert the given html string before each element" do
     el = Document['.before-spec-first']

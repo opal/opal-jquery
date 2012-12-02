@@ -1,18 +1,10 @@
+require "spec_helper"
+
 describe "Element display methods" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="css-spec">
-        <div id="shown"></div>
-        <div id="hidden" style="display: none"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="shown"></div>
+    <div id="hidden" style="display: none"></div>
+  HTML
 
   it "hides an element" do
     element = Document.id('shown') 
@@ -41,5 +33,4 @@ describe "Element display methods" do
     element.toggle
     element.css('display').should == 'none'
   end
-  
 end

@@ -1,17 +1,11 @@
+require "spec_helper"
+
 describe "Element#append_to" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="foo"></div>
-      <div id="bar"></div>
-      <div id="baz"></div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="foo"></div>
+    <div id="bar"></div>
+    <div id="baz"></div>
+  HTML
 
   it "should insert the receiver into the target element" do
     Document.id('foo').children.size.should == 0

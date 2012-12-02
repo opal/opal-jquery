@@ -1,20 +1,12 @@
+require "spec_helper"
+
 describe "Element#append" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="append-spec">
-        <div id="foo" class="first-append"></div>
-        <div id="bar" class="first-append"></div>
-        <div id="baz"></div>
-        <div id="buz"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="foo" class="first-append"></div>
+    <div id="bar" class="first-append"></div>
+    <div id="baz"></div>
+    <div id="buz"></div>
+  HTML
 
   it "should insert the HTML string to the end of each element" do
     Document.find('.first-append').append '<p class="woosh"></p>'

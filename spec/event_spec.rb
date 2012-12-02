@@ -1,20 +1,14 @@
+require "spec_helper"
+
 describe Event do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="on-spec">
-        <div id="foo">
-          <div id="bar"></div>
-        </div>
-        <div id="baz"></div>
+  html <<-HTML
+    <div id="on-spec">
+      <div id="foo">
+        <div id="bar"></div>
       </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+      <div id="baz"></div>
+    </div>
+  HTML
 
   it '#current_target returns the current element in the bubbling' do
     foo = Document['#foo']

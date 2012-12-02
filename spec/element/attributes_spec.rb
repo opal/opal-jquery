@@ -1,52 +1,44 @@
+require "spec_helper"
+
 describe Element do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="attributes-spec">
-        <div id="foo"></div>
-        <div id="bar" class="apples"></div>
-        <div id="baz" class="lemons"></div>
+  html <<-HTML
+    <div id="foo"></div>
+    <div id="bar" class="apples"></div>
+    <div id="baz" class="lemons"></div>
 
-        <div id="attr-foo" title="Hello there!"></div>
-        <div id="attr-bar"></div>
-        <div id="attr-baz" title=""></div>
-        <div id="attr-woosh"></div>
-        <div id="attr-kapow" title="Apples"></div>
+    <div id="attr-foo" title="Hello there!"></div>
+    <div id="attr-bar"></div>
+    <div id="attr-baz" title=""></div>
+    <div id="attr-woosh"></div>
+    <div id="attr-kapow" title="Apples"></div>
 
-        <div id="has-foo" class="apples"></div>
-        <div id="has-bar" class="lemons bananas"></div>
+    <div id="has-foo" class="apples"></div>
+    <div id="has-bar" class="lemons bananas"></div>
 
-        <div id="html-foo">Hey there</div>
-        <div id="html-bar"><p>Erm</p></div>
+    <div id="html-foo">Hey there</div>
+    <div id="html-bar"><p>Erm</p></div>
 
-        <div class="html-bridge">Hello</div>
-        <div class="html-bridge">Hello as well</div>
+    <div class="html-bridge">Hello</div>
+    <div class="html-bridge">Hello as well</div>
 
-        <div id="remove-foo"></div>
+    <div id="remove-foo"></div>
 
-        <div id="remove-bar" class="lemons"></div>
-        <div id="remove-baz" class="apples oranges"></div>
-        <div id="remove-buz" class="pineapples mangos"></div>
+    <div id="remove-bar" class="lemons"></div>
+    <div id="remove-baz" class="apples oranges"></div>
+    <div id="remove-buz" class="pineapples mangos"></div>
 
-        <div id="remove-bleh" class="fruit"></div>
+    <div id="remove-bleh" class="fruit"></div>
 
-        <select id="value-foo">
-          <option selected="selected">Hello</option>
-          <option>World</option>
-        </select>
+    <select id="value-foo">
+      <option selected="selected">Hello</option>
+      <option>World</option>
+    </select>
 
-        <input id="value-bar" type="text" value="Blah"></input>
-        <div id="value-baz"></div>
+    <input id="value-bar" type="text" value="Blah"></input>
+    <div id="value-baz"></div>
 
-        <input type="text" id="value-woosh" value=""></input>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+    <input type="text" id="value-woosh" value=""></input>
+  HTML
 
   describe '#[]' do
     it 'should retrieve the attr value from the element' do

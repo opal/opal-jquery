@@ -1,20 +1,12 @@
+require "spec_helper"
+
 describe "Element#after" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="after-spec">
-        <div id="some-header" class="kapow"></div>
-        <div id="foo" class="after-spec-first"></div>
-        <div id="bar" class="after-spec-first"></div>
-        <div id="baz"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="some-header" class="kapow"></div>
+    <div id="foo" class="after-spec-first"></div>
+    <div id="bar" class="after-spec-first"></div>
+    <div id="baz"></div>
+  HTML
 
   it "should insert the given html string after each element" do
     el = Document['.after-spec-first']

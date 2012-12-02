@@ -1,19 +1,11 @@
+require "spec_helper"
+
 describe "Element#css" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="css-spec">
-        <div id="foo" style="background-color:rgb(15,99,30); color:;"></div>
-        <div id="bar"></div>
-        <div id="hash"></div>
-      </div>
-    HTML
-
-    @div.append_to_body
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="foo" style="background-color:rgb(15,99,30); color:;"></div>
+    <div id="bar"></div>
+    <div id="hash"></div>
+  HTML
 
   describe "with a given name" do
     it "returns the value of the CSS property for the given name" do

@@ -1,3 +1,5 @@
+require "spec_helper"
+
 describe Element do
   before do
     @div = Document.parse <<-HTML

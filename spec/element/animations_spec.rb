@@ -1,17 +1,9 @@
+require "spec_helper"
+
 describe "Element animation methods" do
-  before do
-    @div = Document.parse <<-HTML
-      <div id="animate-foo"></div>
-    HTML
-
-    @div.append_to_body
-
-    Document.id("animate-foo").css("width", "0px")
-  end
-
-  after do
-    @div.remove
-  end
+  html <<-HTML
+    <div id="animate-foo"></div>
+  HTML
 
   describe "#animate" do
     ### HACKY

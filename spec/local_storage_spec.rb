@@ -1,3 +1,5 @@
+describe "spec_helper"
+
 describe LocalStorage do
   before do
     LocalStorage.clear
