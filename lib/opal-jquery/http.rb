@@ -10,7 +10,7 @@ class HTTP
   attr_reader :method
   attr_reader :status_code
   attr_reader :url
-  
+
   def self.get(url, opts={}, &block)
     self.new(url, :GET, opts, block).send!
   end
@@ -111,3 +111,4 @@ class HTTP
     @callback.call self if @callback
   end
 end
+

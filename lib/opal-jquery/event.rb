@@ -24,7 +24,7 @@ class Event < `$.Event`
       if (#{self}._opalTarget) {
         return #{self}._opalTarget;
       }
-      
+
       return #{self}._opalTarget = $(#{self}.target);
     }
   end
@@ -37,3 +37,4 @@ class Event < `$.Event`
     `#{self}.which`
   end
 end
+
