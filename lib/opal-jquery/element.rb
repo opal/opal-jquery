@@ -391,6 +391,7 @@ class Element < `jQuery`
 
   alias succ next
 
+  alias_native :text, :text
   alias_native :text=, :text
 
   alias_native :toggle_class, :toggleClass
