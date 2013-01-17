@@ -407,5 +407,4 @@ class Element < `jQuery`
   alias_native :hide, :hide
   alias_native :show, :show
   alias_native :toggle, :toggle
-  
 end

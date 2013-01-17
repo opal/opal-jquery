@@ -1,4 +1,9 @@
+# Wraps native jQuery event objects.
 class Event < `$.Event`
+  def [](name)
+    `#{self}[name]`
+  end
+
   def current_target
     `$(#{self}.currentTarget)`
   end
@@ -19,14 +24,10 @@ class Event < `$.Event`
 
   alias_native :stop_propagation, :stopPropagation
 
-  def target
-    %x{
-      if (#{self}._opalTarget) {
-        return #{self}._opalTarget;
-      }
+  alias_native :stop_immediate_propagation, :stopImmediatePropagation
 
-      return #{self}._opalTarget = $(#{self}.target);
-    }
+  def target
+    `$(#{self}.target)`
   end
 
   def type
@@ -37,4 +38,3 @@ class Event < `$.Event`
     `#{self}.which`
   end
 end
-
