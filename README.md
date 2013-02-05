@@ -245,10 +245,6 @@ On osx you can install through homebrew
 
     $ brew update; brew install phantomjs
 
-Build dependencies, opal-jquery and it's specs into `build/`:
-
-    $ rake opal
-
 Run the tests inside a phantom.js runner:
 
     $ rake
@@ -276,7 +272,7 @@ Or use a guard script that does similar
 
 ###  License
 
-Copyright (C) 2012 by Adam Beynon
+Copyright (C) 2013 by Adam Beynon
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
