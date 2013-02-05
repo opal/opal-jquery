@@ -1,3 +1,8 @@
+#= require opal-spec
+#= require opal-jquery
+#= require_self
+#= require_tree .
+
 module OpalSpec
   class ExampleGroup
 

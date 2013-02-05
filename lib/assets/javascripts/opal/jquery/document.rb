@@ -45,4 +45,3 @@ module Document
     `document.title = title`
   end
 end
-

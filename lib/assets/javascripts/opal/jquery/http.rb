@@ -111,4 +111,3 @@ class HTTP
     @callback.call self if @callback
   end
 end
-
