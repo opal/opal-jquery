@@ -290,6 +290,10 @@ class Element < `jQuery`
     `#{self}.html() || ""`
   end
 
+  def text
+    `#{self}.text() || ""`
+  end
+
   alias_native :html=, :html
 
   def id
