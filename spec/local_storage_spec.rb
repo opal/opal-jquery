@@ -1,4 +1,4 @@
-describe "spec_helper"
+require "spec_helper"
 
 describe LocalStorage do
   before do

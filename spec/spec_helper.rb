@@ -1,7 +1,6 @@
-#= require opal-spec
-#= require opal-jquery
-#= require_self
-#= require_tree .
+require 'jquery'
+require 'opal-spec'
+require 'opal-jquery'
 
 module OpalSpec
   class ExampleGroup
@@ -34,4 +33,4 @@ module OpalSpec
   end
 end
 
-OpalSpec::Runner.autorun
+Opal::Spec::Runner.autorun
