@@ -226,6 +226,12 @@ class Element < `jQuery`
     } 
   end
 
+  alias_native :blur, :blur
+
+  alias_native :closest, :closest
+
+  alias_native :data, :data
+
   # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.
   #
@@ -342,44 +348,37 @@ class Element < `jQuery`
 
   alias_native :siblings, :siblings
 
-  def off(event_name, selector, handler=nil)
+  def on(name, selector = nil, &handler)
     %x{
-      if (handler === nil) {
-        handler = selector;
-        #{self}.off(event_name, handler._jq);
-      }
-      else {
-        #{self}.off(event_name, selector, handler._jq);
-      }
-    }
-    
-    handler
-  end
-
-  def on(event_name, selector=nil, &block)
-    return unless block_given?
-
-    # The choice of allowing a maximum of four parameters is arbitrary.  arg1 is typically the
-    # event object and the rest are parameters passed by trigger().  For example, Rails 3 AJAX
-    # event handlers get passed up to three additional parameters in addition to the event object.
-    %x{
-      var handler = function(arg1, arg2, arg3, arg4) {
-        return #{ block.call `arg1, arg2, arg3, arg4` }
-      };
-      block._jq = handler;
-
       if (selector === nil) {
-        #{self}.on(event_name, handler);
+        #{self}.on(name, handler);
       }
       else {
-        #{self}.on(event_name, selector, handler);
+        #{self}.on(name, selector, handler);
+      }
+
+      return handler;
+    }
+  end
+
+  def off(name, selector = nil, &handler)
+    %x{
+      if (selector === nil) {
+        return #{self}.off(name, handler);
+      }
+      else {
+        return #{self}.off(name, selector, handler);
       }
     }
-
-    block
   end
+
+  alias_native :remove_attr, :removeAttr
 
   alias_native :parent, :parent
+
+  alias_native :parents, :parents
+
+  alias_native :prepend, :prepend
 
   alias_native :prev, :prev
 

@@ -65,14 +65,14 @@ describe Element do
       foo.trigger(:click)
     end
 
-    it 'has an Event instance, plus up to three additional parameters passed to the handler' do
+    it 'has an Event instance, plus any additional parameters passed to the handler' do
       foo = Document['#foo']
       foo.on :bozo do |event, foo, bar, baz, buz|
         event.should be_kind_of(Event)
         foo.should == 'foo'
         bar.should == 'bar'
         baz.should == 'baz'
-        buz.should be_nil
+        buz.should == 'buz'
       end
       foo.trigger(:bozo, ['foo', 'bar', 'baz', 'buz'])
     end
