@@ -10,6 +10,11 @@ class Event < `$.Event`
 
   alias_native :default_prevented?, :isDefaultPrevented
 
+  def kill
+    stop_propagation
+    prevent_default
+  end
+
   alias_native :prevent_default, :preventDefault
 
   def page_x
@@ -28,6 +33,14 @@ class Event < `$.Event`
 
   def target
     `$(#{self}.target)`
+  end
+
+  def touch_x
+    `#{self}.originalEvent.touches[0].pageX`
+  end
+
+  def touch_y
+    `#{self}.originalEvent.touches[0].pageY`
   end
 
   def type
