@@ -19,6 +19,10 @@ class HTTP
     self.new(url, :POST, opts, block).send!
   end
 
+  def self.put(url, opts={}, &block)
+    self.new(url, :PUT, opts, block).send!
+  end
+
   def initialize(url, method, options, handler=nil)
     @url     = url
     @method  = method
