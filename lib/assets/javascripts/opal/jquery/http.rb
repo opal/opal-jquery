@@ -28,6 +28,7 @@ class HTTP
     @method  = method
     @ok      = true
     http     = self
+    payload  = options.delete :payload
     settings = options.to_native
 
     if handler
@@ -35,7 +36,14 @@ class HTTP
     end
 
     %x{
-      settings.data = settings.payload;
+      if (typeof(payload) === 'string') {
+        settings.data = payload;
+      }
+      else if (payload !== nil) {
+        settings.data = payload.$to_json();
+        settings.contentType = 'application/json';
+      }
+
       settings.url  = url;
       settings.type = method;
 
