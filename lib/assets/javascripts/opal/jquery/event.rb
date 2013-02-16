@@ -10,6 +10,7 @@ class Event < `$.Event`
 
   alias_native :default_prevented?, :isDefaultPrevented
 
+  # Stops propagation and prevents default action.
   def kill
     stop_propagation
     prevent_default

@@ -29,10 +29,7 @@ module Document
         return nil;
       }
 
-      $(function() {
-        #{ block.call };
-      });
-
+      $(block);
       return nil;
     }
   end

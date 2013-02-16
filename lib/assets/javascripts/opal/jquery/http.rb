@@ -5,11 +5,7 @@
 #     end
 #
 class HTTP
-  attr_reader :body
-  attr_reader :error_message
-  attr_reader :method
-  attr_reader :status_code
-  attr_reader :url
+  attr_reader :body, :error_message, :method, :status_code, :url
 
   def self.get(url, opts={}, &block)
     self.new(url, :GET, opts, block).send!
