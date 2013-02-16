@@ -24,13 +24,11 @@ module Spec
     def html(html_string='')
       html = '<div id="opal-jquery-test-div">' + html_string + '</div>'
       before do
-        @__html = Document.parse(html)
-        @__html.append_to_body
+        @_spec_html = Document.parse(html)
+        @_spec_html.append_to_body
       end
 
-      after { @__html.remove }
+      after { @_spec_html.remove }
     end
   end
 end
-
-# Spec::Runner.autorun
