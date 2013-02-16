@@ -2,7 +2,7 @@ require 'jquery'
 require 'opal-spec'
 require 'opal-jquery'
 
-module OpalSpec
+module Spec
   class ExampleGroup
 
     # Add some html code to the body tag ready for testing. This will
@@ -33,4 +33,4 @@ module OpalSpec
   end
 end
 
-Opal::Spec::Runner.autorun
+# Spec::Runner.autorun

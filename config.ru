@@ -1,10 +1,10 @@
 require 'bundler'
 Bundler.require
 
-map '/assets' do
-  env = Opal::Environment.new
-  env.append_path 'spec'
-  run env
-end
+require 'opal/spec/server'
 
-run Rack::Directory.new('spec')
+# Run in non-debug mode (faster, all files concatenated into 1 file)
+run Opal::Spec::Server.new(false)
+
+# Run in debug mode - all files loaded seperately, but slower
+# run Opal::Spec::Server.new
