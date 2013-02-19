@@ -17,6 +17,32 @@ class Element < `jQuery`
     `$(str)`
   end
 
+  def self.expose(*methods)
+    %x{
+      for (var i = 0, length = methods.length, method; i < length; i++) {
+        method = methods[i];
+        #{self}.prototype['$' + method] = #{self}.prototype[method];
+      }
+
+      return nil;
+    }
+  end
+
+  expose :after, :before, :parent, :parents, :prepend, :prev, :remove
+  expose :hide, :show, :toggle, :children, :blur, :closest, :data
+  expose :focus, :find, :next, :siblings, :text, :trigger, :append
+
+  alias_native :[]=, :attr
+  alias_native :add_class, :addClass
+  alias_native :append_to, :appendTo
+  alias_native :has_class?, :hasClass
+  alias_native :html=, :html
+  alias_native :remove_attr, :removeAttr
+  alias_native :remove_class, :removeClass
+  alias_native :text=, :text
+  alias_native :toggle_class, :toggleClass
+  alias_native :value=, :val
+
   # Missing methods are assumed to be jquery plugins. These are called by
   # the given symbol name.
   def method_missing(symbol, *args, &block)
@@ -33,55 +59,8 @@ class Element < `jQuery`
     `#{self}.attr(name) || ""`
   end
 
-  alias_native :[]=, :attr
-
-  # Add the given content to inside each element in the receiver. The
-  # content may be a HTML string or a `DOM` instance. The inserted
-  # content is added to the end of the receiver.
-  #
-  # @example Given HTML String
-  #
-  #   DOM.find('ul').append '<li>list content</li>'
-  #
-  # @example Given an existing DOM node
-  #
-  #   DOM.id('checkout') << Dom.id('total-price-label')
-  #
-  # @param [String, DOM] content HTML string or DOM content
-  # @return [DOM] returns receiver
-  alias_native :<<, :append
-
-  alias_native :add_class, :addClass
-
-  # Add the given content after each element in the receiver. The given
-  # content may be a HTML string, or a `DOM` instance.
-  #
-  # @example Given HTML String
-  #
-  #   DOM.find('.label').after '<p>Content after label</>'
-  #
-  # @example Given existing DOM nodes
-  #
-  #   DOM.find('.price').after DOM.id('checkout-link')
-  #
-  # @param [String, DOM] content HTML string or dom content
-  # @return [DOM] returns self
-  alias_native :after, :after
-
-  alias append <<
-
-  # Appends the elements in #{self} object into the target element. #{self}
-  # method is the reverse of using `#append` on the target with #{self}
-  # instance as the argument.
-  #
-  # @example
-  #
-  #   DOM.parse('<p>Hello</p>').append_to DOM.id('foo')
-  #
-  # @param [DOM] target the target to insert into
-  # @return [DOM] returns the receiver
-  alias_native :append_to, :appendTo
-
+  alias << append
+  
   def append_to_body
     `#{self}.appendTo(document.body)`
   end
@@ -118,33 +97,6 @@ class Element < `jQuery`
     }
   end
 
-  # Insert the given content into the DOM before each element in #{self}
-  # collection. The content may be a raw HTML string or a `DOM`
-  # instance containing elements.
-  #
-  # @example
-  #
-  #   # Given a string
-  #   DOM('.foo').before '<p class="title"></p>'
-  #
-  #   # Using an existing element
-  #   DOM('.bar').before DOM('#other-title')
-  #
-  # @param [DOM, String] content the content to insert before
-  # @return [DOM] returns the receiver
-  alias_native :before, :before
-
-  # Returns a new collection containing the immediate children of each
-  # element in #{self} collection. The result may be empty if no children
-  # are present.
-  #
-  # @example
-  #
-  #   DOM('#foo').children  # => DOM instance
-  #
-  # @return [DOM] returns new DOM collection
-  alias_native :children, :children
-
   # Returns the CSS class name of the firt element in #{self} collection.
   # If the collection is empty then an empty string is returned. Only
   # the class name of the first element will ever be returned.
@@ -158,12 +110,7 @@ class Element < `jQuery`
   def class_name
     %x{
       var first = #{self}[0];
-
-      if (!first) {
-        return "";
-      }
-
-      return first.className || "";
+      return (first && first.className) || "";
     }
   end
 
@@ -238,12 +185,6 @@ class Element < `jQuery`
     } 
   end
 
-  alias_native :blur, :blur
-
-  alias_native :closest, :closest
-
-  alias_native :data, :data
-
   # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.
   #
@@ -283,42 +224,18 @@ class Element < `jQuery`
     map {|el| el }
   end
 
-  # Find all the elements that match the given `selector` within the
-  # scope of elements in #{self} given collection. Might return an empty
-  # collection if no elements match.
-  #
-  # @example
-  #
-  #   form = DOM('#login-form')
-  #   form.find 'input, select'
-  #
-  # @param [String] selector the selector to match elements against
-  # @return [DOM] returns new collection
-  alias_native :find, :find
-
   def first
     `#{self}.length ? #{self}.first() : nil`
   end
-
-  alias_native :focus, :focus
-
-  alias_native :has_class?, :hasClass
 
   def html
     `#{self}.html() || ""`
   end
 
-  alias_native :html=, :html
-
   def id
     %x{
       var first = #{self}[0];
-
-      if (!first) {
-        return "";
-      }
-
-      return first.id || "";
+      return (first && first.id) || "";
     }
   end
 
@@ -356,67 +273,20 @@ class Element < `jQuery`
     `#{self}.length`
   end
 
-  alias_native :next, :next
-
-  alias_native :siblings, :siblings
-
-  def on(name, selector = nil, &handler)
-    %x{
-      if (selector === nil) {
-        #{self}.on(name, handler);
-      }
-      else {
-        #{self}.on(name, selector, handler);
-      }
-
-      return handler;
-    }
+  def on(name, sel = nil, &block)
+    `sel === nil ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
+    block
   end
 
-  def off(name, selector = nil, &handler)
-    %x{
-      if (selector === nil) {
-        return #{self}.off(name, handler);
-      }
-      else {
-        return #{self}.off(name, selector, handler);
-      }
-    }
+  def off(name, sel = nil, &block)
+    `sel === nil ? #{self}.off(name, block) : #{self}.off(name, sel, block)`
   end
-
-  alias_native :remove_attr, :removeAttr
-
-  alias_native :parent, :parent
-
-  alias_native :parents, :parents
-
-  alias_native :prepend, :prepend
-
-  alias_native :prev, :prev
-
-  alias_native :remove, :remove
-
-  alias_native :remove_class, :removeClass
 
   alias size length
 
   alias succ next
 
-  alias_native :text, :text
-  alias_native :text=, :text
-
-  alias_native :toggle_class, :toggleClass
-
-  alias_native :trigger, :trigger
-
   def value
     `#{self}.val() || ""`
   end
-
-  alias_native :value=, :val
-
-  # display functions
-  alias_native :hide, :hide
-  alias_native :show, :show
-  alias_native :toggle, :toggle
 end
