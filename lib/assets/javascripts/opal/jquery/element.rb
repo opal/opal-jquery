@@ -21,8 +21,12 @@ class Element < `jQuery`
   # the given symbol name.
   def method_missing(symbol, *args, &block)
     %x{
-      return #{self}[#{symbol}].apply(#{self}, args);
+      if (#{self}[#{symbol}]) {
+        return #{self}[#{symbol}].apply(#{self}, args);
+      }
     }
+    
+    super
   end
 
   def [](name)
