@@ -12,24 +12,24 @@ describe Document do
 
   describe ".[]" do
     it "should be able to find elements with given id" do
-      Document['#foo'].class_name.should == "bar"
-      Document['#foo'].size.should == 1
+      Element['#foo'].class_name.should == "bar"
+      Element['#foo'].size.should == 1
     end
 
     it "should be able to match any valid CSS selector" do
-      Document['.woosh'].should be_kind_of(Element)
-      Document['.woosh'].size.should == 2
+      Element['.woosh'].should be_kind_of(Element)
+      Element['.woosh'].size.should == 2
     end
 
     it "should return an empty Elements instance when not matching any elements" do
-      dom = Document['.some-non-existing-class']
+      dom = Element['.some-non-existing-class']
 
       dom.should be_kind_of(Element)
       dom.size.should == 0
     end
 
     it "should accept an HTML string and parse it into a Elements instance" do
-      el = Document['<div id="foo-bar-baz"></div>']
+      el = Element['<div id="foo-bar-baz"></div>']
 
       el.should be_kind_of(Element)
       el.id.should == "foo-bar-baz"
@@ -39,17 +39,17 @@ describe Document do
 
   describe ".find" do
     it "should find all elements matching CSS selector" do
-      foo = Document.find '.find-foo'
+      foo = Element.find '.find-foo'
       foo.should be_kind_of(Element)
       foo.length.should == 2
 
-      bar = Document.find '.find-bar'
+      bar = Element.find '.find-bar'
       bar.should be_kind_of(Element)
       bar.length.should == 1
     end
 
     it "should return an empty Element instance with length 0 when no matching" do
-      baz = Document.find '.find-baz'
+      baz = Element.find '.find-baz'
       baz.should be_kind_of(Element)
       baz.length.should == 0
     end
@@ -57,18 +57,18 @@ describe Document do
 
   describe '.id' do
     it "should return a new instance with the element with given id" do
-      Document.id('foo').should be_kind_of(Element)
-      Document.id('foo').id.should == 'foo'
+      Element.id('foo').should be_kind_of(Element)
+      Element.id('foo').id.should == 'foo'
     end
 
     it "should return nil if no element could be found" do
-      Document.id('bad-element-id').should be_nil
+      Element.id('bad-element-id').should be_nil
     end
   end
 
   describe '.parse' do
     it "should return a new instance with parsed element as single element" do
-      foo = Document.parse '<div id="foo" class="bar"></div>'
+      foo = Element.parse '<div id="foo" class="bar"></div>'
       foo.id.should == 'foo'
       foo.class_name.should == 'bar'
     end

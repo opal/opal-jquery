@@ -24,7 +24,7 @@ module Spec
     def html(html_string='')
       html = '<div id="opal-jquery-test-div">' + html_string + '</div>'
       before do
-        @_spec_html = Document.parse(html)
+        @_spec_html = Element.parse(html)
         @_spec_html.append_to_body
       end
 

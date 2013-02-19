@@ -9,15 +9,15 @@ describe "Element#append" do
   HTML
 
   it "should insert the HTML string to the end of each element" do
-    Document.find('.first-append').append '<p class="woosh"></p>'
+    Element.find('.first-append').append '<p class="woosh"></p>'
 
-    Document.id('foo').children.class_name.should == "woosh"
-    Document.id('bar').children.class_name.should == "woosh"
+    Element.find('#foo').children.class_name.should == "woosh"
+    Element.find('#bar').children.class_name.should == "woosh"
   end
 
   it "should insert the given DOM node at the end of the element" do
-    baz = Document.id 'baz'
-    buz = Document.id 'buz'
+    baz = Element.find('#baz')
+    buz = Element.find('#buz')
 
     baz.children.size.should == 0
     baz.append buz

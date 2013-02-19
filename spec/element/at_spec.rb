@@ -8,7 +8,7 @@ describe "Element#at" do
   HTML
 
   it "returns the element at the given index" do
-    foos = Document.find '.foo'
+    foos = Element.find '.foo'
     foos.length.should == 3
 
     foos.at(0).id.should == "blah"
@@ -17,7 +17,7 @@ describe "Element#at" do
   end
 
   it "counts from the last index for negative values" do
-    foos = Document.find '.foo'
+    foos = Element.find '.foo'
 
     foos.at(-1).id.should == "bluh"
     foos.at(-2).id.should == "bleh"
@@ -25,7 +25,7 @@ describe "Element#at" do
   end
 
   it "returns nil for indexes outside range" do
-    foos = Document.find '.foo'
+    foos = Element.find '.foo'
 
     foos.at(-4).should == nil
     foos.at(4).should == nil

@@ -11,7 +11,7 @@ describe Element do
   describe '#on' do
     it 'adds an event listener onto the elements' do
       count = 0
-      foo   = Document['#foo']
+      foo   = Element['#foo']
 
       foo.on(:click) { count += 1 }
       count.should == 0
@@ -25,8 +25,8 @@ describe Element do
 
     it 'takes an optional second parameter to delegate events' do
       count = 0
-      foo   = Document['#foo']
-      bar   = Document['#bar']
+      foo   = Element['#foo']
+      bar   = Element['#bar']
 
       foo.on(:click, '#bar') { count += 1 }
       count.should == 0
@@ -42,7 +42,7 @@ describe Element do
 
     it 'can listen for non-browser events' do
       count = 0
-      foo   = Document['#foo']
+      foo   = Element['#foo']
 
       foo.on('opal-is-mega-lolz') { count += 1 }
       count.should == 0
@@ -54,11 +54,11 @@ describe Element do
 
     it 'returns the given handler' do
       handler = proc {}
-      Document['#foo'].on(:click, &handler).should == handler
+      Element['#foo'].on(:click, &handler).should == handler
     end
 
     it 'has an Event instance passed to the handler' do
-      foo = Document['#foo']
+      foo = Element['#foo']
       foo.on :click do |event|
         event.should be_kind_of(Event)
       end
@@ -66,7 +66,7 @@ describe Element do
     end
 
     it 'has an Event instance, plus any additional parameters passed to the handler' do
-      foo = Document['#foo']
+      foo = Element['#foo']
       foo.on :bozo do |event, foo, bar, baz, buz|
         event.should be_kind_of(Event)
         foo.should == 'foo'
@@ -81,7 +81,7 @@ describe Element do
   describe '#off' do
     it 'removes event handlers that were added using #on' do
       count = 0
-      foo   = Document['#foo']
+      foo   = Element['#foo']
 
       handler = foo.on(:click) { count += 1 }
       count.should == 0
@@ -95,8 +95,8 @@ describe Element do
 
     it 'removes event handlers added with a selector' do
       count = 0
-      foo   = Document['#foo']
-      bar   = Document['#bar']
+      foo   = Element['#foo']
+      bar   = Element['#bar']
 
       handler = foo.on(:click, '#bar') { count += 1 }
       count.should == 0

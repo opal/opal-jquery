@@ -11,8 +11,8 @@ describe Event do
   HTML
 
   it '#current_target returns the current element in the bubbling' do
-    foo = Document['#foo']
-    bar = Document['#bar']
+    foo = Element['#foo']
+    bar = Element['#bar']
     result = []
 
     foo.on(:click) { |e| result << e.current_target.id }
@@ -28,7 +28,7 @@ describe Event do
 
   it '#type returns the type of event' do
     type = nil
-    foo  = Document['#foo']
+    foo  = Element['#foo']
 
     foo.on(:click) { |e| type = e.type }
     foo.on(:mousedown) { |e| type = e.type }
@@ -45,8 +45,8 @@ describe Event do
   end
 
   it '#target returns a JQuery wrapper around the element that triggered the event' do
-    foo = Document['#foo']
-    bar = Document['#bar']
+    foo = Element['#foo']
+    bar = Element['#bar']
     target = nil
 
     foo.on(:click) { |e| target = e.target.id }

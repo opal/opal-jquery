@@ -8,12 +8,12 @@ describe "Element#append_to" do
   HTML
 
   it "should insert the receiver into the target element" do
-    Document.id('foo').children.size.should == 0
+    Element.find('#foo').children.size.should == 0
 
-    Document.parse('<ul class="kapow"></ul>').append_to Document.id('foo')
-    Document.id('foo').children.class_name.should == "kapow"
+    Element.parse('<ul class="kapow"></ul>').append_to Element.find('#foo')
+    Element.find('#foo').children.class_name.should == "kapow"
 
-    Document.id('bar').append_to Document.id('baz')
-    Document.id('baz').children.id.should == "bar"
+    Element.find('#bar').append_to Element.find('#baz')
+    Element.find('#baz').children.id.should == "bar"
   end
 end

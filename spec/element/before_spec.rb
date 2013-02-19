@@ -9,17 +9,17 @@ describe "Element#before" do
   HTML
 
   it "should insert the given html string before each element" do
-    el = Document['.before-spec-first']
+    el = Element.find('.before-spec-first')
     el.size.should == 2
 
     el.before '<p class="woosh"></p>'
 
-    Document['#foo'].prev.class_name.should == "woosh"
-    Document['#bar'].prev.class_name.should == "woosh"
+    Element.find('#foo').prev.class_name.should == "woosh"
+    Element.find('#bar').prev.class_name.should == "woosh"
   end
 
   it "should insert the given DOM element before this element" do
-    Document['#baz'].before Document['#some-header']
-    Document['#baz'].prev.id.should == "some-header"
+    Element.find('#baz').before Element.find('#some-header')
+    Element.find('#baz').prev.id.should == "some-header"
   end
 end

@@ -11,7 +11,7 @@ describe "Element animation methods" do
     # so the values are being compared using greater than
     
     it "should animate a set of properties and values" do
-      foo = Document.id "animate-foo"
+      foo = Element.find "#animate-foo"
       foo.animate :width => "200px"
 
       set_timeout 400 do
@@ -20,7 +20,7 @@ describe "Element animation methods" do
     end
 
     it "should allow you to set a speed in the params" do
-      foo = Document.id "animate-foo"
+      foo = Element.find "#animate-foo"
       foo.animate :width => "200px", :speed => 100
 
       set_timeout 105 do
@@ -29,7 +29,7 @@ describe "Element animation methods" do
     end
 
     it "should accept a block as a callback" do
-      foo = Document.id "animate-foo"
+      foo = Element.find "#animate-foo"
       foo.animate :width => "200px" do
         foo.add_class "finished"
       end

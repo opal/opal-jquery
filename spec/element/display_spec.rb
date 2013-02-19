@@ -7,28 +7,28 @@ describe "Element display methods" do
   HTML
 
   it "hides an element" do
-    element = Document.id('shown') 
+    element = Element.find('#shown') 
     element.css('display').should == 'block'
     element.hide
     element.css('display').should == 'none'
   end
 
   it "shows an element" do 
-    element = Document.id('hidden') 
+    element = Element.find('#hidden') 
     element.css('display').should == 'none'
     element.show
     element.css('display').should == 'block'
   end
 
   it "toggles on a hidden element" do
-    element = Document.id('hidden') 
+    element = Element.find('#hidden') 
     element.css('display').should == 'none'
     element.toggle
     element.css('display').should == 'block'
   end
 
   it "toggles off a displayed element" do
-    element = Document.id('shown') 
+    element = Element.find('#shown') 
     element.css('display').should == 'block'
     element.toggle
     element.css('display').should == 'none'

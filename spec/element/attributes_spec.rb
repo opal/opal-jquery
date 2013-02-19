@@ -42,18 +42,18 @@ describe Element do
 
   describe '#[]' do
     it 'should retrieve the attr value from the element' do
-      Document.id('attr-foo')[:title].should == "Hello there!"
+      Element.find('#attr-foo')[:title].should == "Hello there!"
     end
 
     it 'should return an empty string for an empty attribute value' do
-      Document.id('attr-bar')[:title].should == ""
-      Document.id('attr-baz')[:title].should == ""
+      Element.find('#attr-bar')[:title].should == ""
+      Element.find('#attr-baz')[:title].should == ""
     end
   end
 
   describe '#[]=' do
     it 'should set the attr value on the element' do
-      woosh = Document.id 'attr-woosh'
+      woosh = Element.find '#attr-woosh'
       woosh[:title].should == ""
 
       woosh[:title] = "Oranges"
@@ -61,7 +61,7 @@ describe Element do
     end
 
     it 'should replace the old value for the attribute' do
-      kapow = Document.id 'attr-kapow'
+      kapow = Element.find '#attr-kapow'
       kapow[:title].should == "Apples"
 
       kapow[:title] = "Pineapple"
@@ -71,21 +71,21 @@ describe Element do
 
   describe "#add_class" do
     it "should add the given class name to the element" do
-      foo = Document.id 'foo'
+      foo = Element.find '#foo'
       foo.has_class?('lemons').should be_false
       foo.add_class 'lemons'
       foo.has_class?('lemons').should be_true
     end
 
     it "should not duplicate class names on an element" do
-      bar = Document.id 'bar'
+      bar = Element.find '#bar'
       bar.has_class?('apples').should be_true
       bar.add_class 'apples'
       bar.class_name.should == 'apples'
     end
 
     it "should return self" do
-      baz = Document.id 'baz'
+      baz = Element.find '#baz'
       baz.add_class('oranges').should equal(baz)
       baz.add_class('oranges').should equal(baz)
     end
@@ -93,48 +93,48 @@ describe Element do
 
   describe '#has_class?' do
     it "should return true if the element has the given class" do
-      Document.id('has-foo').has_class?("apples").should be_true
-      Document.id('has-foo').has_class?("oranges").should be_false
-      Document.id('has-bar').has_class?("lemons").should be_true
+      Element.find('#has-foo').has_class?("apples").should be_true
+      Element.find('#has-foo').has_class?("oranges").should be_false
+      Element.find('#has-bar').has_class?("lemons").should be_true
     end
   end
 
   describe '#html' do
     it "should return the html content of the element" do
-      Document.id('html-foo').html.should == "Hey there"
-      Document.id('html-bar').html.downcase.should == "<p>erm</p>"
+      Element.find('#html-foo').html.should == "Hey there"
+      Element.find('#html-bar').html.downcase.should == "<p>erm</p>"
     end
 
     it "should only return html for first matched element" do
-      Document.find('.html-bridge').html.should == "Hello"
+      Element.find('.html-bridge').html.should == "Hello"
     end
 
     it "should return empty string for empty set" do
-      Document.find('.html-nothing-here').html.should == ""
+      Element.find('.html-nothing-here').html.should == ""
     end
   end
 
   describe '#remove_class' do
     it "should have no effect on elements without class" do
-      foo = Document.id 'remove-foo'
+      foo = Element.find '#remove-foo'
       foo.class_name.should == ''
       foo.remove_class 'blah'
       foo.class_name.should == ''
     end
 
     it "should remove the given class from the element" do
-      bar = Document.id 'remove-bar'
+      bar = Element.find '#remove-bar'
       bar.remove_class "lemons"
       bar.class_name.should == ''
 
-      baz = Document.id 'remove-baz'
+      baz = Element.find '#remove-baz'
       baz.remove_class 'lemons'
       baz.class_name.should == 'apples oranges'
 
       baz.remove_class 'apples'
       baz.class_name.should == 'oranges'
 
-      buz = Document.id 'remove-buz'
+      buz = Element.find '#remove-buz'
       buz.remove_class 'mangos'
       buz.class_name.should == 'pineapples'
 
@@ -143,7 +143,7 @@ describe Element do
     end
 
     it "should return self" do
-      bleh = Document.id 'remove-bleh'
+      bleh = Element.find '#remove-bleh'
       bleh.remove_class('fruit').should equal(bleh)
       bleh.remove_class('hmmmm').should equal(bleh)
     end
@@ -151,14 +151,14 @@ describe Element do
 
   describe '#toggle_class' do
     it 'adds the given class name to the element if not already present' do
-      foo = Document['#foo']
+      foo = Element.find('#foo')
       foo.has_class?('oranges').should be_false
       foo.toggle_class 'oranges'
       foo.has_class?('oranges').should be_true
     end
 
     it 'removes the class if the element already has it' do
-      bar = Document['#bar']
+      bar = Element.find('#bar')
       bar.has_class?('apples').should be_true
       bar.toggle_class 'apples'
       bar.has_class?('apples').should be_false
@@ -167,21 +167,21 @@ describe Element do
 
   describe "#value" do
     it "should return the selected value of select elements" do
-      Document.id('value-foo').value.should == "Hello"
+      Element.find('#value-foo').value.should == "Hello"
     end
 
     it "should return the value of normal input fields" do
-      Document.id('value-bar').value.should == "Blah"
+      Element.find('#value-bar').value.should == "Blah"
     end
 
     it "should return an empty string for elements with no value attr" do
-      Document.id('value-baz').value.should == ""
+      Element.find('#value-baz').value.should == ""
     end
   end
 
   describe "#value=" do
     it "should set the value of the element to the given value" do
-      foo = Document.id 'value-woosh'
+      foo = Element.find '#value-woosh'
       foo.value.should == ""
 
       foo.value = "Hi"
