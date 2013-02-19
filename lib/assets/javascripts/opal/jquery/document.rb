@@ -1,26 +1,22 @@
 module Document
   def self.[](selector)
-    `$(#{selector})`
+    puts "Document[] is now depreceated. Use Element[]"
+    Element[selector]
   end
 
   def self.find(selector)
-    self[selector]
+    puts "Document.find is now depreceated. Use Element.find"
+    Element.find(selector)
   end
 
   def self.id(id)
-    %x{
-      var el = document.getElementById(id);
-
-      if (!el) {
-        return nil;
-      }
-
-      return $(el);
-    }
+    puts "Document.id is now depreceated. Use Element.id"
+    Element.id(id)
   end
 
   def self.parse(str)
-    `$(str)`
+    puts "Document.parse is now depreceated. Use Element.parse"
+    Element.parse(str)
   end
 
   def self.ready?(&block)

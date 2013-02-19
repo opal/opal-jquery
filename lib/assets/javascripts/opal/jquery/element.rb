@@ -2,11 +2,19 @@
 # native dom elements.
 class Element < `jQuery`
   def self.find(selector)
-    `$(selector)`
+    `$(#{selector})`
   end
 
   def self.id(id)
-    Document.id(id)
+    %x{
+      var el = document.getElementById(id);
+
+      if (!el) {
+        return nil;
+      }
+
+      return $(el);
+    }
   end
 
   def self.new(tag = 'div')
