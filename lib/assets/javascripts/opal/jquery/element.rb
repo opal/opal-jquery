@@ -17,6 +17,14 @@ class Element < `jQuery`
     `$(str)`
   end
 
+  # Missing methods are assumed to be jquery plugins. These are called by
+  # the given symbol name.
+  def method_missing(symbol, *args, &block)
+    %x{
+      return #{self}[#{symbol}]();
+    }
+  end
+
   def [](name)
     `#{self}.attr(name) || ""`
   end
