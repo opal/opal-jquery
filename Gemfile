@@ -1,5 +1,5 @@
-source :rubygems
+source "https://rubygems.org"
 gemspec
 
 gem 'rake'
-gem 'opal-spec', '~> 0.2.10'
+gem 'opal-spec', '~> 0.2.12'
