@@ -19,6 +19,10 @@ class HTTP
     self.new(url, :PUT, opts, block).send!
   end
 
+  def self.delete(url, opts={}, &block)
+    self.new(url, :DELETE, opts, block).send!
+  end
+
   def initialize(url, method, options, handler=nil)
     @url     = url
     @method  = method
