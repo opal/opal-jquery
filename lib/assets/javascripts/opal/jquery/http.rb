@@ -123,4 +123,12 @@ class HTTP
   def succeed
     @callback.call self if @callback
   end
+
+  # Returns the value of the specified response header.
+  #
+  # @param [String] name of the header to get
+  # @return [String] value of the header
+  def get_header(key)
+    `#{xhr}.getResponseHeader(#{key});`
+  end
 end
