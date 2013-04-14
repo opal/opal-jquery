@@ -48,8 +48,8 @@ class HTTP
         http.body = data;
         http.xhr = xhr;
 
-        if (typeof(str) === 'object') {
-          http.json = #{ JSON.from_object `str` };
+        if (typeof(data) === 'object') {
+          http.json = #{ JSON.from_object `data` };
         }
 
         return #{ http.succeed };
