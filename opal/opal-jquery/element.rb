@@ -182,9 +182,9 @@ class Element < `jQuery`
   # @return [String, DOM] returns css value or the receiver
   def css(name, value=nil)
     if value.nil? && name.is_a?(String)
-      return `$(#{self}).css(name)`
+      return `#{self}.css(name)`
     else
-      name.is_a?(Hash) ? `$(#{self}).css(#{name.to_native})` : `$(#{self}).css(name, value)`
+      name.is_a?(Hash) ? `#{self}.css(#{name.to_native})` : `#{self}.css(name, value)`
     end
     self
   end
@@ -207,7 +207,7 @@ class Element < `jQuery`
   def animate(params, &block)
     speed = params.has_key?(:speed) ? params.delete(:speed) : 400
     %x{
-      $(#{self}).animate(#{params.to_native}, #{speed}, function() {
+      #{self}.animate(#{params.to_native}, #{speed}, function() {
         #{block.call if block_given?}
       })
     }
