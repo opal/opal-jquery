@@ -1,5 +1,7 @@
 ## Edge
 
+*   Depreceate Document in favor of $document global.
+
 *   Add HTTP.delete() for creating DELETE request.
 
 ## 0.0.7 2013-02-20
