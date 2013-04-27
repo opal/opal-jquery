@@ -39,6 +39,10 @@ class Element < `jQuery`
   expose :after, :before, :parent, :parents, :prepend, :prev, :remove
   expose :hide, :show, :toggle, :children, :blur, :closest, :data
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
+  expose :height, :width, :serialize, :is, :filter, :last, :first
+  expose :wrap, :stop, :clone
+
+  attr_reader :selector
 
   alias_native :[]=, :attr
   alias_native :add_class, :addClass
@@ -50,6 +54,14 @@ class Element < `jQuery`
   alias_native :text=, :text
   alias_native :toggle_class, :toggleClass
   alias_native :value=, :val
+  alias_native :scroll_left=, :scrollLeft
+  alias_native :scroll_left, :scrollLeft
+  alias_native :remove_attribute, :removeAttr
+  alias_native :slide_down, :slideDown
+  alias_native :slide_up, :slideUp
+  alias_native :slide_toggle, :slideToggle
+  alias_native :fade_toggle, :fadeToggle
+
 
   # Missing methods are assumed to be jquery plugins. These are called by
   # the given symbol name.
@@ -65,6 +77,14 @@ class Element < `jQuery`
 
   def [](name)
     `#{self}.attr(name) || ""`
+  end
+
+  def add_attribute name
+    self[name] = ''
+  end
+
+  def has_attribute? name
+    `!!#{self}.attr(name)`
   end
 
   alias << append
@@ -193,6 +213,24 @@ class Element < `jQuery`
     }
   end
 
+  # Start a visual effect (e.g. fadeIn, fadeOut, …) passing its name.
+  # Underscored style is automatically converted (e.g. `effect(:fade_in)`).
+  # Also accepts additional arguments and a block for the finished callback.
+  def effect(name, *args, &block)
+    name = name.gsub(/_\w/) { |match| match[1].upcase }
+    args = args.map { |a| a.to_native if a.respond_to? :to_native }.compact
+    args << `function() { #{block.call if block_given?} }`
+    `#{self}[#{name}].apply(#{self}, #{args})`
+  end
+
+  def visible?
+    `#{self}.is(':visible')`
+  end
+
+  def offset
+    Hash.from_native(`#{self}.offset()`)
+  end
+
   # Yields each element in #{self} collection in turn. The yielded element
   # is wrapped as a `DOM` instance.
   #
@@ -259,6 +297,10 @@ class Element < `jQuery`
     }
   end
 
+  def tag_name
+    `#{self}.length > 0 ? #{self}[0].tagName.toLowerCase() : #{nil}`
+  end
+
   def inspect
     %x{
       var val, el, str, result = [];
@@ -280,6 +322,16 @@ class Element < `jQuery`
   def length
     `#{self}.length`
   end
+
+  def any?
+    `#{self}.length > 0`
+  end
+
+  def empty?
+    `#{self}.length === 0`
+  end
+
+  alias empty? none?
 
   def on(name, sel = nil, &block)
     `sel === nil ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
