@@ -1,6 +1,8 @@
 # Instances of Element are just jquery instances, and wrap 1 or more
 # native dom elements.
 class Element < `jQuery`
+  include Enumerable
+
   def self.find(selector)
     `$(#{selector})`
   end
