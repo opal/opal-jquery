@@ -8,7 +8,9 @@ class Event < `$.Event`
     `$(#{self}.currentTarget)`
   end
 
-  alias_native :default_prevented?, :isDefaultPrevented
+  def default_prevented?
+    `#{self}.isDefaultPrevented()`
+  end
 
   # Stops propagation and prevents default action.
   def kill
