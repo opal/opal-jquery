@@ -1,5 +1,9 @@
-module Document
-  def self.ready?(&block)
+require 'opal-jquery/element'
+
+$document = Element.find(`document`)
+
+class << $document
+  def ready?(&block)
     %x{
       if (block === nil) {
         return nil;
@@ -10,11 +14,15 @@ module Document
     }
   end
 
-  def self.title
+  def title
     `document.title`
   end
 
-  def self.title=(title)
+  def title=(title)
     `document.title = title`
   end
 end
+
+# Document is depreceated, use $document instead.
+Document = $document
+
