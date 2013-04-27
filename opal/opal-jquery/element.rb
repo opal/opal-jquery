@@ -59,7 +59,7 @@ class Element < `jQuery`
         return #{self}[#{symbol}].apply(#{self}, args);
       }
     }
-    
+
     super
   end
 
@@ -68,7 +68,7 @@ class Element < `jQuery`
   end
 
   alias << append
-  
+
   def append_to_body
     `#{self}.appendTo(document.body)`
   end
@@ -168,7 +168,7 @@ class Element < `jQuery`
     end
     self
   end
-  
+
   # Set css values over time to create animations. The first parameter is a
   # set of css properties and values to animate to. The first parameter
   # also accepts a special :speed value to set animation speed. If a block
@@ -181,7 +181,7 @@ class Element < `jQuery`
   #   bar.animate :top => "30px", :speed => 100 do
   #     bar.add_class "finished"
   #   end
-  # 
+  #
   # @param [Hash] css properties and and values. Also accepts speed param.
   # @return [DOM] receiver
   def animate(params, &block)
@@ -190,7 +190,7 @@ class Element < `jQuery`
       $(#{self}).animate(#{params.to_native}, #{speed}, function() {
         #{block.call if block_given?}
       })
-    } 
+    }
   end
 
   # Yields each element in #{self} collection in turn. The yielded element
@@ -208,11 +208,11 @@ class Element < `jQuery`
     self
   end
 
-  # return an opal array mapped with block yielded for any element 
+  # return an opal array mapped with block yielded for any element
   #
   # @example
   #
-  #  list = Document.find('table.players td.surname').map  {|el| el.html } 
+  #  list = Document.find('table.players td.surname').map  {|el| el.html }
   #
   # @return an Array
   def map
