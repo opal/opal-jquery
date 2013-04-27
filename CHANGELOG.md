@@ -1,3 +1,7 @@
+## Edge
+
+*   Add HTTP.delete() for creating DELETE request.
+
 ## 0.0.7 2013-02-20
 
 *   Add Element#method_missing which forwards missing calls to try and call
