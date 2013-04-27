@@ -286,8 +286,8 @@ class Element < `jQuery`
     block
   end
 
-  def off(name, sel = nil, &block)
-    `sel === nil ? #{self}.off(name, block) : #{self}.off(name, sel, block)`
+  def off(name, sel, block = nil)
+    `block === nil ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
   end
 
   alias size length
