@@ -1,4 +1,4 @@
-## Edge
+## 0.0.8 2013-05-02
 
 *   Depreceate Document in favor of $document global.
 
