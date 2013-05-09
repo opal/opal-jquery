@@ -13,14 +13,6 @@ class << $document
       return nil;
     }
   end
-
-  def title
-    `document.title`
-  end
-
-  def title=(title)
-    `document.title = title`
-  end
 end
 
 # Document is depreceated, use $document instead.
