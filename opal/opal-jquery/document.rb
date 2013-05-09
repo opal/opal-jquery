@@ -1,6 +1,12 @@
 require 'opal-jquery/element'
 
-$document = Element.find(`document`)
+class Element
+
+  # Returns a jquery wrapped version of document
+  def self.document
+    @_doc ||= Element.find(`document`)
+  end
+end
 
 class << $document
   def ready?(&block)
@@ -15,6 +21,6 @@ class << $document
   end
 end
 
-# Document is depreceated, use $document instead.
-Document = $document
+# Document is depreceated, use Element.document instead
+Document = Element.document
 

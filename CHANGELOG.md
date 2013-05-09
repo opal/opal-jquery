@@ -1,5 +1,7 @@
 ## edge
 
+*   Introduce Element.document as wrapped document element
+
 *   Depreceate $document.title and $document.title=.
 
 ## 0.0.8 2013-05-02
