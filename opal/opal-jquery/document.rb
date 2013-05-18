@@ -8,8 +8,10 @@ class Element
   end
 end
 
-class << $document
-  def ready?(&block)
+Document = Element.document
+
+class << Document
+  def self.ready?(&block)
     %x{
       if (block === nil) {
         return nil;
@@ -20,7 +22,4 @@ class << $document
     }
   end
 end
-
-# Document is depreceated, use Element.document instead
-Document = Element.document
 
