@@ -10,16 +10,14 @@ end
 
 Document = Element.document
 
-class << Document
-  def self.ready?(&block)
-    %x{
-      if (block === nil) {
-        return nil;
-      }
-
-      $(block);
+def Document.ready?(&block)
+  %x{
+    if (block === nil) {
       return nil;
     }
-  end
+
+    $(block);
+    return nil;
+  }
 end
 
