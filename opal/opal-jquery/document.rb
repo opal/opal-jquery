@@ -12,7 +12,7 @@ Document = Element.document
 
 def Document.ready?(&block)
   %x{
-    if (block == nil) {
+    if (block == null) {
       return null;
     }
 
