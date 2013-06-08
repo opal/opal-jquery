@@ -2,8 +2,8 @@ require 'jquery'
 require 'opal-spec'
 require 'opal-jquery'
 
-module OpalTest
-  class TestCase
+module OpalSpec
+  class Example
 
     # Add some html code to the body tag ready for testing. This will
     # be added before each test, then removed after each test. It is
