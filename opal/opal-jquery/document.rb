@@ -12,12 +12,12 @@ Document = Element.document
 
 def Document.ready?(&block)
   %x{
-    if (block === nil) {
-      return nil;
+    if (block == nil) {
+      return null;
     }
 
     $(block);
-    return nil;
+    return null;
   }
 end
 

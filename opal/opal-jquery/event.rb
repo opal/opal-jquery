@@ -1,5 +1,7 @@
+Class.bridge_class 'Event', `$.Event`
+
 # Wraps native jQuery event objects.
-class Event < `$.Event`
+class Event
   def [](name)
     `#{self}[name]`
   end
@@ -47,10 +49,10 @@ class Event < `$.Event`
   end
 
   def type
-    `#{self}.type`
+    @type
   end
 
   def which
-    `#{self}.which`
+    @which
   end
 end

@@ -40,7 +40,7 @@ class HTTP
       if (typeof(payload) === 'string') {
         settings.data = payload;
       }
-      else if (payload !== nil) {
+      else if (payload != null) {
         settings.data = payload.$to_json();
         settings.contentType = 'application/json';
       }

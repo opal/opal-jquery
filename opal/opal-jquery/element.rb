@@ -1,6 +1,9 @@
 # Instances of Element are just jquery instances, and wrap 1 or more
 # native dom elements.
-class Element < `jQuery`
+
+Class.bridge_class 'Element', `jQuery`
+
+class Element
   include Enumerable
 
   def self.find(selector)
@@ -12,7 +15,7 @@ class Element < `jQuery`
       var el = document.getElementById(id);
 
       if (!el) {
-        return nil;
+        return null;
       }
 
       return $(el);
@@ -34,7 +37,7 @@ class Element < `jQuery`
         #{self}.prototype['$' + method] = #{self}.prototype[method];
       }
 
-      return nil;
+      return null;
     }
   end
 
@@ -120,7 +123,7 @@ class Element < `jQuery`
       }
 
       if (index < 0 || index >= length) {
-        return nil;
+        return null;
       }
 
       return $(#{self}[index]);
@@ -273,7 +276,7 @@ class Element < `jQuery`
   end
 
   def first
-    `#{self}.length ? #{self}.first() : nil`
+    `#{self}.length ? #{self}.first() : null`
   end
 
   def html
@@ -336,12 +339,12 @@ class Element < `jQuery`
   alias empty? none?
 
   def on(name, sel = nil, &block)
-    `sel === nil ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
+    `sel == null ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
     block
   end
 
   def off(name, sel, block = nil)
-    `block === nil ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
+    `block == null ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
   end
 
   alias size length
