@@ -205,7 +205,7 @@ class Element
     if value.nil? && name.is_a?(String)
       return `#{self}.css(name)`
     else
-      name.is_a?(Hash) ? `#{self}.css(#{name.to_native})` : `#{self}.css(name, value)`
+      name.is_a?(Hash) ? `#{self}.css(#{name.to_n})` : `#{self}.css(name, value)`
     end
     self
   end
@@ -228,7 +228,7 @@ class Element
   def animate(params, &block)
     speed = params.has_key?(:speed) ? params.delete(:speed) : 400
     %x{
-      #{self}.animate(#{params.to_native}, #{speed}, function() {
+      #{self}.animate(#{params.to_n}, #{speed}, function() {
         #{block.call if block_given?}
       })
     }
@@ -239,7 +239,7 @@ class Element
   # Also accepts additional arguments and a block for the finished callback.
   def effect(name, *args, &block)
     name = name.gsub(/_\w/) { |match| match[1].upcase }
-    args = args.map { |a| a.to_native if a.respond_to? :to_native }.compact
+    args = args.map { |a| a.to_n if a.respond_to? :to_n }.compact
     args << `function() { #{block.call if block_given?} }`
     `#{self}[#{name}].apply(#{self}, #{args})`
   end

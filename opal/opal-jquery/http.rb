@@ -30,7 +30,7 @@ class HTTP
     @xhr     = nil
     http     = self
     payload  = options.delete :payload
-    settings = options.to_native
+    settings = options.to_n
 
     if handler
       @callback = @errback = handler
