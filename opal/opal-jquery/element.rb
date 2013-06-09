@@ -41,14 +41,22 @@ class Element
     }
   end
 
+  attr_reader :selector
+
+  # Bridged functions - we just expose all core jquery functions as ruby
+  # methods on this class.
   expose :after, :before, :parent, :parents, :prepend, :prev, :remove
   expose :hide, :show, :toggle, :children, :blur, :closest, :data
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
   expose :height, :width, :serialize, :is, :filter, :last, :first
   expose :wrap, :stop, :clone
 
-  attr_reader :selector
+  # We alias some jquery methods to common ruby method names.
+  alias succ next
+  alias << append
 
+  # Here we map the remaining jquery methods, but change their names to
+  # snake_case to be more consistent with ruby.
   alias_native :[]=, :attr
   alias_native :add_class, :addClass
   alias_native :append_to, :appendTo
@@ -66,7 +74,6 @@ class Element
   alias_native :slide_up, :slideUp
   alias_native :slide_toggle, :slideToggle
   alias_native :fade_toggle, :fadeToggle
-
 
   # Missing methods are assumed to be jquery plugins. These are called by
   # the given symbol name.
@@ -91,8 +98,6 @@ class Element
   def has_attribute? name
     `!!#{self}.attr(name)`
   end
-
-  alias << append
 
   def append_to_body
     `#{self}.appendTo(document.body)`
@@ -348,8 +353,6 @@ class Element
   end
 
   alias size length
-
-  alias succ next
 
   def value
     `#{self}.val() || ""`
