@@ -7,3 +7,6 @@ class << $document
     `$(#{ block })` if block
   end
 end
+
+# TODO: this will be removed soon (here for compatibility)
+Document = $document
