@@ -1,12 +1,23 @@
 # Instances of Element are just jquery instances, and wrap 1 or more
 # native dom elements.
 
-Class.bridge_class 'Element', `jQuery`
+%x{
+  var root = __opal.global, dom_class;
+
+  if (root.jQuery) { dom_class = jQuery }
+  else if (root.Zepto) { dom_class = Zepto.zepto.Z; }
+}
+
+Class.bridge_class 'Element', `dom_class`
 
 class Element
   include Enumerable
 
   def self.find(selector)
+    `$(#{selector})`
+  end
+
+  def self.[](selector)
     `$(#{selector})`
   end
 
