@@ -1,5 +1,8 @@
 ## edge
 
+*   Revert earlier commit, and use `$document` as reference to jquery
+    wrapped `document`.
+
 *   Introduce Element.document as wrapped document element
 
 *   Depreceate $document.title and $document.title=.

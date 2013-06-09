@@ -1,23 +1,9 @@
 require 'opal-jquery/element'
 
-class Element
+$document = Element.find($global.document)
 
-  # Returns a jquery wrapped version of document
-  def self.document
-    @_doc ||= Element.find(`document`)
+class << $document
+  def ready?(&block)
+    `$(#{ block })` if block
   end
 end
-
-Document = Element.document
-
-def Document.ready?(&block)
-  %x{
-    if (block == null) {
-      return null;
-    }
-
-    $(block);
-    return null;
-  }
-end
-
