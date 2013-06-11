@@ -6,6 +6,8 @@ class Event
     `#{self}[name]`
   end
 
+  alias_native :ctrl_key, :ctrlKey
+
   def current_target
     `$(#{self}.currentTarget)`
   end
