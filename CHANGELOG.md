@@ -1,4 +1,4 @@
-## edge
+## 0.0.9 2013-06-15
 
 *   Revert earlier commit, and use `$document` as reference to jquery
     wrapped `document`.
