@@ -6,6 +6,10 @@ class Event
     `#{self}[name]`
   end
 
+  def ctrl_key
+    @ctrlKey
+  end
+
   def current_target
     `$(#{self}.currentTarget)`
   end
