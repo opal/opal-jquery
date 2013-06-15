@@ -26,7 +26,7 @@ class Element
       var el = document.getElementById(id);
 
       if (!el) {
-        return null;
+        return nil;
       }
 
       return $(el);
@@ -52,7 +52,7 @@ class Element
         #{self}.prototype['$' + method] = #{self}.prototype[method];
       }
 
-      return null;
+      return nil;
     }
   end
 
@@ -143,7 +143,7 @@ class Element
       }
 
       if (index < 0 || index >= length) {
-        return null;
+        return nil;
       }
 
       return $(#{self}[index]);
@@ -296,7 +296,7 @@ class Element
   end
 
   def first
-    `#{self}.length ? #{self}.first() : null`
+    `#{self}.length ? #{self}.first() : nil`
   end
 
   def html
@@ -359,12 +359,12 @@ class Element
   alias empty? none?
 
   def on(name, sel = nil, &block)
-    `sel == null ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
+    `sel == nil ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
     block
   end
 
   def off(name, sel, block = nil)
-    `block == null ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
+    `block == nil ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
   end
 
   alias size length
