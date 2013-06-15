@@ -3,8 +3,9 @@ require 'opal-jquery/element'
 $document = Element.find($global.document)
 
 class << $document
+  # Use Element.ready? instead
   def ready?(&block)
-    `$(#{ block })` if block
+    Element.ready?(&block)
   end
 end
 

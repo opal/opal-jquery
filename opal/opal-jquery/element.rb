@@ -41,6 +41,10 @@ class Element
     `$(str)`
   end
 
+  def self.ready?(&block)
+    `$(#{ block })` if block
+  end
+
   def self.expose(*methods)
     %x{
       for (var i = 0, length = methods.length, method; i < length; i++) {
