@@ -336,7 +336,7 @@ class Element
         result.push(str + '>');
       }
 
-      return '[' + result.join(', ') + ']';
+      return '#<Element [' + result.join(', ') + ']>';
     }
   end
 
