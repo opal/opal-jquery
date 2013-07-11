@@ -8,13 +8,25 @@ opal-jquery is [hosted on github](http://github.com/opal/opal-jquery).
 
 See the [website for documentation](http://opalrb.org/jquery).
 
-### Running Specs
+## Documentation
+
+### HTTP
+
+The `HTTP` class wraps jQuery's ajax request into a ruby class.
+
+```ruby
+HTTP.get("/users/1.json") do |response|
+  puts "Got response!"
+end
+```
+
+## Running Specs
 
 Get the dependencies:
 
     $ bundle install
 
-#### Browser
+### Browser
 
 You can run the specs in any web browser, by running the `config.ru` rack file:
 
@@ -22,7 +34,7 @@ You can run the specs in any web browser, by running the `config.ru` rack file:
 
 And then visiting `http://localhost:9292` in any web browser.
 
-#### Phantomjs
+### Phantomjs
 
 You will need phantomjs to run the specs outside the browser.  It can
 be downloaded at [http://phantomjs.org/download.html](http://phantomjs.org/download.html)
@@ -35,7 +47,9 @@ Run the tests inside a phantom.js runner:
 
     $ bundle exec rake
 
-###  License
+##  License
+
+(The MIT License)
 
 Copyright (C) 2013 by Adam Beynon
 
