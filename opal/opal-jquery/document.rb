@@ -1,11 +1,10 @@
 require 'opal-jquery/element'
 
-$document = Element.find($global.document)
+Document = Element.find(`document`)
 
-class << $document
-  # Use Element.ready? instead
+class << Document
   def ready?(&block)
-    ::Element.ready?(&block)
+    `$(#{ block })` if block
   end
 
   def title
@@ -18,4 +17,4 @@ class << $document
 end
 
 # TODO: this will be removed soon (here for compatibility)
-Document = $document
+$document = Document
