@@ -98,6 +98,10 @@ class Element
     super
   end
 
+  def to_n
+    self
+  end
+
   def [](name)
     `#{self}.attr(name) || ""`
   end

@@ -8,11 +8,11 @@ describe "Element#inspect" do
   HTML
 
   it "should return a string representation of the elements" do
-    Element.find('#foo').inspect.should == '[<div id="foo">]'
-    Element.find('.bar').inspect.should == '[<div class="bar">, <p id="lol" class="bar">]'
+    Element.find('#foo').inspect.should == '#<Element [<div id="foo">]>'
+    Element.find('.bar').inspect.should == '#<Element [<div class="bar">, <p id="lol" class="bar">]>'
   end
 
   it "should return '[]' when called on empty element set" do
-    Element.find('.inspect-spec-none').inspect.should == '[]'
+    Element.find('.inspect-spec-none').inspect.should == '#<Element []>'
   end
 end
