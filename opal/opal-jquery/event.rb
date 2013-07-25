@@ -1,7 +1,16 @@
-Class.bridge_class 'Event', `$.Event`
+#Class.bridge_class 'Event', `$.Event`
 
 # Wraps native jQuery event objects.
 class Event
+  %x{
+    var bridge_class = $.Event;
+
+    #{self}._proto = bridge_class.prototype, def = #{self}._proto;
+    bridge_class.prototype._klass = #{self};
+  }
+
+  include Kernel
+
   def [](name)
     `#{self}[name]`
   end

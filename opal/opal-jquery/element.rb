@@ -1,16 +1,19 @@
-# Instances of Element are just jquery instances, and wrap 1 or more
-# native dom elements.
-
-%x{
-  var root = __opal.global, dom_class;
-
-  if (root.jQuery) { dom_class = jQuery }
-  else if (root.Zepto) { dom_class = Zepto.zepto.Z; }
-}
-
-Class.bridge_class 'Element', `dom_class`
-
 class Element
+  %x{
+    var root = __opal.global, dom_class;
+
+    if (root.jQuery) {
+      dom_class = jQuery
+    }
+    else if (root.Zepto) {
+      dom_class = Zepto.zepto.Z;
+    }
+
+    #{self}._proto = dom_class.prototype, def = #{self}._proto;
+    dom_class.prototype._klass = #{self};
+  }
+
+  include Kernel
   include Enumerable
 
   def self.find(selector)
@@ -45,7 +48,7 @@ class Element
     %x{
       for (var i = 0, length = methods.length, method; i < length; i++) {
         method = methods[i];
-        #{self}.prototype['$' + method] = #{self}.prototype[method];
+        #{self}._proto['$' + method] = #{self}._proto[method];
       }
 
       return nil;
