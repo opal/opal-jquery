@@ -362,12 +362,26 @@ class Element
   alias empty? none?
 
   def on(name, sel = nil, &block)
-    `sel == nil ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
+    %x{
+      var handler = function() {
+        var args = __slice.call(arguments, 0);
+
+        if (args[0].isDefaultPrevented) {
+          args[0] = #{Event.new(`args[0]`)};
+        }
+
+        return block.apply(null, args);
+      };
+
+      block._handler = handler;
+    }
+
+    `sel == nil ? #{self}.on(name, handler) : #{self}.on(name, sel, handler)`
     block
   end
 
   def off(name, sel, block = nil)
-    `block == nil ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
+    `block == nil ? #{self}.off(name, sel._handler) : #{self}.off(name, sel, block._handler)`
   end
 
   alias size length
