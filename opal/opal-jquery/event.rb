@@ -1,21 +1,30 @@
+#Class.bridge_class 'Event', `$.Event`
+
+# Wraps native jQuery event objects.
 class Event
-  def initialize(event)
-    @event = event
-  end
+  %x{
+    var bridge_class = $.Event;
+
+    #{self}._proto = bridge_class.prototype, def = #{self}._proto;
+    bridge_class.prototype._klass = #{self};
+  }
+
+  include Kernel
+
   def [](name)
-    `#{@event}[name]`
+    `#{self}[name]`
   end
 
   def ctrl_key
-    `#{@event}.ctrlKey`
+    @ctrlKey
   end
 
   def current_target
-    `$(#{@event}.currentTarget)`
+    `$(#{self}.currentTarget)`
   end
 
   def default_prevented?
-    `#{@event}.isDefaultPrevented()`
+    `#{self}.isDefaultPrevented()`
   end
 
   # Stops propagation and prevents default action.
@@ -24,47 +33,39 @@ class Event
     prevent_default
   end
 
-  def prevent_default
-    `#{@event}.preventDefault()`
-  end
+  alias_native :prevent_default, :preventDefault
 
   def page_x
-    `#{@event}.pageX`
+    `#{self}.pageX`
   end
 
   def page_y
-    `#{@event}.pageY`
+    `#{self}.pageY`
   end
 
-  def propagation_stopped?
-    `#{@event}.propagationStopped()`
-  end
+  alias_native :propagation_stopped?, :propagationStopped
 
-  def stop_propagation
-    `#{@event}.stopPropagation()`
-  end
+  alias_native :stop_propagation, :stopPropagation
 
-  def stop_immediate_propagation
-    `#{@event}.stopImmediatePropagation()`
-  end
+  alias_native :stop_immediate_propagation, :stopImmediatePropagation
 
   def target
-    `$(#{@event}.target)`
+    `$(#{self}.target)`
   end
 
   def touch_x
-    `#{@event}.originalEvent.touches[0].pageX`
+    `#{self}.originalEvent.touches[0].pageX`
   end
 
   def touch_y
-    `#{@event}.originalEvent.touches[0].pageY`
+    `#{self}.originalEvent.touches[0].pageY`
   end
 
   def type
-    `#{@event}.type`
+    @type
   end
 
   def which
-    `#{@event}.which`
+    @which
   end
 end
