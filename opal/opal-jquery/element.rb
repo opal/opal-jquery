@@ -1,6 +1,6 @@
 class Element
   %x{
-    var root = __opal.global, dom_class;
+    var root = $opal.global, dom_class;
 
     if (root.jQuery) {
       dom_class = jQuery
@@ -88,18 +88,6 @@ class Element
   alias_native :slide_up, :slideUp
   alias_native :slide_toggle, :slideToggle
   alias_native :fade_toggle, :fadeToggle
-
-  # Missing methods are assumed to be jquery plugins. These are called by
-  # the given symbol name.
-  def method_missing(symbol, *args, &block)
-    %x{
-      if (#{self}[#{symbol}]) {
-        return #{self}[#{symbol}].apply(#{self}, args);
-      }
-    }
-
-    super
-  end
 
   def to_n
     self
