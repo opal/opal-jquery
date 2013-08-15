@@ -247,43 +247,11 @@ class Element
     Hash.from_native(`#{self}.offset()`)
   end
 
-  # Yields each element in #{self} collection in turn. The yielded element
-  # is wrapped as a `DOM` instance.
-  #
-  # @example
-  #
-  #   DOM('.foo').each { |e| puts "The element id: #{e.id}" }
-  #
-  # @return returns the receiver
   def each
     `for (var i = 0, length = #{self}.length; i < length; i++) {`
       yield `$(#{self}[i])`
     `}`
     self
-  end
-
-  # return an opal array mapped with block yielded for any element
-  #
-  # @example
-  #
-  #  list = Document.find('table.players td.surname').map  {|el| el.html }
-  #
-  # @return an Array
-  def map
-    list = []
-    each {|el| list << yield(el) }
-    list
-  end
-
-  # return an opal Array of elements
-  #
-  # @example
-  #
-  # Document.find('table.players td.surname').to_a.last
-  #
-  # @return an Array
-  def to_a
-    map {|el| el }
   end
 
   def first
