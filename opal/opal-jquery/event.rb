@@ -15,17 +15,23 @@ class Event
     `#{self}[name]`
   end
 
-  def ctrl_key
-    @ctrlKey
+  def type
+    @type
   end
 
-  def key_code
-    @keyCode
-  end
+
+  # Element
 
   def current_target
     `$(#{self}.currentTarget)`
   end
+
+  def target
+    `$(#{self}.target)`
+  end
+
+
+  # Propagation
 
   def default_prevented?
     `#{self}.isDefaultPrevented()`
@@ -39,22 +45,21 @@ class Event
 
   alias_native :prevent_default, :preventDefault
 
-  def page_x
-    `#{self}.pageX`
-  end
-
-  def page_y
-    `#{self}.pageY`
-  end
-
   alias_native :propagation_stopped?, :propagationStopped
 
   alias_native :stop_propagation, :stopPropagation
 
   alias_native :stop_immediate_propagation, :stopImmediatePropagation
 
-  def target
-    `$(#{self}.target)`
+
+  # Keyboard/Mouse/Touch
+
+  def page_x
+    @pageX
+  end
+
+  def page_y
+    @pageY
   end
 
   def touch_x
@@ -65,8 +70,12 @@ class Event
     `#{self}.originalEvent.touches[0].pageY`
   end
 
-  def type
-    @type
+  def ctrl_key
+    @ctrlKey
+  end
+
+  def key_code
+    @keyCode
   end
 
   def which
