@@ -19,6 +19,10 @@ class Event
     @ctrlKey
   end
 
+  def key_code
+    @keyCode
+  end
+
   def current_target
     `$(#{self}.currentTarget)`
   end
