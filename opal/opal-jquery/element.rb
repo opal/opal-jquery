@@ -8,6 +8,9 @@ class Element
     else if (root.Zepto) {
       dom_class = Zepto.zepto.Z;
     }
+    else {
+      throw new Error("jQuery must be included before opal-jquery");
+    }
 
     #{self}._proto = dom_class.prototype, def = #{self}._proto;
     dom_class.prototype._klass = #{self};
