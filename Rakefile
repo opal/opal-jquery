@@ -1,23 +1,46 @@
 require 'bundler'
-Bundler.setup
+Bundler.require
+Bundler::GemHelper.install_tasks
 
-require 'opal/rake_task'
+require 'opal/spec/rake_task'
+Opal::Spec::RakeTask.new(:default)
 
-Opal::RakeTask.new do |t|
-  t.name         = 'opal-jquery'
-  t.parser       = true # opal-parser for examples
-  t.dependencies = %w(opal-spec)
-end
+desc "Build build/opal-jquery.js"
+task :dist do
+  require 'fileutils'
+  FileUtils.mkdir_p 'build'
 
-desc "Run phantom tests"
-task :test do
-  src = %w(build/opal.js build/opal-spec.js vendor/jquery.js build/opal-jquery.js build/specs.js)
-  out = 'build/phantom_runner.js'
-  File.open(out, 'w+') do |o|
-    src.each { |s| o.write File.read(s) }
+  src = Opal::Builder.build('opal-jquery')
+  min = uglify src
+  gzp = gzip min
+
+  File.open('build/opal-jquery.js', 'w+') do |out|
+    out << src
   end
 
-  sh "phantomjs build/phantom_runner.js"
+  puts "development: #{src.size}, minified: #{min.size}, gzipped: #{gzp.size}"
 end
 
-task :default => :test
+# Used for uglifying source to minify
+def uglify(str)
+  IO.popen('uglifyjs', 'r+') do |i|
+    i.puts str
+    i.close_write
+    return i.read
+  end
+rescue Errno::ENOENT
+  $stderr.puts '"uglifyjs" command not found (install with: "npm install -g uglify-js")'
+  nil
+end
+
+# Gzip code to check file size
+def gzip(str)
+  IO.popen('gzip -f', 'r+') do |i|
+    i.puts str
+    i.close_write
+    return i.read
+  end
+rescue Errno::ENOENT
+  $stderr.puts '"gzip" command not found, it is required to produce the .gz version'
+  nil
+end
