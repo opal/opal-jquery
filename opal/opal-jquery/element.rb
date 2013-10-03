@@ -66,7 +66,7 @@ class Element
   expose :hide, :show, :toggle, :children, :blur, :closest, :data
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
   expose :height, :width, :serialize, :is, :filter, :last, :first
-  expose :wrap, :stop, :clone
+  expose :wrap, :stop, :clone, :empty
 
   # We alias some jquery methods to common ruby method names.
   alias succ next
