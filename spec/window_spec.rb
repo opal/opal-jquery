@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Element do
+describe Window do
   html <<-HTML
     <div id="foo">
       <div id="bar" class="apples"></div>
