@@ -119,15 +119,6 @@ class Element
   # Returns the element at the given index as a new `DOM` instance.
   # Negative indexes can be used and are counted from the end. If the
   # given index is outside the range then `nil` is returned.
-  #
-  # @example
-  #
-  #   DOM('.foo')[0]    # => first element in collection
-  #   DOM('.foo')[-1]   # => last element from collection
-  #   DOM('.foo')[100]  # => returns nil if index outside range
-  #
-  # @param [Numeric] index the index to get
-  # @return [DOM, nil] returns new collection with returned element
   def at(index)
     %x{
       var length = #{self}.length;
@@ -147,13 +138,6 @@ class Element
   # Returns the CSS class name of the firt element in #{self} collection.
   # If the collection is empty then an empty string is returned. Only
   # the class name of the first element will ever be returned.
-  #
-  # @example
-  #
-  #   DOM('<p class="foo"></p>').class_name
-  #   # => "foo"
-  #
-  # @return [String] the class name
   def class_name
     %x{
       var first = #{self}[0];
@@ -164,13 +148,6 @@ class Element
   # Sets the CSS class name of every element in #{self} collection to the
   # given string. #{self} does not append the class names, it replaces
   # the entire current class name.
-  #
-  # @example
-  #
-  #   DOM('#foo').class_name = "title"
-  #
-  # @param [String] name the class name to set on each element
-  # @return [DOM] returns the receiver
   def class_name=(name)
     %x{
       for (var i = 0, length = #{self}.length; i < length; i++) {
@@ -186,19 +163,6 @@ class Element
   # property is also given then the given css property is set to the
   # given value for each of the elements in #{self} collection. The
   # property can also be a hash of properties and values.
-  #
-  # @example
-  #
-  #   foo = DOM '#foo'
-  #   foo.css 'background-color'            # => "red"
-  #   foo.css 'background-color', 'green'
-  #   foo.css 'background-color'            # => "green"
-  #   foo.css :width => '200px'
-  #
-  # @param [String] name the css property to get/set
-  # @param [String] value optional value to set
-  # @param [Hash] set of css properties and values
-  # @return [String, DOM] returns css value or the receiver
   def css(name, value=nil)
     if value.nil? && name.is_a?(String)
       return `#{self}.css(name)`
@@ -212,17 +176,6 @@ class Element
   # set of css properties and values to animate to. The first parameter
   # also accepts a special :speed value to set animation speed. If a block
   # is given, the block is run as a callback when the animation finishes.
-  #
-  # @example
-  #
-  #   foo = DOM "#foo"
-  #   foo.animate :height => "200px", "margin-left" => "10px"
-  #   bar.animate :top => "30px", :speed => 100 do
-  #     bar.add_class "finished"
-  #   end
-  #
-  # @param [Hash] css properties and and values. Also accepts speed param.
-  # @return [DOM] receiver
   def animate(params, &block)
     speed = params.has_key?(:speed) ? params.delete(:speed) : 400
     %x{

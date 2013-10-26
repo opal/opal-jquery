@@ -51,7 +51,6 @@ class Event
 
   alias_native :stop_immediate_propagation, :stopImmediatePropagation
 
-
   # Keyboard/Mouse/Touch
 
   def page_x
