@@ -41,7 +41,7 @@ describe HTTP do
         run_async { response.ok?.should be_true }
       end
     end
-    
+
     async 'returns false when the request failed' do
       HTTP.get('spec/data/non_existant.txt') do |response|
         run_async { response.ok?.should be_false }
