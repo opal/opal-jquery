@@ -3,7 +3,13 @@ Bundler.require
 Bundler::GemHelper.install_tasks
 
 require 'opal/spec/rake_task'
-Opal::Spec::RakeTask.new(:default)
+Opal::Spec::RakeTask.new(:default) do |s|
+  s.index_path = 'spec/index.html'
+end
+
+Opal::Spec::RakeTask.new(:zepto) do |s|
+  s.index_path = 'spec/zepto/index.html'
+end
 
 desc "Build build/opal-jquery.js"
 task :dist do

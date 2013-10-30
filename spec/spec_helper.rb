@@ -1,4 +1,3 @@
-require 'jquery'
 require 'opal-spec'
 require 'opal-jquery'
 
