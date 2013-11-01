@@ -1,40 +1,49 @@
-#Class.bridge_class 'Event', `$.Event`
-
 # Wraps native jQuery event objects.
 class Event
-  %x{
-    var bridge_class = $.Event;
-
-    #{self}._proto = bridge_class.prototype, def = #{self}._proto;
-    bridge_class.prototype._klass = #{self};
-  }
-
-  include Kernel
+  def initialize(native)
+    @native = native
+  end
 
   def [](name)
-    `#{self}[name]`
+    `#@native[name]`
   end
 
   def type
-    @type
+    `#@native.type`
   end
 
-
+  ##
   # Element
 
   def current_target
-    `$(#{self}.currentTarget)`
+    `$(#@native.currentTarget)`
   end
 
   def target
-    `$(#{self}.target)`
+    `$(#@native.target)`
   end
 
-
+  ##
   # Propagation
 
   def default_prevented?
-    `#{self}.isDefaultPrevented()`
+    `#@native.isDefaultPrevented()`
+  end
+
+  def prevent_default
+    `#@native.preventDefault()`
+  end
+
+  def propagation_stopped?
+    `#@native.propagationStopped()`
+  end
+
+  def stop_propagation
+    `#@native.stopPropagation()`
+  end
+
+  def stop_immediate_propagation
+    `#@native.stopImmediatePropagation()`
   end
 
   # Stops propagation and prevents default action.
@@ -43,41 +52,34 @@ class Event
     prevent_default
   end
 
-  alias_native :prevent_default, :preventDefault
-
-  alias_native :propagation_stopped?, :propagationStopped
-
-  alias_native :stop_propagation, :stopPropagation
-
-  alias_native :stop_immediate_propagation, :stopImmediatePropagation
-
+  ##
   # Keyboard/Mouse/Touch
 
   def page_x
-    @pageX
+    `#@native.pageX`
   end
 
   def page_y
-    @pageY
+    `#@native.pageY`
   end
 
   def touch_x
-    `#{self}.originalEvent.touches[0].pageX`
+    `#@native.originalEvent.touches[0].pageX`
   end
 
   def touch_y
-    `#{self}.originalEvent.touches[0].pageY`
+    `#@native.originalEvent.touches[0].pageY`
   end
 
   def ctrl_key
-    @ctrlKey
+    `#@native.ctrlKey`
   end
 
   def key_code
-    @keyCode
+    `#@native.keyCode`
   end
 
   def which
-    @which
+    `#@native.which`
   end
 end

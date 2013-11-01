@@ -275,7 +275,11 @@ class Element
 
   def on(name, sel = nil, &block)
     %x{
-      var wrapper = function() {
+      var wrapper = function(evt) {
+        if (evt.preventDefault) {
+          evt = #{Event.new `evt`};
+        }
+
         return block.apply(null, arguments);
       };
 
