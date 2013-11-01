@@ -268,6 +268,12 @@ Run the tests inside a phantom.js runner:
 
     $ bundle exec rake
 
+### Zepto
+
+opal-jquery also supports zepto. To run specs for zepto use the rake task:
+
+    $ bundle exec rake zepto
+
 ##  License
 
 (The MIT License)
