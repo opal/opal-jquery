@@ -12,8 +12,8 @@ class Element
       throw new Error("jQuery must be included before opal-jquery");
     }
 
-    #{self}._proto = dom_class.prototype, def = #{self}._proto;
-    dom_class.prototype._klass = #{self};
+    self._proto = dom_class.prototype, def = self._proto;
+    dom_class.prototype._klass = self;
   }
 
   include Kernel
@@ -51,7 +51,7 @@ class Element
     %x{
       for (var i = 0, length = methods.length, method; i < length; i++) {
         method = methods[i];
-        #{self}._proto['$' + method] = #{self}._proto[method];
+        self._proto['$' + method] = self._proto[method];
       }
 
       return nil;
@@ -97,7 +97,7 @@ class Element
   end
 
   def [](name)
-    `#{self}.attr(name) || ""`
+    `self.attr(name) || ""`
   end
 
   def add_attribute name
@@ -105,15 +105,15 @@ class Element
   end
 
   def has_attribute? name
-    `!!#{self}.attr(name)`
+    `!!self.attr(name)`
   end
 
   def append_to_body
-    `#{self}.appendTo(document.body)`
+    `self.appendTo(document.body)`
   end
 
   def append_to_head
-    `#{self}.appendTo(document.head)`
+    `self.appendTo(document.head)`
   end
 
   # Returns the element at the given index as a new `DOM` instance.
@@ -121,7 +121,7 @@ class Element
   # given index is outside the range then `nil` is returned.
   def at(index)
     %x{
-      var length = #{self}.length;
+      var length = self.length;
 
       if (index < 0) {
         index += length;
@@ -131,43 +131,43 @@ class Element
         return nil;
       }
 
-      return $(#{self}[index]);
+      return $(self[index]);
     }
   end
 
-  # Returns the CSS class name of the firt element in #{self} collection.
+  # Returns the CSS class name of the firt element in self collection.
   # If the collection is empty then an empty string is returned. Only
   # the class name of the first element will ever be returned.
   def class_name
     %x{
-      var first = #{self}[0];
+      var first = self[0];
       return (first && first.className) || "";
     }
   end
 
-  # Sets the CSS class name of every element in #{self} collection to the
-  # given string. #{self} does not append the class names, it replaces
+  # Sets the CSS class name of every element in self collection to the
+  # given string. self does not append the class names, it replaces
   # the entire current class name.
   def class_name=(name)
     %x{
-      for (var i = 0, length = #{self}.length; i < length; i++) {
-        #{self}[i].className = name;
+      for (var i = 0, length = self.length; i < length; i++) {
+        self[i].className = name;
       }
     }
     self
   end
 
-  # Get or set css properties on each element in #{self} collection. If
+  # Get or set css properties on each element in self collection. If
   # only the `name` is given, then that css property name is read from
   # the first element in the collection and returned. If the `value`
   # property is also given then the given css property is set to the
-  # given value for each of the elements in #{self} collection. The
+  # given value for each of the elements in self collection. The
   # property can also be a hash of properties and values.
   def css(name, value=nil)
     if value.nil? && name.is_a?(String)
-      return `#{self}.css(name)`
+      return `self.css(name)`
     else
-      name.is_a?(Hash) ? `#{self}.css(#{name.to_n})` : `#{self}.css(name, value)`
+      name.is_a?(Hash) ? `self.css(#{name.to_n})` : `self.css(name, value)`
     end
     self
   end
@@ -179,7 +179,7 @@ class Element
   def animate(params, &block)
     speed = params.has_key?(:speed) ? params.delete(:speed) : 400
     %x{
-      #{self}.animate(#{params.to_n}, #{speed}, function() {
+      self.animate(#{params.to_n}, #{speed}, function() {
         #{block.call if block_given?}
       })
     }
@@ -192,61 +192,61 @@ class Element
     name = name.gsub(/_\w/) { |match| match[1].upcase }
     args = args.map { |a| a.to_n if a.respond_to? :to_n }.compact
     args << `function() { #{block.call if block_given?} }`
-    `#{self}[#{name}].apply(#{self}, #{args})`
+    `self[#{name}].apply(self, #{args})`
   end
 
   def visible?
-    `#{self}.is(':visible')`
+    `self.is(':visible')`
   end
 
   def offset
-    Hash.from_native(`#{self}.offset()`)
+    Hash.from_native(`self.offset()`)
   end
 
   def each
-    `for (var i = 0, length = #{self}.length; i < length; i++) {`
-      yield `$(#{self}[i])`
+    `for (var i = 0, length = self.length; i < length; i++) {`
+      yield `$(self[i])`
     `}`
     self
   end
 
   def first
-    `#{self}.length ? #{self}.first() : nil`
+    `self.length ? self.first() : nil`
   end
 
   def html
-    `#{self}.html() || ""`
+    `self.html() || ""`
   end
 
   def id
     %x{
-      var first = #{self}[0];
+      var first = self[0];
       return (first && first.id) || "";
     }
   end
 
   def id=(id)
     %x{
-      var first = #{self}[0];
+      var first = self[0];
 
       if (first) {
         first.id = id;
       }
 
-      return #{self};
+      return self;
     }
   end
 
   def tag_name
-    `#{self}.length > 0 ? #{self}[0].tagName.toLowerCase() : #{nil}`
+    `self.length > 0 ? self[0].tagName.toLowerCase() : #{nil}`
   end
 
   def inspect
     %x{
       var val, el, str, result = [];
 
-      for (var i = 0, length = #{self}.length; i < length; i++) {
-        el  = #{self}[i];
+      for (var i = 0, length = self.length; i < length; i++) {
+        el  = self[i];
         str = "<" + el.tagName.toLowerCase();
 
         if (val = el.id) str += (' id="' + val + '"');
@@ -260,15 +260,15 @@ class Element
   end
 
   def length
-    `#{self}.length`
+    `self.length`
   end
 
   def any?
-    `#{self}.length > 0`
+    `self.length > 0`
   end
 
   def empty?
-    `#{self}.length === 0`
+    `self.length === 0`
   end
 
   alias empty? none?
@@ -313,6 +313,6 @@ class Element
   alias size length
 
   def value
-    `#{self}.val() || ""`
+    `self.val() || ""`
   end
 end
