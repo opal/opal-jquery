@@ -16,11 +16,11 @@ class Event
   # Element
 
   def current_target
-    `$(#@native.currentTarget)`
+    Element.new `#@native.currentTarget`
   end
 
   def target
-    `$(#@native.target)`
+    Element.new `#@native.target`
   end
 
   ##

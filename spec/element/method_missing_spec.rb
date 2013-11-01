@@ -9,6 +9,10 @@ require "spec_helper"
   $.fn.opal_specs_args = function() {
     return Array.prototype.slice.call(arguments);
   };
+
+  $.fn.opal_meth_missing = function() {
+    return Array.prototype.slice.call(arguments);
+  };
 }
 
 class Element
@@ -28,5 +32,11 @@ describe "Element#exposes" do
     lambda {
       Element.new.some_unknown_plugin
     }.should raise_error(NoMethodError)
+  end
+end
+
+describe "Element#method_missing" do
+  it "forwards calls to jquery plugins" do
+    Element.new.opal_meth_missing(1, 2, 3).should eq([1, 2, 3])
   end
 end
