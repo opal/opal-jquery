@@ -274,12 +274,36 @@ class Element
   alias empty? none?
 
   def on(name, sel = nil, &block)
-    `sel == nil ? #{self}.on(name, block) : #{self}.on(name, sel, block)`
+    %x{
+      var wrapper = function() {
+        return block.apply(null, arguments);
+      };
+
+      block._jq_wrap = wrapper;
+
+      if (sel == nil) {
+        self.on(name, wrapper);
+      }
+      else {
+        self.on(name, sel, wrapper);
+      }
+    }
+
     block
   end
 
   def off(name, sel, block = nil)
-    `block == nil ? #{self}.off(name, sel) : #{self}.off(name, sel, block)`
+    %x{
+      if (sel == null) {
+        return self.off(name);
+      }
+      else if (block === nil) {
+        return self.off(name, sel._jq_wrap);
+      }
+      else {
+        return self.off(name, sel, block._jq_wrap);
+      }
+    }
   end
 
   alias size length
