@@ -25,8 +25,8 @@ describe "Element#exposes" do
   end
 
   it "only forwards calls when a native method exists" do
-    lambda {
+    expect {
       Element.new.some_unknown_plugin
-    }.should raise_error(NoMethodError)
+    }.to raise_error(Exception)
   end
 end

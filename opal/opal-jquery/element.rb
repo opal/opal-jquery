@@ -1,22 +1,18 @@
-class Element
-  %x{
-    var root = $opal.global, dom_class;
+%x{
+  var root = $opal.global, dom_class;
 
-    if (root.jQuery) {
-      dom_class = jQuery
-    }
-    else if (root.Zepto) {
-      dom_class = Zepto.zepto.Z;
-    }
-    else {
-      throw new Error("jQuery must be included before opal-jquery");
-    }
-
-    self._proto = dom_class.prototype, def = self._proto;
-    dom_class.prototype._klass = self;
+  if (root.jQuery) {
+    dom_class = jQuery
   }
+  else if (root.Zepto) {
+    dom_class = Zepto.zepto.Z;
+  }
+  else {
+    throw new Error("jQuery must be included before opal-jquery");
+  }
+}
 
-  include Kernel
+class Element < `dom_class`
   include Enumerable
 
   def self.find(selector)

@@ -2,12 +2,12 @@ require 'bundler'
 Bundler.require
 Bundler::GemHelper.install_tasks
 
-require 'opal/spec/rake_task'
-Opal::Spec::RakeTask.new(:default) do |s|
+require 'opal/rspec/rake_task'
+Opal::RSpec::RakeTask.new(:default) do |s|
   s.index_path = 'spec/jquery/index.html'
 end
 
-Opal::Spec::RakeTask.new(:zepto) do |s|
+Opal::RSpec::RakeTask.new(:zepto) do |s|
   s.index_path = 'spec/zepto/index.html'
 end
 

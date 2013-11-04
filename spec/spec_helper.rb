@@ -1,4 +1,4 @@
-require 'opal-spec'
+require 'opal-rspec'
 require 'opal-jquery'
 
 module JqueryHelpers
@@ -30,6 +30,6 @@ module JqueryHelpers
   end
 end
 
-class OpalSpec::Example
-  extend JqueryHelpers
+RSpec.configure do |config|
+  config.extend JqueryHelpers
 end

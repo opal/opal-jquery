@@ -13,7 +13,7 @@ describe HTTP do
     async 'can add a success callback after the request is sent' do
       http = HTTP.get('spec/fixtures/simple.txt')
       http.callback do |response|
-        run_async { response.ok?.should be_true }
+        run_async { response.should be_ok }
       end
     end
   end
@@ -22,7 +22,7 @@ describe HTTP do
     async 'can add a failure callback after the request is sent' do
       http = HTTP.get('spec/fixtures/bad_url.txt')
       http.errback do |response|
-        run_async { response.ok?.should be_false }
+        run_async { response.should_not be_ok }
       end
     end
   end
@@ -38,13 +38,13 @@ describe HTTP do
   describe '#ok?' do
     async 'returns true when the request was a sucess' do
       HTTP.get('spec/fixtures/simple.txt') do |response|
-        run_async { response.ok?.should be_true }
+        run_async { response.should be_ok }
       end
     end
 
     async 'returns false when the request failed' do
       HTTP.get('spec/fixtures/non_existant.txt') do |response|
-        run_async { response.ok?.should be_false }
+        run_async { response.should_not be_ok }
       end
     end
   end

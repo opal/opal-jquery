@@ -72,14 +72,14 @@ describe Element do
   describe "#add_class" do
     it "should add the given class name to the element" do
       foo = Element.find '#foo'
-      foo.has_class?('lemons').should be_false
+      foo.has_class?('lemons').should eq(false)
       foo.add_class 'lemons'
-      foo.has_class?('lemons').should be_true
+      foo.has_class?('lemons').should eq(true)
     end
 
     it "should not duplicate class names on an element" do
       bar = Element.find '#bar'
-      bar.has_class?('apples').should be_true
+      bar.has_class?('apples').should eq(true)
       bar.add_class 'apples'
       bar.class_name.should == 'apples'
     end
@@ -93,9 +93,9 @@ describe Element do
 
   describe '#has_class?' do
     it "should return true if the element has the given class" do
-      Element.find('#has-foo').has_class?("apples").should be_true
-      Element.find('#has-foo').has_class?("oranges").should be_false
-      Element.find('#has-bar').has_class?("lemons").should be_true
+      Element.find('#has-foo').has_class?("apples").should eq(true)
+      Element.find('#has-foo').has_class?("oranges").should eq(false)
+      Element.find('#has-bar').has_class?("lemons").should eq(true)
     end
   end
 
@@ -152,16 +152,16 @@ describe Element do
   describe '#toggle_class' do
     it 'adds the given class name to the element if not already present' do
       foo = Element.find('#foo')
-      foo.has_class?('oranges').should be_false
+      foo.has_class?('oranges').should eq(false)
       foo.toggle_class 'oranges'
-      foo.has_class?('oranges').should be_true
+      foo.has_class?('oranges').should eq(true)
     end
 
     it 'removes the class if the element already has it' do
       bar = Element.find('#bar')
-      bar.has_class?('apples').should be_true
+      bar.has_class?('apples').should eq(true)
       bar.toggle_class 'apples'
-      bar.has_class?('apples').should be_false
+      bar.has_class?('apples').should eq(false)
     end
   end
 
