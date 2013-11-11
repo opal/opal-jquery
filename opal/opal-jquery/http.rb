@@ -1,4 +1,5 @@
 require 'json'
+require 'native'
 
 class HTTP
   attr_reader :body, :error_message, :method, :status_code, :url, :xhr
