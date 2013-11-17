@@ -91,7 +91,11 @@ class Element < `dom_class`
   def to_n
     self
   end
-
+  
+  def get i
+    `self.get(i)`
+  end
+  
   def [](name)
     `self.attr(name) || ""`
   end
