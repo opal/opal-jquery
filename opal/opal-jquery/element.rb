@@ -63,6 +63,7 @@ class Element < `dom_class`
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
   expose :height, :width, :serialize, :is, :filter, :last, :first
   expose :wrap, :stop, :clone, :empty
+  expose :get, :attr, :prop
 
   # We alias some jquery methods to common ruby method names.
   alias succ next
@@ -91,7 +92,7 @@ class Element < `dom_class`
   def to_n
     self
   end
-
+  
   def [](name)
     `self.attr(name) || ""`
   end
