@@ -211,8 +211,14 @@ class Element < `dom_class`
     `self.length ? self.first() : nil`
   end
 
-  def html
-    `self.html() || ""`
+  def html(content = undefined)
+    %x{
+      if (content != null) {
+        return self.html(content);
+      }
+
+      return self.html() || '';
+    }
   end
 
   def id

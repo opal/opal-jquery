@@ -184,3 +184,21 @@ describe Element do
     end
   end
 end
+
+describe "Element#html" do
+  html <<-HTML
+    <div id="foo">bar</div>
+  HTML
+
+  it "retrieves the inner html content for the element" do
+    expect(Element.id('foo').html).to include('bar')
+  end
+
+  it "can be used to set inner html of element by passing string" do
+    foo = Element.id 'foo'
+    foo.html "different content"
+
+    expect(foo.html).to_not include('bar')
+    expect(foo.html).to include('different content')
+  end
+end
