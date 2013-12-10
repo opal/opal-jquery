@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Document do
+  subject { Document }
+
   describe "ready?" do
     it "accepts a block" do
       Document.ready? { }
@@ -19,6 +21,20 @@ describe Document do
       Document.title = "foo"
       Document.title.should eq("foo")
       Document.title = old
+    end
+  end
+
+  describe "head" do
+    it "returns the head element as an Element instance" do
+      expect(subject.head).to be_kind_of(Element)
+      expect(subject.head.tag_name).to eq('head')
+    end
+  end
+
+  describe "body" do
+    it "returns the body element as an Element instance" do
+      expect(subject.body).to be_kind_of(Element)
+      expect(subject.body.tag_name).to eq('body')
     end
   end
 end

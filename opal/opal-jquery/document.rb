@@ -14,6 +14,14 @@ class << Document
   def title=(title)
     `document.title = #{title}`
   end
+
+  def head
+    Element.find(`document.head`)
+  end
+
+  def body
+    Element.find(`document.body`)
+  end
 end
 
 # TODO: this will be removed soon (here for compatibility)
