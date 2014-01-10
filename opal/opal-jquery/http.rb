@@ -48,6 +48,7 @@ class HTTP
       settings.success = function(data, status, xhr) {
         http.body = data;
         http.xhr = xhr;
+        http.status_code = xhr.status;
 
         if (typeof(data) === 'object') {
           http.json = #{ JSON.from_object `data` };
@@ -59,6 +60,7 @@ class HTTP
       settings.error = function(xhr, status, error) {
         http.body = xhr.responseText;
         http.xhr = xhr;
+        http.status_code = xhr.status;
 
         return #{ http.fail };
       };
