@@ -26,31 +26,38 @@ class Event
   ##
   # Propagation
 
-  def default_prevented?
+  def prevented?
     `#@native.isDefaultPrevented()`
   end
 
-  def prevent_default
+  def prevent
     `#@native.preventDefault()`
   end
 
-  def propagation_stopped?
+  def stopped?
     `#@native.propagationStopped()`
   end
 
-  def stop_propagation
+  def stop
     `#@native.stopPropagation()`
   end
 
-  def stop_immediate_propagation
+  def stop_immediate
     `#@native.stopImmediatePropagation()`
   end
 
   # Stops propagation and prevents default action.
   def kill
-    stop_propagation
-    prevent_default
+    stop
+    prevent
   end
+
+  # to be removed?
+  alias default_prevented? prevented?
+  alias prevent_default prevent
+  alias propagation_stopped? stopped?
+  alias stop_propagation stop
+  alias stop_immediate_propagation stop_immediate
 
   ##
   # Keyboard/Mouse/Touch

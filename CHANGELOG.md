@@ -2,6 +2,9 @@
 
 *   Add `Document.body` and `Document.head` shortcut to element instances.
 
+*   Add `Event` methods: `prevented?`, `prevent`, `stopped?` and `stop` to
+    replace longer javascript names.
+
 ## 0.1.2 2013-12-01
 
 *   Support setting html content through `Element#html()`.
