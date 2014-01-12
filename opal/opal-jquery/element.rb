@@ -92,7 +92,7 @@ class Element < `dom_class`
   def to_n
     self
   end
-  
+
   def [](name)
     `self.attr(name) || ""`
   end
