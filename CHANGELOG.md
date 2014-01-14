@@ -5,6 +5,8 @@
 *   Add `Event` methods: `prevented?`, `prevent`, `stopped?` and `stop` to
     replace longer javascript names.
 
+*   Add `LocalStorage` implementation.
+
 ## 0.1.2 2013-12-01
 
 *   Support setting html content through `Element#html()`.
