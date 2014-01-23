@@ -244,10 +244,6 @@ class Element < `dom_class`
     `self.length > 0 ? self[0].tagName.toLowerCase() : #{nil}`
   end
 
-  def to_s
-    inspect
-  end
-
   def inspect
     %x{
       var val, el, str, result = [];
@@ -267,6 +263,8 @@ class Element < `dom_class`
       return '#<Element [' + result.join(', ') + ']>';
     }
   end
+
+  alias to_s inspect
 
   def length
     `self.length`
