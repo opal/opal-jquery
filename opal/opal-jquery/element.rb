@@ -254,7 +254,7 @@ class Element < `dom_class`
 
       for (var i = 0, length = self.length; i < length; i++) {
         el  = self[i];
-        if (el == document) { return '#<Element [document]>'; }
+        if (!el.tagName) { return '#<Element ['+el.toString()+']'; }
 
         str = "<" + el.tagName.toLowerCase();
 
