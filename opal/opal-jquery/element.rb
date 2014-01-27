@@ -264,7 +264,19 @@ class Element < `dom_class`
     }
   end
 
-  alias to_s inspect
+  def to_s
+    %x{
+      var val, el, result = [];
+
+      for (var i = 0, length = self.length; i < length; i++) {
+        el  = self[i];
+
+        result.push(el.outerHTML)
+      }
+
+      return result.join(', ');
+    }
+  end
 
   def length
     `self.length`
