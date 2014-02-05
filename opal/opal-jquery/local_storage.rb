@@ -5,7 +5,10 @@ module DOM
     end
 
     def []=(key, value)
-      `#@storage.setItem(key, value)`
+      %x{
+        #@storage.setItem(key, value);
+        return value;
+      }
     end
 
     def [](key)
