@@ -59,7 +59,7 @@ class Element < `dom_class`
   # Bridged functions - we just expose all core jquery functions as ruby
   # methods on this class.
   expose :after, :before, :parent, :parents, :prepend, :prev, :remove
-  expose :hide, :show, :toggle, :children, :blur, :closest, :data
+  expose :hide, :show, :toggle, :children, :blur, :closest
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
   expose :height, :width, :serialize, :is, :filter, :last, :first
   expose :wrap, :stop, :clone, :empty
@@ -179,6 +179,13 @@ class Element < `dom_class`
       self.animate(#{params.to_n}, #{speed}, function() {
         #{block.call if block_given?}
       })
+    }
+  end
+
+  def data(*args)
+    %x{
+      var result = self.data.apply(self, args);
+      return result == null ? nil : result;
     }
   end
 

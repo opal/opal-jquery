@@ -183,6 +183,28 @@ describe Element do
       foo.class_name.should == 'bar'
     end
   end
+
+end
+
+describe "Element#data" do
+  html <<-HTML
+    <div id="data-foo"></div>
+    <div id="data-ford" data-authur="dent"></div>
+  HTML
+
+  it "sets a data attribute" do
+    foo = Element.id('data-foo')
+    foo.data 'bar', 'baz'
+    expect(foo.data('bar')).to eq('baz')
+  end
+
+  it "can retrieve a data attribute" do
+    expect(Element.id('data-ford').data('authur')).to eq('dent')
+  end
+
+  it "returns nil for an undefined data attribute" do
+    expect(Element.id('data-ford').data('not-here')).to be_nil
+  end
 end
 
 describe "Element#html" do

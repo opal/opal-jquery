@@ -7,6 +7,9 @@
 
 *   Add `LocalStorage` implementation.
 
+*   Fix Element#data() to return nil for an undefined data attribute instead
+    of null.
+
 ## 0.1.2 2013-12-01
 
 *   Support setting html content through `Element#html()`.
