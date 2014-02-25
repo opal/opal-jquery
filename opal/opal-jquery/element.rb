@@ -1,3 +1,5 @@
+require 'native'
+
 %x{
   var root = $opal.global, dom_class;
 
@@ -204,7 +206,7 @@ class Element < `dom_class`
   end
 
   def offset
-    Hash.from_native(`self.offset()`)
+    Native(`self.offset()`)
   end
 
   def each
