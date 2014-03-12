@@ -1,5 +1,7 @@
 ## edge
 
+## 0.2.0 2014-03-12
+
 *   Add `Document.body` and `Document.head` shortcut to element instances.
 
 *   Add `Event` methods: `prevented?`, `prevent`, `stopped?` and `stop` to
