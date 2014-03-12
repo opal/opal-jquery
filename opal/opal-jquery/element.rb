@@ -61,7 +61,7 @@ class Element < `dom_class`
   # Bridged functions - we just expose all core jquery functions as ruby
   # methods on this class.
   expose :after, :before, :parent, :parents, :prepend, :prev, :remove
-  expose :hide, :show, :toggle, :children, :blur, :closest
+  expose :hide, :show, :toggle, :children, :blur, :closest, :detach
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
   expose :height, :width, :serialize, :is, :filter, :last, :first
   expose :wrap, :stop, :clone, :empty
