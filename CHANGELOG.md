@@ -7,8 +7,10 @@
 
 *   Add `LocalStorage` implementation.
 
-*   Fix Element#data() to return nil for an undefined data attribute instead
-    of null.
+*   Fix `Element#data()` to return `nil` for an undefined data attribute
+    instead of null.
+
+*   Expose `#detach` method on `Element`.
 
 ## 0.1.2 2013-12-01
 
