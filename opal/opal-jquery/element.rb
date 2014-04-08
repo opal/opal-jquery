@@ -63,7 +63,7 @@ class Element < `dom_class`
   expose :after, :before, :parent, :parents, :prepend, :prev, :remove
   expose :hide, :show, :toggle, :children, :blur, :closest, :detach
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
-  expose :height, :width, :serialize, :is, :filter, :last, :first
+  expose :serialize, :is, :filter, :last, :first
   expose :wrap, :stop, :clone, :empty
   expose :get, :attr, :prop
 
@@ -90,6 +90,8 @@ class Element < `dom_class`
   alias_native :slide_up, :slideUp
   alias_native :slide_toggle, :slideToggle
   alias_native :fade_toggle, :fadeToggle
+  alias_native :height=, :height
+  alias_native :width=, :width
 
   def to_n
     self
@@ -326,5 +328,13 @@ class Element < `dom_class`
 
   def value
     `self.val() || ""`
+  end
+
+  def height
+    `self.height() || nil`
+  end
+
+  def width
+    `self.width() || nil`
   end
 end
