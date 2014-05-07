@@ -1,23 +1,40 @@
 require 'json'
 require 'native'
+require 'promise'
 
 class HTTP
   attr_reader :body, :error_message, :method, :status_code, :url, :xhr
 
   def self.get(url, opts={}, &block)
-    self.new(url, :GET, opts, block).send!
+    build_request url, :GET, opts, block
   end
 
   def self.post(url, opts={}, &block)
-    self.new(url, :POST, opts, block).send!
+    build_request url, :POST, opts, block
   end
 
   def self.put(url, opts={}, &block)
-    self.new(url, :PUT, opts, block).send!
+    build_request url, :PUT, opts, block
   end
 
   def self.delete(url, opts={}, &block)
-    self.new(url, :DELETE, opts, block).send!
+    build_request url, :DELETE, opts, block
+  end
+
+  def self.build_request(url, method, options, block)
+    unless block
+      promise = ::Promise.new
+      block = proc do |response|
+        if response.ok?
+          promise.resolve response
+        else
+          promise.reject response
+        end
+      end
+    end
+
+    http = new(url, method, options, block).send!
+    promise || http
   end
 
   def initialize(url, method, options, handler=nil)
@@ -67,16 +84,6 @@ class HTTP
     }
 
     @settings = settings
-  end
-
-  def callback(&block)
-    @callback = block
-    self
-  end
-
-  def errback(&block)
-    @errback = block
-    self
   end
 
   def fail

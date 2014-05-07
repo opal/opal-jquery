@@ -1,5 +1,8 @@
 ## edge
 
+*   Add Promise support to HTTP get/post/put/delete methods. Also remove
+    HTTP#callback and #errback methods.
+
 ## 0.2.0 2014-03-12
 
 *   Add `Document.body` and `Document.head` shortcut to element instances.
