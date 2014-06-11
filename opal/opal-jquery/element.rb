@@ -83,6 +83,8 @@ class Element < `dom_class`
   alias_native :text=, :text
   alias_native :toggle_class, :toggleClass
   alias_native :value=, :val
+  alias_native :scroll_top=, :scrollTop
+  alias_native :scroll_top, :scrollTop
   alias_native :scroll_left=, :scrollLeft
   alias_native :scroll_left, :scrollLeft
   alias_native :remove_attribute, :removeAttr
