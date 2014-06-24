@@ -231,13 +231,14 @@ request.errback { |response|
   puts "failed with status #{response.status_code}"
 }
 ```
-### HTTP
 
-The `HTTP` class wraps jQuery's ajax request into a ruby class.
+#### Other options
+
+`HTTP` accepts the usual `$.ajax` options:
 
 ```ruby
-HTTP.get("/users/1.json") do |response|
-  puts "Got response!"
+HTTP.get '/search', data: {q: 'foo'}, async: false do |response|
+  p response.body
 end
 ```
 
