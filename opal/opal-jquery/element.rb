@@ -259,6 +259,9 @@ class Element < `dom_class`
 
   def inspect
     %x{
+      if      (self[0] === document) return '#<Element [document]>'
+      else if (self[0] === window  ) return '#<Element [window]>'
+
       var val, el, str, result = [];
 
       for (var i = 0, length = self.length; i < length; i++) {
