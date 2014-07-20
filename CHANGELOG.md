@@ -1,5 +1,7 @@
 ## edge
 
+*   Add PATCH and HEAD support to `HTTP`
+
 *   Let `Element` accept previously defined `JQUERY_CLASS` and `JQUERY_SELECTOR`
     for environments such as node-webkit where `$` can't be found in the global object.
 

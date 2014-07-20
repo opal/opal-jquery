@@ -21,6 +21,14 @@ class HTTP
     build_request url, :DELETE, opts, block
   end
 
+  def self.patch(url, opts={}, &block)
+    build_request url, :PATCH, opts, block
+  end
+
+  def self.head(url, opts={}, &block)
+    build_request url, :HEAD, opts, block
+  end
+
   def self.build_request(url, method, options, block)
     unless block
       promise = ::Promise.new
