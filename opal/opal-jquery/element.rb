@@ -1,20 +1,20 @@
 require 'native'
 
-%x{
-  var root = $opal.global, dom_class;
+unless defined?(JQUERY_CLASS)
+  case
+  when $$[:jQuery]
+    JQUERY_CLASS = JQUERY_SELECTOR = $$[:jQuery]
+  when $$[:Zepto]  then
+    JQUERY_SELECTOR = $$[:Zepto]
+    JQUERY_CLASS = $$[:Zepto][:zepto][:Z]
+  else
+    raise NameError, 'Can\'t find jQuery or Zepto. jQuery must be included before opal-jquery'
+  end
+end
 
-  if (root.jQuery) {
-    dom_class = jQuery
-  }
-  else if (root.Zepto) {
-    dom_class = Zepto.zepto.Z;
-  }
-  else {
-    throw new Error("jQuery must be included before opal-jquery");
-  }
-}
+class Element < `#{JQUERY_CLASS.to_n}`
+  `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
 
-class Element < `dom_class`
   include Enumerable
 
   def self.find(selector)
