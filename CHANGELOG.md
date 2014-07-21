@@ -1,5 +1,7 @@
 ## edge
 
+*   Add `HTTP.setup` and `HTTP.setup=` to access `$.ajaxSetup`
+
 *   Add PATCH and HEAD support to `HTTP`
 
 *   Let `Element` accept previously defined `JQUERY_CLASS` and `JQUERY_SELECTOR`

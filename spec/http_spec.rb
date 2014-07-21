@@ -1,6 +1,12 @@
 require "spec_helper"
 
 describe HTTP do
+  describe ".setup" do
+    it 'presents the $.ajaxSetup() object as a Hash' do
+      HTTP.setup.should be_a Hash
+    end
+  end
+
   describe ".get" do
     context "with a block" do
       it "returns the http object instance" do
