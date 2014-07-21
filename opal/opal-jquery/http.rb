@@ -1,8 +1,11 @@
 require 'json'
 require 'native'
 require 'promise'
+require 'opal-jquery/constants'
 
 class HTTP
+  `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
+
   attr_reader :body, :error_message, :method, :status_code, :url, :xhr
 
   def self.get(url, opts={}, &block)

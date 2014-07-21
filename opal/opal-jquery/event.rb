@@ -1,5 +1,9 @@
+require 'opal-jquery/constants'
+
 # Wraps native jQuery event objects.
 class Event
+  `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
+
   def initialize(native)
     @native = native
   end
