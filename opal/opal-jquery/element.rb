@@ -331,4 +331,8 @@ class Element < `#{JQUERY_CLASS.to_n}`
   def width
     `self.width() || nil`
   end
+
+  def position
+    Native(`self.position()`)
+  end
 end
