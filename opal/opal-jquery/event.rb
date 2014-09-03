@@ -39,7 +39,7 @@ class Event
   end
 
   def stopped?
-    `#@native.propagationStopped()`
+    `#@native.isPropagationStopped()`
   end
 
   def stop
