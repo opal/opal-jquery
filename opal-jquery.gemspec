@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'opal', ['>= 0.5.0', '< 1.0.0']
   s.add_development_dependency 'opal-rspec', '~> 0.3.0'
+  s.add_development_dependency 'yard'
 end

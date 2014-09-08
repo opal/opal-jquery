@@ -50,3 +50,28 @@ rescue Errno::ENOENT
   $stderr.puts '"gzip" command not found, it is required to produce the .gz version'
   nil
 end
+
+
+namespace :doc do
+  doc_repo = Pathname(ENV['DOC_REPO'] || 'gh-pages')
+  doc_base = doc_repo.join('doc')
+  current_git_release = -> { `git rev-parse --abbrev-ref HEAD`.chomp }
+  # template_option = "--template opal --template-path #{doc_repo.join('yard-templates')}"
+  template_option = ""
+
+  directory doc_repo.to_s do
+    remote = ENV['DOC_REPO_REMOTE'] || '.'
+    sh 'git', 'clone', '-b', 'gh-pages', '--', remote, doc_repo.to_s
+  end
+
+  task :default => doc_repo.to_s do
+    git  = current_git_release.call
+    name = 'api'
+    glob = 'opal/**/*.rb'
+    command = "yard doc #{glob} #{template_option} "\
+              "--readme opal/README.md -o gh-pages/doc/#{git}/#{name}"
+    puts command; system command
+  end
+end
+
+task :doc => 'doc:default'

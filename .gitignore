@@ -4,3 +4,4 @@ Gemfile.lock
 build
 gh-pages
 /.bundle
+.yardoc
