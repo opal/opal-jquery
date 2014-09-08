@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.8.7.4
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  hasFrames = window.top.frames.main ? true : false;
+  relpath = '';
+  framesUrl = "frames.html#!file.README.html";
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="class_list.html">
+      Class List
+    </a>
+  
+    <a class="full_list_link" id="method_list_link"
+        href="method_list.html">
+      Method List
+    </a>
+  
+    <a class="full_list_link" id="file_list_link"
+        href="file_list.html">
+      File List
+    </a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+
+    <iframe id="search_frame"></iframe>
+
+    <div id="content"><div id='filecontents'>
+<h1 id="label-opal-jquery">opal-jquery</h1>
+
+<p><a href="http://travis-ci.org/opal/opal-jquery"><img
+src="https://secure.travis-ci.org/opal/opal-jquery.png?branch=master"></a></p>
+
+<p>opal-jquery provides DOM access to opal by wrapping jQuery (or zepto) and
+providing a nice ruby syntax for dealing with jQuery instances. opal-jquery
+is <a href="http://github.com/opal/opal-jquery">hosted on github</a>.</p>
+
+<p>See the <a href="http://opalrb.org/jquery">website for documentation</a>.</p>
+
+<h2 id="label-Documentation">Documentation</h2>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_elements'>elements</span> <span class='op'>=</span> <span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.foo</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='comment'># =&gt; [&lt;div class=&quot;foo&quot;&gt;, ...]
+</span>
+<span class='id identifier rubyid_elements'>elements</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+<span class='comment'># =&gt; JQuery
+</span>
+<span class='id identifier rubyid_elements'>elements</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='symbol'>:click</span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_alert'>alert</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>element was clicked</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h3 id="label-Getting+Started">Getting Started</h3>
+
+<h4 id="label-Installation">Installation</h4>
+
+<p>Install opal-jquery from RubyGems:</p>
+
+<pre class="code ruby"><code class="ruby">$ gem install opal-jquery</code></pre>
+
+<p>Or include it in your Gemfile for Bundler:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_gem'>gem</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>opal-jquery</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<h3 id="label-Interacting+with+the+DOM">Interacting with the DOM</h3>
+
+<h4 id="label-Finding+elements">Finding elements</h4>
+
+<p>opal-jquery provides the <code>Element</code> class, which can be used to
+find elements in the current document:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#header</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p><code>Element.find</code> is aliased to <code>Element[]</code>:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.my-class</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+</code></pre>
+
+<p>These methods acts just like <code>$(&#39;selector&#39;)</code>, and can
+use any jQuery compatible selector:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#navigation li:last</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+</code></pre>
+
+<p>The result is just a jQuery instance, which is toll-free bridged to
+instances of the <code>Element</code> class in ruby:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.foo</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span>
+<span class='comment'># =&gt; Element
+</span></code></pre>
+
+<p>Instances of <code>Element</code> also have the <code>#find</code> method
+available for finding elements within the scope of each DOM node
+represented by the instance:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_el'>el</span> <span class='op'>=</span> <span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#header</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_el'>el</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.foo</span><span class='tstring_end'>&#39;</span></span>
+<span class='comment'># =&gt; #&lt;Element .... &gt;
+</span></code></pre>
+
+<h4 id="label-Running+code+on+document+ready">Running code on document ready</h4>
+
+<p>Just like jQuery, opal-jquery requires the document to be ready to be able
+to fully interact with the page. Any top level access should use the
+<code>ready?</code> method:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Document</span><span class='period'>.</span><span class='id identifier rubyid_ready?'>ready?</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_alert'>alert</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>document is ready to go!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>The <code>Kernel#alert</code> method is shown above too.</p>
+
+<h4 id="label-Event+handling">Event handling</h4>
+
+<p>The <code>Element#on</code> method is used to attach event handlers to
+elements:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#header</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span> <span class='symbol'>:click</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The header was clicked!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>Selectors can also be passed as a second argument to handle events on
+certain children:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#header</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='symbol'>:click</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.foo</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>An element with a &#39;foo&#39; class was clicked</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>An <code>Event</code> instance is optionally passed to block handlers as
+well, which is toll-free bridged to jquery events:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#my_link</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_on'>on</span><span class='lparen'>(</span><span class='symbol'>:click</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_evt'>evt</span><span class='op'>|</span>
+  <span class='id identifier rubyid_evt'>evt</span><span class='period'>.</span><span class='id identifier rubyid_stop_propagation'>stop_propagation</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>stopped the event!</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h4 id="label-CSS+styles+and+classnames">CSS styles and classnames</h4>
+
+<p>The various jQuery methods are available on <code>Element</code> instances:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_foo'>foo</span> <span class='op'>=</span> <span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>.foo</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_add_class'>add_class</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>blue</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_remove_class'>remove_class</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_toggle_class'>toggle_class</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>selected</span><span class='tstring_end'>&#39;</span></span>
+</code></pre>
+
+<p>There are also added convenience methods for opal-jquery:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_foo'>foo</span> <span class='op'>=</span> <span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#header</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_class_name'>class_name</span>
+<span class='comment'># =&gt; &#39;red lorry&#39;
+</span>
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_class_name'>class_name</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>yellow house</span><span class='tstring_end'>&#39;</span></span>
+
+<span class='id identifier rubyid_foo'>foo</span><span class='period'>.</span><span class='id identifier rubyid_class_name'>class_name</span>
+<span class='comment'># =&gt; &#39;yellow house&#39;
+</span></code></pre>
+
+<p><code>Element#css</code> also exists for getting/setting css styles:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_el'>el</span> <span class='op'>=</span> <span class='const'>Element</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>#container</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+<span class='id identifier rubyid_el'>el</span><span class='period'>.</span><span class='id identifier rubyid_css'>css</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>color</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>blue</span><span class='tstring_end'>&#39;</span></span>
+<span class='id identifier rubyid_el'>el</span><span class='period'>.</span><span class='id identifier rubyid_css'>css</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>color</span><span class='tstring_end'>&#39;</span></span>
+<span class='comment'># =&gt; &#39;blue&#39;
+</span></code></pre>
+
+<h3 id="label-HTTP%2FAJAX+requests">HTTP/AJAX requests</h3>
+
+<p>jQuery&#39;s Ajax implementation is also wrapped in the top level HTTP
+class.</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/users/1.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_response'>response</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='comment'># =&gt; &quot;{\&quot;name\&quot;: \&quot;Adam Beynon\&quot;}&quot;
+</span><span class='kw'>end</span>
+</code></pre>
+
+<p>The block passed to this method is used as the handler when the request
+succeeds, as well as when it fails. To determine whether the request was
+successful, use the <code>ok?</code> method:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/users/2.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_response'>response</span><span class='op'>|</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_ok?'>ok?</span>
+    <span class='id identifier rubyid_alert'>alert</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>successful!</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>else</span>
+    <span class='id identifier rubyid_alert'>alert</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>request failed :(</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<p>It is also possible to use a different handler for each case:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/users/3.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_callback'>callback</span> <span class='lbrace'>{</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Request worked!</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_errback'>errback</span> <span class='lbrace'>{</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Request didn&#39;t work :(</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<p>The request is actually triggered inside the <code>HTTP.get</code> method,
+but due to the async nature of the request, the callback and errback
+handlers can be added anytime before the request returns.</p>
+
+<h4 id="label-Handling+responses">Handling responses</h4>
+
+<p>Web apps deal with JSON responses quite frequently, so there is a useful
+<code>#json</code> helper method to get the JSON content from a request:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/users.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_response'>response</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_json'>json</span>
+<span class='kw'>end</span>
+
+<span class='comment'># =&gt; &quot;[{\&quot;name\&quot;: \&quot;Adam\&quot;},{\&quot;name\&quot;: \&quot;Ben\&quot;}]&quot;
+</span><span class='comment'># =&gt; [{&quot;name&quot; =&gt; &quot;Adam&quot;}, {&quot;name&quot; =&gt; &quot;Ben&quot;}]
+</span></code></pre>
+
+<p>The <code>#body</code> method will always return the raw response string.</p>
+
+<p>If an error is encountered, then the <code>#status_code</code> method will
+hold the specific error code from the underlying request:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_request'>request</span> <span class='op'>=</span> <span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/users/3.json</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+
+<span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_callback'>callback</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>it worked!</span><span class='tstring_end'>&quot;</span></span> <span class='rbrace'>}</span>
+
+<span class='id identifier rubyid_request'>request</span><span class='period'>.</span><span class='id identifier rubyid_errback'>errback</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_response'>response</span><span class='op'>|</span>
+  <span class='id identifier rubyid_puts'>puts</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>failed with status </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_status_code'>status_code</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
+<span class='rbrace'>}</span>
+</code></pre>
+
+<h4 id="label-Other+options">Other options</h4>
+
+<p><code>HTTP</code> accepts the usual <code>$.ajax</code> options:</p>
+
+<pre class="code ruby"><code class="ruby"><span class='const'>HTTP</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/search</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='label'>data:</span> <span class='lbrace'>{</span><span class='label'>q:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&#39;</span></span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='label'>async:</span> <span class='kw'>false</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_response'>response</span><span class='op'>|</span>
+  <span class='id identifier rubyid_p'>p</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span>
+<span class='kw'>end</span>
+</code></pre>
+
+<h2 id="label-Running+Specs">Running Specs</h2>
+
+<p>Get the dependencies:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle install</code></pre>
+
+<h3 id="label-Browser">Browser</h3>
+
+<p>You can run the specs in any web browser, by running the
+<code>config.ru</code> rack file:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec rackup</code></pre>
+
+<p>And then visiting <code>http://localhost:9292</code> in any web browser.</p>
+
+<h3 id="label-Phantomjs">Phantomjs</h3>
+
+<p>You will need phantomjs to run the specs outside the browser. It can be
+downloaded at <a
+href="http://phantomjs.org/download.html">phantomjs.org/download.html</a></p>
+
+<p>On osx you can install through homebrew</p>
+
+<pre class="code ruby"><code class="ruby">$ brew update; brew install phantomjs</code></pre>
+
+<p>Run the tests inside a phantom.js runner:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec rake</code></pre>
+
+<h3 id="label-Zepto">Zepto</h3>
+
+<p>opal-jquery also supports zepto. To run specs for zepto use the rake task:</p>
+
+<pre class="code ruby"><code class="ruby">$ bundle exec rake zepto</code></pre>
+
+<h2 id="label-License">License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (C) 2013 by Adam Beynon</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the “Software”),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.</p>
+</div></div>
+
+    <div id="footer">
+  Generated on Mon Sep  8 14:37:40 2014 by
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.8.7.4 (ruby-2.1.2).
+</div>
+
+  </body>
+</html>
