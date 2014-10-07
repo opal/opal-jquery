@@ -23,11 +23,11 @@ describe "Element animation methods" do
       foo = Element.find "#animate-foo"
       foo.animate :width => "200px", :speed => 100
 
-      set_timeout 105 do
-        run_async {
+      run_async {
+        set_timeout 150 do
           (foo.css("width").to_f > 199).should eq(true)
-        }
-      end
+        end
+      }
     end
 
     async "should accept a block as a callback" do
@@ -36,11 +36,11 @@ describe "Element animation methods" do
         foo.add_class "finished"
       end
 
-      set_timeout 405 do
-        run_async {
+      run_async {
+        set_timeout 405 do
           foo.class_name.should eq("finished")
-        }
-      end
+        end
+      }
     end
   end
 end
