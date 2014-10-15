@@ -53,7 +53,7 @@ class Element < `#{JQUERY_CLASS.to_n}`
   expose :after, :before, :parent, :parents, :prepend, :prev, :remove
   expose :hide, :show, :toggle, :children, :blur, :closest, :detach
   expose :focus, :find, :next, :siblings, :text, :trigger, :append
-  expose :serialize, :is, :filter, :last, :first
+  expose :serialize, :serialize_array, :is, :filter, :last, :first
   expose :wrap, :stop, :clone, :empty
   expose :get, :attr, :prop
 
@@ -65,6 +65,7 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # snake_case to be more consistent with ruby.
   alias_native :[]=, :attr
   alias_native :add_class, :addClass
+  alias_native :serialize_array, :serializeArray
   alias_native :append_to, :appendTo
   alias_native :has_class?, :hasClass
   alias_native :html=, :html
