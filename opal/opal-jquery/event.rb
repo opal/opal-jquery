@@ -8,6 +8,10 @@ class Event
     @native = native
   end
 
+  def to_n
+    @native
+  end
+
   def [](name)
     `#@native[name]`
   end
