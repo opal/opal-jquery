@@ -260,6 +260,8 @@ class Element < `#{JQUERY_CLASS.to_n}`
 
       for (var i = 0, length = self.length; i < length; i++) {
         el  = self[i];
+        if (!el.tagName) { return '#<Element ['+el.toString()+']'; }
+
         str = "<" + el.tagName.toLowerCase();
 
         if (val = el.id) str += (' id="' + val + '"');
@@ -269,6 +271,20 @@ class Element < `#{JQUERY_CLASS.to_n}`
       }
 
       return '#<Element [' + result.join(', ') + ']>';
+    }
+  end
+
+  def to_s
+    %x{
+      var val, el, result = [];
+
+      for (var i = 0, length = self.length; i < length; i++) {
+        el  = self[i];
+
+        result.push(el.outerHTML)
+      }
+
+      return result.join(', ');
     }
   end
 
