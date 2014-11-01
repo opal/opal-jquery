@@ -83,30 +83,32 @@ describe Element do
   describe "#add_class" do
     it "should add the given class name to the element" do
       foo = Element.find '#foo'
-      foo.has_class?('lemons').should eq(false)
+      expect(foo).to_not have_class('lemons')
+
       foo.add_class 'lemons'
-      foo.has_class?('lemons').should eq(true)
+      expect(foo).to have_class('lemons')
     end
 
     it "should not duplicate class names on an element" do
       bar = Element.find '#bar'
-      bar.has_class?('apples').should eq(true)
+      expect(bar).to have_class('apples')
+
       bar.add_class 'apples'
-      bar.class_name.should == 'apples'
+      expect(bar.class_name).to eq('apples')
     end
 
     it "should return self" do
       baz = Element.find '#baz'
-      baz.add_class('oranges').should equal(baz)
-      baz.add_class('oranges').should equal(baz)
+      expect(baz.add_class('oranges')).to eq(baz)
     end
   end
 
   describe '#has_class?' do
     it "should return true if the element has the given class" do
-      Element.find('#has-foo').has_class?("apples").should eq(true)
-      Element.find('#has-foo').has_class?("oranges").should eq(false)
-      Element.find('#has-bar').has_class?("lemons").should eq(true)
+      expect(Element.find('#has-foo')).to have_class('apples')
+      expect(Element.find('#has-bar')).to have_class('lemons')
+
+      expect(Element.find('#has-foo')).to_not have_class('oranges')
     end
   end
 
