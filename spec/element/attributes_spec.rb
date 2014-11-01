@@ -45,19 +45,30 @@ describe Element do
       Element.find('#attr-foo')[:title].should == "Hello there!"
     end
 
-    it 'should return an empty string for an empty attribute value' do
-      Element.find('#attr-bar')[:title].should == ""
-      Element.find('#attr-baz')[:title].should == ""
+    it 'should return nil for an empty attribute' do
+      expect(Element.find('#attr-bar')[:title]).to be_nil
+      expect(Element.find('#attr-baz')[:title]).to be_nil
+    end
+  end
+
+  describe '#attr' do
+    it 'returns attributes from elements' do
+      expect(Element.find('#attr-foo').attr(:title)).to eq('Hello there!')
+    end
+
+    it 'returns nil for empty attributes' do
+      expect(Element.find('#attr-bar').attr(:title)).to be_nil
+      expect(Element.find('#attr-baz').attr(:title)).to be_nil
     end
   end
 
   describe '#[]=' do
     it 'should set the attr value on the element' do
       woosh = Element.find '#attr-woosh'
-      woosh[:title].should == ""
+      expect(woosh[:title]).to be_nil
 
       woosh[:title] = "Oranges"
-      woosh[:title].should == "Oranges"
+      expect(woosh[:title]).to eq('Oranges')
     end
 
     it 'should replace the old value for the attribute' do

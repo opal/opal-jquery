@@ -1,5 +1,8 @@
 ## edge
 
+*   `Element#[]` and `Element#attr` now return `nil` for empty attributes,
+    instead of returning an empty string.
+
 *   Add `HTTP.setup` and `HTTP.setup=` to access `$.ajaxSetup`
 
 *   Add PATCH and HEAD support to `HTTP`

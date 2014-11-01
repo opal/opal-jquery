@@ -90,14 +90,18 @@ class Element < `#{JQUERY_CLASS.to_n}`
   end
 
   def [](name)
-    `self.attr(name) || ""`
+    `self.attr(name) || nil`
   end
 
-  def add_attribute name
-    self[name] = ''
+  def attr(name, value=nil)
+    if value.nil?
+      `self.attr(name) || nil`
+    else
+      `self.attr(name, value)`
+    end
   end
 
-  def has_attribute? name
+  def has_attribute?(name)
     `!!self.attr(name)`
   end
 
