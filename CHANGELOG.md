@@ -1,5 +1,7 @@
 ## edge
 
+*   Cleanup HTTP implementation.
+
 *   `Element#[]` and `Element#attr` now return `nil` for empty attributes,
     instead of returning an empty string.
 

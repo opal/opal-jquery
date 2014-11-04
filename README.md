@@ -183,20 +183,6 @@ HTTP.get("/users/2.json") do |response|
 end
 ```
 
-It is also possible to use a different handler for each case:
-
-```ruby
-request = HTTP.get("/users/3.json")
-
-request.callback {
-  puts "Request worked!"
-}
-
-request.errback {
-  puts "Request didn't work :("
-}
-```
-
 The request is actually triggered inside the `HTTP.get` method, but due
 to the async nature of the request, the callback and errback handlers can
 be added anytime before the request returns.

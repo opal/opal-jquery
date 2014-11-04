@@ -1,6 +1,10 @@
 require "spec_helper"
 
 describe HTTP do
+  let(:good_url) { '/spec/fixtures/simple.txt' }
+  let(:json_url) { '/spec/fixtures/user.json' }
+  let(:bad_url) { '/spec/fixtures/does_not_exist.txt' }
+
   describe ".setup" do
     it 'presents the $.ajaxSetup() object as a Hash' do
       expect(HTTP.setup).to be_a Hash
@@ -10,37 +14,36 @@ describe HTTP do
   describe ".get" do
     context "with a block" do
       it "returns the http object instance" do
-        HTTP.get('/spec/fixtures/simple.txt') do
-        end.should be_a HTTP
+        expect(HTTP.get(good_url) {}).to be_a HTTP
       end
 
       async "block gets called on success" do
-        HTTP.get('spec/fixtures/simple.txt') do |response|
-          async { response.should be_ok }
+        HTTP.get(good_url) do |response|
+          async { expect(response).to be_ok }
         end
       end
 
       async "block gets called on failure" do
-        HTTP.get('/spec/does/not/exist.txt') do |response|
-          async { response.should_not be_ok }
+        HTTP.get(bad_url) do |response|
+          async { expect(response).to_not be_ok }
         end
       end
     end
 
     context "without a block" do
       it "returns a promise" do
-        HTTP.get('/spec/fixtures/simple.txt').should be_a Promise
+        expect(HTTP.get(good_url)).to be_a Promise
       end
 
       async "returns a promise which accepts a then-block for successful response" do
-        HTTP.get('spec/fixtures/simple.txt').then do |response|
-          async { response.should be_ok }
+        HTTP.get(good_url).then do |response|
+          async { expect(response).to be_ok }
         end
       end
 
       async "returns a promise which accepts a fail-block for failing response" do
-        HTTP.get('spec/does/not/exist.txt').fail do |response|
-          async { response.should_not be_ok }
+        HTTP.get(bad_url).fail do |response|
+          async { expect(response).to_not be_ok }
         end
       end
     end
@@ -48,30 +51,30 @@ describe HTTP do
 
   describe '#body' do
     async 'returns the response body as a string' do
-      HTTP.get('spec/fixtures/simple.txt') do |response|
-        async { response.body.should == "hey" }
+      HTTP.get(good_url) do |response|
+        async { expect(response.body).to eq('hey') }
       end
     end
   end
 
   describe '#json' do
     async 'returns the json converted into native ruby objects' do
-      HTTP.get('spec/fixtures/user.json') do |response|
-        async { response.json.should == { 'name' => 'Adam', 'age' => 26 } }
+      HTTP.get(json_url) do |response|
+        async { expect(response.json).to eq({ 'name' => 'Adam', 'age' => 26 }) }
       end
     end
   end
 
   describe '#ok?' do
     async 'returns true when the request was a sucess' do
-      HTTP.get('spec/fixtures/simple.txt') do |response|
+      HTTP.get(good_url) do |response|
         async { expect(response).to be_ok }
       end
     end
 
     async 'returns false when the request failed' do
-      HTTP.get('spec/fixtures/non_existant.txt') do |response|
-        async { response.should_not be_ok }
+      HTTP.get(bad_url) do |response|
+        async { expect(response).to_not be_ok }
       end
     end
   end
