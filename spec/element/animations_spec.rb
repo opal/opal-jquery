@@ -10,12 +10,12 @@ describe "Element animation methods" do
     # jQUery's animate method doesn't *always* finish on time
     # so the values are being compared using greater than
 
-    it "should animate a set of properties and values" do
+    async "should animate a set of properties and values" do
       foo = Element.find "#animate-foo"
       foo.animate :width => "200px"
 
-      set_timeout 400 do
-        (foo.css("width").to_f > 199).should eq(true)
+      delay 0.4 do
+        async { (foo.css("width").to_f > 199).should eq(true) }
       end
     end
 
@@ -23,11 +23,9 @@ describe "Element animation methods" do
       foo = Element.find "#animate-foo"
       foo.animate :width => "200px", :speed => 100
 
-      run_async {
-        set_timeout 150 do
-          (foo.css("width").to_f > 199).should eq(true)
-        end
-      }
+      delay 0.150 do
+        async { (foo.css("width").to_f > 199).should eq(true) }
+      end
     end
 
     async "should accept a block as a callback" do
@@ -36,11 +34,34 @@ describe "Element animation methods" do
         foo.add_class "finished"
       end
 
-      run_async {
-        set_timeout 405 do
-          foo.class_name.should eq("finished")
-        end
-      }
+      delay 0.405 do
+        async { foo.class_name.should eq("finished") }
+      end
+    end
+  end
+end
+
+describe "Element effects methods" do
+  html <<-HTML
+    <div id="effects-foo"></div>
+  HTML
+  
+  describe "#fadeout / #fadein" do
+    async "should fade the element out first" do
+      foo = Element.find "#effects-foo"
+      foo.effect(:fade_out)
+      
+      delay 1 do
+        async {
+          foo.css("display").should eq("none")
+          foo.effect(:fade_in)
+        }
+      end
+    end
+    async "should fade the element back in" do
+      delay 2 do
+        async { Element["#effects-foo"].css("display").should eq("block") }
+      end
     end
   end
 end
