@@ -1,5 +1,10 @@
 # EDGE
 
+*   Add `Browser::Window` class, and make `::Window` an instance of it.
+
+*   Make `Document` include `Browser::DocumentMethods` which is a simple
+    module to define custom methods for `Document`.
+
 *   Cleanup HTTP implementation.
 
 *   `Element#[]` and `Element#attr` now return `nil` for empty attributes,
@@ -15,7 +20,7 @@
 *   Add Promise support to `HTTP` get/post/put/delete methods. Also remove
     `HTTP#callback` and `#errback` methods.
 
-# 0.2.0 - December 3, 2014
+# 0.2.0 - March 12, 2013
 
 *   Add `Document.body` and `Document.head` shortcut to element instances.
 

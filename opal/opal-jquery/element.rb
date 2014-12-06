@@ -305,6 +305,8 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @!method []=(attr, value)
   #
   # Set the given attribute `attr` on each element in this collection.
+  #
+  # @see http://api.jquery.com/attr/
   alias_native :[]=, :attr
 
   # @!method add_class(class_name)

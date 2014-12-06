@@ -14,11 +14,22 @@ module Browser
   #     LocalStorage['bar'] # => nil
   #
   # @see LocalStorage
+  #
   class LocalStorage
     def initialize(storage)
       @storage = storage
     end
 
+    # Set a value in storage.
+    #
+    # Values stored in {LocalStorage} will be stored as strings. To store any
+    # other type of object, you will need to convert them to a string first,
+    # and then convert them back from {#[]}. For this reason it is recommended
+    # to only store {JSON} based objects in storage, so they can be easily
+    # converted back and forth.
+    #
+    # @param key [String] string key
+    # @param value [String, #to_s] string or explicitly converted object
     def []=(key, value)
       %x{
         #@storage.setItem(key, value);
@@ -26,6 +37,17 @@ module Browser
       }
     end
 
+    # Retrieve an object from {LocalStorage}.
+    #
+    # Only string values can be stored, so any object will be returned as a
+    # string. You will need to handle any conversion back into a normal
+    # object. {JSON.parse} could be used, for example, to parse back into
+    # arrays or hashes.
+    #
+    # If a key is not present in the storage, then `nil` will be returned.
+    #
+    # @param key [String] key to lookup
+    # @return [String, nil]
     def [](key)
       %x{
         var value = #@storage.getItem(key);
@@ -33,10 +55,15 @@ module Browser
       }
     end
 
+    # Removes a specific `key` from storage. If the key does not exist then
+    # there is no side effect.
+    #
+    # @param key [String] key to remove
     def delete(key)
       `#@storage.removeItem(key)`
     end
 
+    # Remove all key/values from storage
     def clear
       `#@storage.clear()`
     end
