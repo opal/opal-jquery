@@ -73,10 +73,10 @@ require 'opal-jquery/constants'
 # All data returned from an HTTP request can be accessed via the {HTTP} object
 # passed into the block or promise handlers.
 #
-# * {#ok?} - returns `true` or `false`, if request was a success (or not).
-# * {#body} - returns the raw text response of the request
-# * {#status_code} - returns the raw {HTTP} status code as integer
-# * {#json} - tries to convert the body response into a JSON object
+# - {#ok?} - returns `true` or `false`, if request was a success (or not).
+# - {#body} - returns the raw text response of the request
+# - {#status_code} - returns the raw {HTTP} status code as integer
+# - {#json} - tries to convert the body response into a JSON object
 class HTTP
   `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
 

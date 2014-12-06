@@ -1,6 +1,8 @@
 require 'opal-jquery/constants'
 require 'opal-jquery/element'
 
+# {Document} is an instance of {Element} that wraps the `document` object as
+# a simple jQuery object.
 Document = Element.find(`document`)
 
 class << Document
