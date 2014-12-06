@@ -3,11 +3,11 @@ require 'native'
 require 'promise'
 require 'opal-jquery/constants'
 
-# {HTTP} is used to perform +XMLHttpRequest+s in ruby. It is a simple wrapper
-# around jQuerys' +$.ajax+ call. +XMLHttpRequest+ is not wrapped directly as
+# {HTTP} is used to perform a `XMLHttpRequest` in ruby. It is a simple wrapper
+# around jQuerys' `$.ajax` call. `XMLHttpRequest` is not wrapped directly as
 # jquery provides some cross browser fixes.
 #
-# = Making requests
+# # Making requests
 #
 # To create a simple request, {HTTP} exposes class level methods to specify
 # the HTTP action you wish to perform. Each action accepts the url for the
@@ -16,7 +16,7 @@ require 'opal-jquery/constants'
 #     HTTP.get("/users/1.json")
 #     HTTP.post("/users", payload: data)
 #
-# The supported +HTTP+ actions are:
+# The supported `HTTP` actions are:
 #
 # * {HTTP.get}
 # * {HTTP.post}
@@ -25,12 +25,12 @@ require 'opal-jquery/constants'
 # * {HTTP.patch}
 # * {HTTP.head}
 #
-# = Handling responses
+# # Handling responses
 #
 # Responses can be handled using either a simple block callback, or using a
 # {Promise} returned by the request.
 #
-# == Using a block
+# ## Using a block
 #
 # All HTTP action methods accept a block which can be used as a simple
 # handler for the request. The block will be called for both successful as well
@@ -40,8 +40,8 @@ require 'opal-jquery/constants'
 #       puts "the request has completed!"
 #     end
 #
-# This +request+ object will simply be the instance of the {HTTP} class which
-# wraps the native +XMLHttpRequest+. {HTTP#ok?} can be used to quickly determine
+# This `request` object will simply be the instance of the {HTTP} class which
+# wraps the native `XMLHttpRequest`. {HTTP#ok?} can be used to quickly determine
 # if the request was successful.
 #
 #     HTTP.get("/users/1") do |request|
@@ -54,7 +54,7 @@ require 'opal-jquery/constants'
 #
 # The {HTTP} instance will always be the only object passed to the block.
 #
-# == Using a Promise
+# ## Using a Promise
 #
 # If no block is given to one of the action methods, then a {Promise} is
 # returned instead. See the standard library for more information on Promises.
@@ -68,12 +68,12 @@ require 'opal-jquery/constants'
 # When using a {Promise}, both success and failure handlers will be passed the
 # {HTTP} instance.
 #
-# = Accessing Response Data
+# # Accessing Response Data
 #
 # All data returned from an HTTP request can be accessed via the {HTTP} object
 # passed into the block or promise handlers.
 #
-# * {#ok?} - returns +true+ or +false+, if request was a success (or not).
+# * {#ok?} - returns `true` or `false`, if request was a success (or not).
 # * {#body} - returns the raw text response of the request
 # * {#status_code} - returns the raw {HTTP} status code as integer
 # * {#json} - tries to convert the body response into a JSON object
@@ -92,7 +92,7 @@ class HTTP
 
   # @!method self.get(url, options = {}, &block)
   #
-  # Create a {HTTP} +get+ request.
+  # Create a {HTTP} `get` request.
   #
   # @example
   #   HTTP.get("/foo") do |req|
@@ -106,8 +106,8 @@ class HTTP
 
   # @!method self.post(url, options = {}, &block)
   #
-  # Create a {HTTP} +post+ request. Post data can be supplied using the
-  # +payload+ options. Usually this will be a hash which will get serialized
+  # Create a {HTTP} `post` request. Post data can be supplied using the
+  # `payload` options. Usually this will be a hash which will get serialized
   # into a native javascript object.
   #
   # @example
