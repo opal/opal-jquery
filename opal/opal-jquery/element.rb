@@ -126,15 +126,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @param methods [String, Symbol] all methods to expose to ruby
   # @return nil
   def self.expose(*methods)
-    method = nil
-    %x{
-      for (var i = 0, length = methods.length, method; i < length; i++) {
-        method = methods[i];
-        #{alias_native method, method}
-      }
-
-      return nil;
-    }
+    methods.each do |method|
+      alias_native method
+    end
   end
 
   # @return The original css selector used to create {Element}
