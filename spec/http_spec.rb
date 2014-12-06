@@ -12,7 +12,7 @@ describe HTTP do
   end
 
   describe ".get" do
-    context "with a block" do
+    describe "with a block" do
       it "returns the http object instance" do
         expect(HTTP.get(good_url) {}).to be_a HTTP
       end
@@ -30,7 +30,7 @@ describe HTTP do
       end
     end
 
-    context "without a block" do
+    describe "without a block" do
       it "returns a promise" do
         expect(HTTP.get(good_url)).to be_a Promise
       end
