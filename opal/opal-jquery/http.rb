@@ -6,6 +6,18 @@ require 'opal-jquery/constants'
 class HTTP
   `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
 
+  ACTIONS = %w[get post put delete patch head]
+
+  ACTIONS.each do |action|
+    define_singleton_method(action) do |url, options = {}, &block|
+      new.send(action, url, options, block)
+    end
+
+    define_method(action) do |url, options = {}, &block|
+      send(action, url, options, block)
+    end
+  end
+
   def self.setup
     Hash.new(`$.ajaxSetup()`)
   end
@@ -16,48 +28,23 @@ class HTTP
 
   attr_reader :body, :error_message, :method, :status_code, :url, :xhr
 
-  def self.get(url, opts={}, &block)
-    send(:get, url, opts, &block)
+  def initialize
+    @settings = {}
+    @ok = true
   end
 
-  def self.post(url, opts={}, &block)
-    send(:post, url, opts, &block)
-  end
-
-  def self.put(url, opts={}, &block)
-    send(:put, url, opts, &block)
-  end
-
-  def self.delete(url, opts={}, &block)
-    send(:delete, url, opts, &block)
-  end
-
-  def self.patch(url, opts={}, &block)
-    send(:patch, url, opts, &block)
-  end
-
-  def self.head(url, opts={}, &block)
-    send(:head, url, opts, &block)
-  end
-
-  def self.send(method, url, options, &block)
-    new(method, url, options, &block).send
-  end
-
-  def initialize(method, url, options={}, &handler)
+  def send(method, url, options, block)
     @method   = method
     @url      = url
-    @ok       = true
     @payload  = options.delete :payload
-    @settings = options
-    @handler  = handler
-  end
+    @handler  = block
 
-  def send(payload=@payload)
-    settings = @settings.to_n
+    @settings.update options
+
+    settings, payload = @settings.to_n, @payload
 
     %x{
-      if (typeof(payload) === 'string') {
+      if (typeof(#{payload}) === 'string') {
         #{settings}.data = payload;
       }
       else if (payload != nil) {
