@@ -1,4 +1,4 @@
-require 'opal-jquery/constants'
+require 'opal/jquery/constants'
 
 # {Event} wraps native jQuery events into a ruby api. Instances of events
 # can be accessed by {#to_n}.

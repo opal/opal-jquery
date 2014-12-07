@@ -11,8 +11,8 @@ module Browser
   # LocalStorage is not included by default when you require opal-jquery, so
   # you will need to require it explicitly in your code:
   #
-  #     require 'opal-jquery'
-  #     require 'opal-jquery/local_storage'
+  #     require 'opal/jquery'
+  #     require 'opal/jquery/local_storage'
   #
   #     puts LocalStorage
   #     # => #<LocalStorage>

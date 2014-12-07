@@ -1,5 +1,8 @@
 # EDGE
 
+*   Move all files under `opal/jquery` require namespace, rather than
+    current `opal-jquery` require paths.
+
 *   Add `Browser::Window` class, and make `::Window` an instance of it.
 
 *   Make `Document` include `Browser::DocumentMethods` which is a simple

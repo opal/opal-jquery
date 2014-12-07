@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'opal-jquery/local_storage'
+require 'opal/jquery/local_storage'
 
 describe LocalStorage do
   before { subject.clear }

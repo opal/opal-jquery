@@ -8,7 +8,7 @@ module Browser
   #
   #     require 'application'
   #     require 'opal-rspec'
-  #     require 'opal-jquery/rspec'
+  #     require 'opal/jquery/rspec'
   #
   # Once required, the module is registered with `rspec` for all example
   # groups.

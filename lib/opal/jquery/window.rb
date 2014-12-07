@@ -1,4 +1,4 @@
-require 'opal-jquery/element'
+require 'opal/jquery/element'
 
 module Browser
   # {Window} instances are {Native} objects used to wrap native window instances.

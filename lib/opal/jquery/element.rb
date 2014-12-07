@@ -1,5 +1,5 @@
 require 'native'
-require 'opal-jquery/constants'
+require 'opal/jquery/constants'
 
 # {Element} is a toll-free bridged class that maps to native jQuery instances.
 #

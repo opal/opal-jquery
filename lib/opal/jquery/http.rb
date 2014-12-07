@@ -1,7 +1,7 @@
 require 'json'
 require 'native'
 require 'promise'
-require 'opal-jquery/constants'
+require 'opal/jquery/constants'
 
 # {HTTP} is used to perform a `XMLHttpRequest` in ruby. It is a simple wrapper
 # around jQuerys' `$.ajax` call. `XMLHttpRequest` is not wrapped directly as
