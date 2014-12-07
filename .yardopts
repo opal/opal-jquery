@@ -1,4 +1,3 @@
-opal/**/*.rb
 --markup markdown
 -
 CHANGELOG.md
