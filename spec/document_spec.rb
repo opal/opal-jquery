@@ -11,7 +11,7 @@ describe Document do
   
   describe "ready" do
     async "resolves when document is ready" do
-      Document.ready.then do |response|
+      Document.ready.then do 
         async { Document.ready.resolved?.should be_truthy }
       end
     end
