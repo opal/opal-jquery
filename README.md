@@ -142,16 +142,15 @@ Document.ready? do
 end
 ```
 
-Document.ready (without the question mark) returns the equivilent promise. 
-Like other promises it can be combined using the when and then methods.
+or the equivilent `Document.ready` promise which is useful when combined with other promises:
 
 ```ruby
 Document.ready.then do |ready|
-  puts "Page is ready to use!"
+  alert "Page is ready to use!"
 end
 ```
 
-The `Kernel#alert` method is shown above too.
+Notice the use of the `Kernel#alert` method.
 
 ### Event handling
 
