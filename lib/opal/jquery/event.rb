@@ -175,6 +175,18 @@ class Event
     `#@native.ctrlKey`
   end
 
+  def meta_key
+    `#@native.metaKey`
+  end
+
+  def alt_key
+    `#@native.altKey`
+  end
+
+  def shift_key
+    `#@native.shiftKey`
+  end
+
   def key_code
     `#@native.keyCode`
   end
