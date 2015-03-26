@@ -244,6 +244,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @param content [String, Element]
   alias_native :append
 
+  # @!method prepend(content)
+  #
+  # @param content [String, Element]
+  alias_native :prepend
+
   # @!method serialize
   alias_native :serialize
 

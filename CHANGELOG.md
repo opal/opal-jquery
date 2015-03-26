@@ -1,5 +1,7 @@
 ## EDGE
 
+*   Add `Element#prepend` method.
+
 ## 0.3.0 2015-02-03
 
 *   Move all files under `opal/jquery` require namespace, rather than
