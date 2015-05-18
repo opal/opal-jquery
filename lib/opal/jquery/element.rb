@@ -325,6 +325,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @param content [String, Element]
   alias_native :html=, :html
 
+  # @!method is?(selector)
+  alias_native :is?, :is
+
   # @!method remove_attr(attr)
   alias_native :remove_attr, :removeAttr
 
