@@ -11,6 +11,8 @@ describe Element do
     <div id="attr-baz" title=""></div>
     <div id="attr-woosh"></div>
     <div id="attr-kapow" title="Apples"></div>
+    <div id="attr-empty" attr-empty-value=""></div>
+    <div id="attr-missing" attr-auto-value></div>
 
     <div id="has-foo" class="apples"></div>
     <div id="has-bar" class="lemons bananas"></div>
@@ -45,9 +47,15 @@ describe Element do
       Element.find('#attr-foo')[:title].should == "Hello there!"
     end
 
-    it 'should return nil for an empty attribute' do
-      expect(Element.find('#attr-bar')[:title]).to be_nil
-      expect(Element.find('#attr-baz')[:title]).to be_nil
+    it 'should return nil for a missing attribute' do
+      expect(Element.find('#attr-missing')['attr-missing-value']).to be_nil
+    end
+
+    it 'should return "" for an attribute with empty value' do
+      expect(Element.find('#attr-empty')['attr-empty-value']).to eq("")
+
+      # Not sure if this is browser dependant
+      expect(Element.find('#attr-missing')['attr-auto-value']).to eq("")
     end
   end
 
