@@ -660,6 +660,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
     }
   end
 
+  # returns an Array of Hashes
+  def serialize_array
+    `self.serializeArray()`.map { |e| Hash.new(e) }
+  end
+
   alias size length
 
   def value
