@@ -337,6 +337,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @!method remove_class(class_name)
   alias_native :remove_class, :removeClass
 
+  # @!method submit()
+  alias_native :submit
+
   # @!method text=(text)
   #
   # Set text content of each element in this collection.
