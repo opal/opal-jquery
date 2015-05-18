@@ -646,6 +646,29 @@ class Element < `#{JQUERY_CLASS.to_n}`
     block
   end
 
+  def one(name, sel = nil, &block)
+    %x{
+      var wrapper = function(evt) {
+        if (evt.preventDefault) {
+          evt = #{Event.new `evt`};
+        }
+
+        return block.apply(null, arguments);
+      };
+
+      block._jq_wrap = wrapper;
+
+      if (sel == nil) {
+        self.one(name, wrapper);
+      }
+      else {
+        self.one(name, sel, wrapper);
+      }
+    }
+
+    block
+  end
+
   def off(name, sel, block = nil)
     %x{
       if (sel == null) {
