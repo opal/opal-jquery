@@ -398,7 +398,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
   end
 
   def [](name)
-    `self.attr(name) || nil`
+    %x{
+      var value = self.attr(name);
+      if(value === undefined) return nil;
+      return value;
+    }
   end
 
   def attr(name, value=nil)
@@ -410,7 +414,7 @@ class Element < `#{JQUERY_CLASS.to_n}`
   end
 
   def has_attribute?(name)
-    `!!self.attr(name)`
+    `self.attr(name) !== undefined`
   end
 
   def append_to_body
