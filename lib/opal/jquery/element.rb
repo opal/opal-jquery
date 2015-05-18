@@ -325,6 +325,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @param content [String, Element]
   alias_native :html=, :html
 
+  # @!method index(selector_or_element = nil)
+  alias_native :index
+
   # @!method is?(selector)
   alias_native :is?, :is
 
