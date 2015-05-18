@@ -301,13 +301,6 @@ class Element < `#{JQUERY_CLASS.to_n}`
   alias succ next
   alias << append
 
-  # @!method []=(attr, value)
-  #
-  # Set the given attribute `attr` on each element in this collection.
-  #
-  # @see http://api.jquery.com/attr/
-  alias_native :[]=, :attr
-
   # @!method add_class(class_name)
   alias_native :add_class, :addClass
 
@@ -405,12 +398,28 @@ class Element < `#{JQUERY_CLASS.to_n}`
     }
   end
 
-  def attr(name, value=nil)
-    if value.nil?
-      `self.attr(name) || nil`
-    else
-      `self.attr(name, value)`
-    end
+  # Set the given attribute `attr` on each element in this collection.
+  #
+  # @see http://api.jquery.com/attr/
+  def []=(name, value)
+    `return self.removeAttr(name)` if value.nil?
+    `self.attr(name, value)`
+  end
+
+  def attr(*args)
+    %x{
+      var size = args.length;
+      switch (size) {
+      case 1:
+        return #{self[`args[0]`]};
+        break;
+      case 2:
+        return #{self[`args[0]`] = `args[1]`};
+        break;
+      default:
+        #{raise ArgumentError, '#attr only accepts 1 or 2 arguments'}
+      }
+    }
   end
 
   def has_attribute?(name)

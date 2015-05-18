@@ -1,5 +1,11 @@
 ## EDGE
 
+*   `Element#[]=` now removes the attribute when the assigned value is nil.
+
+*   `Element#attr` now better follows jQuery's behaviour by checking the number of arguments passed. Also it's now just a proxy to `Element#[]` and `Element#[]=`
+
+*   `Element#[]` now returns `nil` only for attributes that are missing, better following jQuery behaviour (which is to return `undefined` on such attributes). `Element#has_attribute?` has been updated accordingly.
+
 *   Add `Element#prepend` method.
 
 ## 0.3.0 2015-02-03

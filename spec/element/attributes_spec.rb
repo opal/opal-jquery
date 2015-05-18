@@ -64,9 +64,15 @@ describe Element do
       expect(Element.find('#attr-foo').attr(:title)).to eq('Hello there!')
     end
 
-    it 'returns nil for empty attributes' do
-      expect(Element.find('#attr-bar').attr(:title)).to be_nil
-      expect(Element.find('#attr-baz').attr(:title)).to be_nil
+    it 'should return nil for a missing attribute' do
+      expect(Element.find('#attr-missing').attr('attr-missing-value')).to be_nil
+    end
+
+    it 'should return "" for an attribute with empty value' do
+      expect(Element.find('#attr-empty').attr('attr-empty-value')).to eq("")
+
+      # Not sure if this is browser dependant
+      expect(Element.find('#attr-missing').attr('attr-auto-value')).to eq("")
     end
   end
 
