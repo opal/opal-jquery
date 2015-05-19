@@ -142,7 +142,15 @@ Document.ready? do
 end
 ```
 
-The `Kernel#alert` method is shown above too.
+or the equivilent `Document.ready` promise which is useful when combined with other promises:
+
+```ruby
+Document.ready.then do |ready|
+  alert "Page is ready to use!"
+end
+```
+
+Notice the use of the `Kernel#alert` method.
 
 ### Event handling
 
@@ -288,6 +296,23 @@ request.callback { puts "it worked!" }
 request.errback { |response|
   puts "failed with status #{response.status_code}"
 }
+```
+
+### Supplying an XHR method
+
+To supply an XHR callback include a lambda with the `xhr` option:
+
+```ruby
+update_progress = lambda do
+  xhr = `new window.XMLHttpRequest()`
+  update_progress = lambda do |evt|
+    # update your progress here
+  end
+  `xhr.upload.addEventListener("progress", update_progress, false)`
+  xhr
+end
+
+cloud_xfer = HTTP.put "http://my.cloud.storage/location", xhr: update_progress, ... etc ...
 ```
 
 ##  License
