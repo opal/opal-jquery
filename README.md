@@ -290,6 +290,22 @@ request.errback { |response|
 }
 ```
 
+## Usage of JQuery plugins
+Extra plugins used for JQuery aren't available to ruby code by default, you will have to `expose` these functions to opal-jquery.
+
+```ruby
+Element.expose :cool_plugin
+```
+
+Arguments to a `exposed` function will be passed as they are, so these arguments will have to be passed as native JS instead of ruby code. A conversion to native JS can be done with the `.to_n` method.
+
+```ruby
+Element.expose :cool_plugin
+
+el = Element['.html_element']
+el.cool_plugin({argument: 'value', argument1: 1000}.to_n)
+```
+
 ##  License
 
 (The MIT License)
