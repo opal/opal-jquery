@@ -1,4 +1,4 @@
-## EDGE
+## 0.4.0 2015-07-17
 
 *   `Element#[]=` now removes the attribute when the assigned value is nil.
 
