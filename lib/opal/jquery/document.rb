@@ -11,13 +11,21 @@ module Browser
   #
   # A useful method on {Document} is the {#ready?} method, which can be used to
   # run a block once the document is ready. This is equivalent to passing a
-  # function to the `jQuery` constructor.
+  # function to the `jQuery` constructor.  Unlike jQuery it will work correctly 
+  # even if called *after* the document is already loaded.
   #
   #     Document.ready? do
   #       puts "Page is ready to use!"
   #     end
   #
   # Just like jQuery, multiple blocks may be passed to {#ready?}.
+  #
+  # Document.ready (without the question mark) returns the equivilent promise. 
+  # Like other promises it can be combined using the when and then methods.
+  #
+  #     Document.ready.then do |ready|
+  #       puts "Page is ready to use!"
+  #     end
   #
   # ### Document head and body elements
   #
@@ -45,6 +53,7 @@ module Browser
     `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
 
     # Register a block to run once the document/page is ready.
+    # will call the block if the document is already ready
     #
     # @example
     #   Document.ready? do
@@ -52,8 +61,25 @@ module Browser
     #   end
     #
     def ready?(&block)
-      `$(#{block})` if block_given?
+      @@__isReady ? block.call : `$(#{block})` if block_given?
     end
+    
+    # Return a promise that resolves when the document is ready.
+    #
+    # @example
+    #   Document.ready.then do |r|
+    #     puts "ready to go"
+    #   end
+    #
+    def ready
+      promise = Promise.new
+      Document.ready? { promise.resolve }
+      promise
+    end
+    
+    module_function :ready?
+    
+    ready? { @@__isReady = true }
 
     # Returns document title.
     #
