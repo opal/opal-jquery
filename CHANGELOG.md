@@ -1,3 +1,7 @@
+## 0.5.0 (edge)
+
+*   Updated specs to use jQuery 1.8 (that was initially released in 2012)
+
 ## 0.4.0 2015-07-17
 
 *   `Element#[]=` now removes the attribute when the assigned value is nil.
