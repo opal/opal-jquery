@@ -1,4 +1,4 @@
-# opal-jquery: jQuery Wrapper For Opal
+# opal-jquery: jQuery wrapper for Opal
 
 [![Build Status](http://img.shields.io/travis/opal/opal-jquery/master.svg)](http://travis-ci.org/opal/opal-jquery)
 
@@ -6,6 +6,9 @@ opal-jquery provides DOM access to opal by wrapping jQuery (or zepto)
 and providing a nice ruby syntax for dealing with jQuery instances.
 
 See the Opal website for [documentation](http://opalrb.org/docs/jquery).
+
+
+
 
 ## Installation
 
@@ -20,11 +23,16 @@ Or include it in your Gemfile for Bundler:
 ```ruby
 gem 'opal-jquery'
 ```
+
+
+
+
 ## Running Specs
 
 Get the dependencies:
 
     $ bundle install
+
 
 ### Browser
 
@@ -33,6 +41,7 @@ You can run the specs in any web browser, by running the `config.ru` rack file:
     $ bundle exec rackup
 
 And then visiting `http://localhost:9292` in any web browser.
+
 
 ### Phantomjs
 
@@ -47,13 +56,18 @@ Run the tests inside a phantom.js runner:
 
     $ bundle exec rake
 
+
 ### Zepto
 
 opal-jquery also supports zepto. To run specs for zepto use the rake task:
 
     $ bundle exec rake zepto
 
+
+
+
 ## Getting Started
+
 
 ### Usage
 
@@ -78,6 +92,7 @@ alert "Hello from jquery + opal"
 The `#alert` method is provided by `opal-jquery`. If the message displays, then
 `jquery` support should be working.
 
+
 ### How does opal-jquery work
 
 `opal-jquery` provides an `Element` class, whose instances are toll-free
@@ -88,7 +103,11 @@ with jquery plugins much easier.
 Also, `Element` will try to bridge with Zepto if it cannot find jQuery loaded,
 making it ideal for mobile applications as well.
 
+
+
+
 ## Interacting with the DOM
+
 
 ### Finding Elements
 
@@ -130,6 +149,7 @@ el.find '.foo'
 # => #<Element .... >
 ```
 
+
 ### Running code on document ready
 
 Just like jQuery, opal-jquery requires the document to be ready to
@@ -151,6 +171,7 @@ end
 ```
 
 Notice the use of the `Kernel#alert` method.
+
 
 ### Event handling
 
@@ -189,6 +210,7 @@ Document.on :click do |evt|
 end
 ```
 
+
 ### CSS styles and classnames
 
 The various jQuery methods are available on `Element` instances:
@@ -223,6 +245,9 @@ el.css 'color', 'blue'
 el.css 'color'
 # => 'blue'
 ```
+
+
+
 
 ## HTTP/AJAX requests
 
@@ -268,6 +293,7 @@ The request is actually triggered inside the `HTTP.get` method, but due
 to the async nature of the request, the callback and errback handlers can
 be added anytime before the request returns.
 
+
 ### Handling responses
 
 Web apps deal with JSON responses quite frequently, so there is a useful
@@ -298,6 +324,7 @@ request.errback { |response|
 }
 ```
 
+
 ### Supplying an XHR method
 
 To supply an XHR callback include a lambda with the `xhr` option:
@@ -314,6 +341,8 @@ end
 
 cloud_xfer = HTTP.put "http://my.cloud.storage/location", xhr: update_progress, ... etc ...
 ```
+
+
 
 
 ## Usage of JQuery plugins
