@@ -1,20 +1,21 @@
 language: ruby
-
-rvm:
-  - 2.2
-  - 2.1
-  - 2.0
-  - 1.9.3
-
-script: rake $RUN
+sudo: false
 
 fast_finish: true
+script: rake $RUN
 
 matrix:
   include:
-    - env: RUN=default
-    - env: RUN=zepto
+    - rvm: 2.2
+    - rvm: 2.1
+    - rvm: 1.9.3
+    - rvm: 2.0
 
-allow_failures:
-  - env: RUN=zepto
+    # We use 2.1.4 to differentiate the rvm version
+    # as travis doesn't allow failures by env.
+    - rvm: 2.1.4
+      env: RUN=zepto
+
+  allow_failures:
+    - rvm: 2.1.4
 
