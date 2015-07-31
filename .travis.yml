@@ -5,3 +5,16 @@ rvm:
   - 2.1
   - 2.0
   - 1.9.3
+
+script: rake $RUN
+
+fast_finish: true
+
+matrix:
+  include:
+    - env: RUN=default
+    - env: RUN=zepto
+
+allow_failures:
+  - env: RUN=zepto
+
