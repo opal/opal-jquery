@@ -2,6 +2,8 @@
 
 *   Updated specs to use jQuery 1.8 (that was initially released in 2012)
 
+*   `Element.parse` now relies on `$.parseHTML` in conjunction with `$` enforcing actual HTML parsing.
+
 ## 0.4.0 2015-07-17
 
 *   `Element#[]=` now removes the attribute when the assigned value is nil.

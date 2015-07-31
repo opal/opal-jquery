@@ -109,7 +109,7 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @param str [String] html content to parse
   # @return [Element]
   def self.parse(str)
-    `$(str)`
+    `$.parseHTML ? $($.parseHTML(str)) : $(str)`
   end
 
   # Expose jQuery plugins to become available in ruby code. By default,
