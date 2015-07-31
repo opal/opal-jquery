@@ -113,7 +113,7 @@ end
 
 # Top level {Document} instance wrapping `window.document`.
 Document = Element.find(`document`)
-Document.send(:extend, Browser::DocumentMethods)
+Document.extend Browser::DocumentMethods
 
 # TODO: this will be removed soon (here for compatibility)
 $document = Document
