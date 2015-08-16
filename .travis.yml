@@ -7,6 +7,9 @@ script: rake $RUN
 matrix:
   include:
     - rvm: 2.2
+      Gemfile: Gemfile
+    - rvm: 2.2
+      Gemfile: gemfiles/rspec.0.5.gemfile
     - rvm: 2.1
     - rvm: 1.9.3
     - rvm: 2.0
@@ -18,7 +21,3 @@ matrix:
 
   allow_failures:
     - rvm: 2.1.4
-
-gemfile:
-  - Gemfile
-  - gemfiles/rspec.0.5.gemfile
