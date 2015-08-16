@@ -1,6 +1,7 @@
 .DS_Store
 *.gem
 Gemfile.lock
+/gemfiles/*.lock
 build
 gh-pages
 /.bundle

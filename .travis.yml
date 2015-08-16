@@ -19,3 +19,6 @@ matrix:
   allow_failures:
     - rvm: 2.1.4
 
+gemfile:
+  - Gemfile
+  - gemfiles/rspec.0.5.gemfile
