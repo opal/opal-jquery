@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.test_files     = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths  = ['lib']
 
-  s.add_runtime_dependency 'opal', '>= 0.7.0', '< 0.9.0'
+  s.add_runtime_dependency 'opal', '>= 0.7.0', '< 0.10.0'
   s.add_development_dependency 'opal-rspec', '~> 0.4.0'
   s.add_development_dependency 'yard'
   s.add_development_dependency 'rake'
