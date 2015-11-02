@@ -4,6 +4,10 @@
 
 *   `Element.parse` now relies on `$.parseHTML` in conjunction with `$` enforcing actual HTML parsing.
 
+*   Added `Document.ready` that returns a promise for `Document.ready?`
+
+*   `Document.ready?` now works even after the document is loaded (unlike jQuery)
+
 ## 0.4.0 2015-07-17
 
 *   `Element#[]=` now removes the attribute when the assigned value is nil.
