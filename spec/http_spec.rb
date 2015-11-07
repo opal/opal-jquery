@@ -78,4 +78,18 @@ describe HTTP do
       end
     end
   end
+
+  describe '#get_header' do
+    async 'returns the header value' do
+      HTTP.get(good_url) do |response|
+        async { expect(response.get_header 'Content-Type').to eq 'text/plain' }
+      end
+    end
+
+    async 'returns nil' do
+      HTTP.get(good_url) do |response|
+        async { expect(response.get_header 'Does-Not-Exist').to be nil }
+      end
+    end
+  end
 end
