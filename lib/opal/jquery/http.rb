@@ -223,8 +223,12 @@ class HTTP
   #
   # @param key [String] name of the header to get
   # @return [String] value of the header
+  # @return [nil] if the header +key+ was not in the response
   def get_header(key)
-    `#@xhr.getResponseHeader(#{key});`
+    %x{
+      var value = #@xhr.getResponseHeader(#{key});
+      return (value === null) ? nil : value;
+    }
   end
 
   private
