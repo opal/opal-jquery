@@ -261,6 +261,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @return [Element]
   alias_native :filter
 
+  # @!method not(selector)
+  # @param selector [String]
+  # @return [Element]
+  alias_native :not
+
   # @!method last
   #
   # Returns a new {Element} instance containing the last element in this

@@ -165,6 +165,18 @@ describe Element do
     end
   end
 
+  describe ".not" do
+    it "should subtract from a set of elements" do
+      divs = Element['#foo, .woosh']
+      divs.should be_kind_of(Element)
+      divs.size.should == 3
+
+      subtracted = divs.not('#foo')
+      subtracted.should be_kind_of(Element)
+      subtracted.length.should == 2
+    end
+  end
+
   describe '.id' do
     it "should return a new instance with the element with given id" do
       Element.id('foo').should be_kind_of(Element)
