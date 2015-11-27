@@ -338,6 +338,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @!method submit()
   alias_native :submit
 
+  # @!method click()
+  alias_native :click
+
   # @!method text=(text)
   #
   # Set text content of each element in this collection.
