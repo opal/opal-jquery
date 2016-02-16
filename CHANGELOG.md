@@ -4,6 +4,8 @@
 
 *   `$document` and `Document` are all replaced by `Element.document`, to get the old behavior while updating it's still possible to manually `require 'opal/jquery/document'`.
 
+*   `Kernel#alert`has been removed; to get the old behavior while updating it's still possible to manually `require 'opal/jquery/kernel'`.
+
 ## 0.4.1 2015-11-02
 
 *   Updated specs to use jQuery 1.8 (that was initially released in 2012)
