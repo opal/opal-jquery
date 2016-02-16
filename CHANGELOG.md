@@ -1,3 +1,7 @@
+## 0.5.0
+
+*   `$window`, `Browser::Window` and `Window` are all replaced by `Element.window`, to get the old behavior while updating it's still possible to manually `require 'opal/jquery/window'`.
+
 ## 0.4.1 2015-11-02
 
 *   Updated specs to use jQuery 1.8 (that was initially released in 2012)

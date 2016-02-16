@@ -131,6 +131,16 @@ class Element < `#{JQUERY_CLASS.to_n}`
     end
   end
 
+  # Access the jQuery-wrapped `window` object, equivalent to
+  # `Element.find(`window`)`.
+  #
+  # @example
+  #   Element.window.on(:resize) { |event| … }
+  # @return [Element]
+  def self.window
+    @window ||= find(`window`)
+  end
+
   # @return The original css selector used to create {Element}
   attr_reader :selector
 
