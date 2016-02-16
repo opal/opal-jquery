@@ -2,6 +2,8 @@ require 'opal/jquery/constants'
 require 'opal/jquery/element'
 
 module Browser
+  # @deprecated
+  #
   # {Document} includes these methods to extend {Element}.
   #
   # Generally, you will want to use the {::Document} top level instance of

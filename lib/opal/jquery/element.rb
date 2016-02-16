@@ -141,6 +141,16 @@ class Element < `#{JQUERY_CLASS.to_n}`
     @window ||= find(`window`)
   end
 
+  # Access the jQuery-wrapped `document` object, equivalent to
+  # `Element.find(`document`)`.
+  #
+  # @example
+  #   Element.document.ready { … }
+  # @return [Element]
+  def self.document
+    @document ||= find(`document`)
+  end
+
   # @return The original css selector used to create {Element}
   attr_reader :selector
 
@@ -712,6 +722,25 @@ class Element < `#{JQUERY_CLASS.to_n}`
         return self.off(name, sel, block._jq_wrap);
       }
     }
+  end
+
+  # Register a block to run once the document/page is ready.
+  # will call the block if the document is already ready
+  #
+  # @example
+  #   Element.document.ready { puts "ready to go" }
+  #
+  # Or return a promise that resolves when the document is ready if no block is
+  # given.
+  #
+  # @example
+  #   Document.ready.then { puts "ready to go" }
+  #
+  def ready(&block)
+    return `$(#{block})` if block_given?
+    promise = Promise.new
+    ready { promise.resolve }
+    promise
   end
 
   # Serializes a form into an Array of Hash objects.
