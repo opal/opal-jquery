@@ -704,7 +704,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
     }
   end
 
-  # returns an Array of Hashes
+  # Serializes a form into an Array of Hash objects.
+  #
+  # @return [Array<Hashes>]
   def serialize_array
     `self.serializeArray()`.map { |e| Hash.new(e) }
   end
