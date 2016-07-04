@@ -1,3 +1,7 @@
+## 0.4.2 2016-07-04
+
+*   Allow Opal v0.10.0
+
 ## 0.4.1 2015-11-02
 
 *   Updated specs to use jQuery 1.8 (that was initially released in 2012)
