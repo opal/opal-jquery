@@ -7,6 +7,10 @@ Opal::RSpec::RakeTask.new(:default) do |s|
   s.index_path = 'spec/jquery/index.html.erb'
 end
 
+Opal::RSpec::RakeTask.new(:jquery3) do |s|
+  s.index_path = 'spec/jquery/index3.html.erb'
+end
+
 Opal::RSpec::RakeTask.new(:zepto) do |s|
   s.index_path = 'spec/zepto/index.html.erb'
 end
