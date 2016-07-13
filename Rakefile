@@ -68,6 +68,11 @@ namespace :doc do
     sh 'git', 'clone', '-b', 'gh-pages', '--', remote, doc_repo.to_s
   end
 
+  # To generate docs that live on http://opalrb.org/opal-jquery/ use the 
+  # `rake doc` task
+  # 
+  # DOC_REPO_REMOTE=https://github.com/opal/opal-jquery.git bundle exec rake doc
+  # open gh-pages/index.html
   task :default => doc_repo.to_s do
     git  = current_git_release.call
     name = 'api'
@@ -76,6 +81,10 @@ namespace :doc do
               "--readme opal/README.md -o gh-pages/doc/#{git}/#{name}"
     puts command; system command
   end
+
+  # To generate api docs on rubygems: http://www.rubydoc.info/gems/opal-jquery/0.4.2
+  # yard --main README.md --markup markdown --github
+  # open doc/index.html
 end
 
 task :doc => 'doc:default'
