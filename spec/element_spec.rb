@@ -271,3 +271,12 @@ describe 'Element.expose' do
     expect(element.exposableMethod2).to eq(12)
   end
 end
+
+describe 'Element#prop' do
+  it 'converts nil to null' do
+    checkbox = Element.new(:input).attr(:type, :checkbox)
+
+    checkbox.prop(:checked, nil)
+    expect(checkbox.prop(:checked)).to be false
+  end
+end

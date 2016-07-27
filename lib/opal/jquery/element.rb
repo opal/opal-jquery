@@ -298,10 +298,12 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @!method get
   alias_native :get
 
-  # @!method prop(name, value = nil)
+  # @!method prop(name, value = undefined)
   #
   # Get or set the property `name` on each element in collection.
-  alias_native :prop
+  def prop(*args)
+    Native.call(self, :prop, *args)
+  end
 
   alias succ next
   alias << append
