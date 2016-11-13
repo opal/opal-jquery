@@ -201,7 +201,7 @@ end
 describe "Element#data" do
   html <<-HTML
     <div id="data-foo"></div>
-    <div id="data-ford" data-authur="dent"></div>
+    <div id="data-ford" data-authur="dent" data-baz="bar"></div>
   HTML
 
   it "sets a data attribute" do
@@ -212,6 +212,12 @@ describe "Element#data" do
 
   it "can retrieve a data attribute" do
     expect(Element.id('data-ford').data('authur')).to eq('dent')
+  end
+
+  it "can retrieve all data attributes" do
+    expect(Element.id('data-ford').data).to eq(
+      'authur' => 'dent', 'baz' => 'bar'
+    )
   end
 
   it "returns nil for an undefined data attribute" do

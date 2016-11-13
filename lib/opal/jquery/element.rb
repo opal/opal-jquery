@@ -518,6 +518,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
   def data(*args)
     %x{
       var result = self.data.apply(self, args);
+      if (
+        (typeof(result) === 'object') && !(result instanceof #{JQUERY_CLASS})
+      ) {
+        result = #{ JSON.from_object `result` };
+      }
       return result == null ? nil : result;
     }
   end
