@@ -13,14 +13,14 @@ before_install:
 
 matrix:
   include:
-    - rvm: 2.3.1
-      env: PATH=".:$PATH"
+    - rvm: 2.3.3
+      env: OPAL_VERSION='~> 0.10.3'
     - rvm: 2.2.4
-      env: PATH=".:$PATH"
+      env: OPAL_VERSION='~> 0.9.4'
     - rvm: 2.1.10
-      env: PATH=".:$PATH" RACK_VERSION='< 2.0'
+      env: RACK_VERSION='< 2.0'
     - rvm: 2.0.0
-      env: PATH=".:$PATH" RACK_VERSION='< 2.0'
+      env: RACK_VERSION='< 2.0'
 
     # We use 2.1.9 to differentiate the rvm version
     # as travis doesn't allow failures by env.

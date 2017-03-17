@@ -1,6 +1,16 @@
 source 'https://rubygems.org'
 gemspec
 
-gem 'opal', ENV['OPAL_VERSION'] || '~> 0.10.0'
-gem 'opal-rspec', github: 'opal/opal-rspec', submodules: true
+case (opal_version = ENV['OPAL_VERSION'])
+when 'master'
+  gem 'opal', github: 'opal/opal', branch: 'master'
+  gem 'opal-sprockets', github: 'opal/opal-sprockets'
+when nil
+  gem 'opal' # let bundler pick a version
+else
+  gem 'opal', opal_version
+end
+
+# gem 'opal-rspec', github: 'opal/opal-rspec', submodules: true
+gem 'opal-rspec', path: '../opal-rspec'
 gem 'rack', ENV['RACK_VERSION'] || '> 0'
