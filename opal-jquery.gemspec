@@ -4,11 +4,11 @@ require File.expand_path('../lib/opal/jquery/version', __FILE__)
 Gem::Specification.new do |s|
   s.name         = 'opal-jquery'
   s.version      = Opal::JQuery::VERSION
-  s.author       = 'Adam Beynon'
-  s.email        = 'adam.beynon@gmail.com'
+  s.authors      = ['Adam Beynon', 'Elia Schito']
+  s.email        = 'elia@schito.me'
   s.homepage     = 'http://opalrb.org'
-  s.summary      = 'Opal access to jquery'
-  s.description  = 'Opal DOM library for jquery'
+  s.summary      = 'Opal access to jQuery'
+  s.description  = 'Opal DOM library for jQuery'
 
   s.files          = `git ls-files`.split("\n")
   s.executables    = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
