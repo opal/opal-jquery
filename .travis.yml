@@ -13,6 +13,8 @@ before_install:
 
 matrix:
   include:
+    - rvm: 2.4.0
+      env: OPAL_VERSION='master'
     - rvm: 2.3.3
       env: OPAL_VERSION='~> 0.10.3'
     - rvm: 2.2.4
