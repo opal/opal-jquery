@@ -6,8 +6,14 @@ script: rake $RUN
 
 before_install:
   # thanks to https://mediocre.com/forum/topics/phantomjs-2-and-travis-ci-we-beat-our-heads-against-a-wall-so-you-dont-have-to
-  - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
-  - tar -xjf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+  - "mkdir -p phantom20"
+  - "export PATH=`pwd`/phantom20:$PATH"
+  - "echo $PATH"
+  - "pushd phantom20"
+  - "ls phantomjs || curl -L -O https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2"
+  - "ls phantomjs || tar xjvf phantomjs-2.0.0-ubuntu-12.04.tar.bz2"
+  - "rm -rf phantomjs-2.0.0-ubuntu-12.04.tar.bz2"
+  - "popd"
   # Keep track of which version of phantomjs we're running the specs against
   - phantomjs -v
 
