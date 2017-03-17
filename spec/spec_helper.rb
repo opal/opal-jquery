@@ -10,4 +10,5 @@ end
 
 RSpec.configure do |config|
   config.include JQueryTestHelpers
+  config.formatter = :doc
 end
