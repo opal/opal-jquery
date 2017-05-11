@@ -165,7 +165,7 @@ class HTTP
 
     %x{
       if (typeof(#{payload}) === 'string') {
-        #{settings}.data = payload;
+        settings.data = payload;
       }
       else if (payload != nil) {
         settings.data = payload.$to_json();
