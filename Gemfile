@@ -12,5 +12,5 @@ else
 end
 
 # gem 'opal-rspec', github: 'opal/opal-rspec', submodules: true
-gem 'opal-rspec', path: '../opal-rspec'
+# gem 'opal-rspec', path: '../opal-rspec'
 gem 'rack', ENV['RACK_VERSION'] || '> 0'
