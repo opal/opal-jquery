@@ -1,3 +1,7 @@
+## Unreleased
+
+*   Add `Element#==` as an alias of `.is()`
+
 ## 0.4.2 2016-07-04
 
 *   Allow Opal v0.10.0

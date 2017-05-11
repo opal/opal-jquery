@@ -738,4 +738,8 @@ class Element < `#{JQUERY_CLASS.to_n}`
   def position
     Native(`self.position()`)
   end
+
+  def ==(other)
+    `self.is(other)`
+  end
 end

@@ -285,4 +285,10 @@ describe 'Element#prop' do
     checkbox.prop(:checked, nil)
     expect(checkbox.prop(:checked)).to be false
   end
+
+  describe '#==' do
+    it 'uses .is()' do
+      expect(Element['body']).to eq(Element['body'])
+    end
+  end
 end
