@@ -231,6 +231,10 @@ class HTTP
     }
   end
 
+  def inspect
+    "#<HTTP @url=#{@url} @method=#{@method}>"
+  end
+
   private
 
   def promise
