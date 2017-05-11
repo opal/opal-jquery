@@ -1,13 +1,11 @@
 require 'bundler'
 Bundler.require
 
-require 'opal-rspec'
-Opal.append_path File.expand_path('../spec', __FILE__)
+require 'opal/rspec'
 
-run Opal::Server.new { |s|
+sprockets_env = Opal::RSpec::SprocketsEnvironment.new
+run Opal::Server.new(sprockets: sprockets_env) { |s|
   s.main = 'opal/rspec/sprockets_runner'
-  s.append_path 'spec'
+  sprockets_env.add_spec_paths_to_sprockets
   s.debug = false
-  s.index_path = 'spec/jquery/index.html.erb'
 }
-
