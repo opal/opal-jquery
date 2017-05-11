@@ -742,4 +742,17 @@ class Element < `#{JQUERY_CLASS.to_n}`
   def ==(other)
     `self.is(other)`
   end
+
+  def method_missing(name, *args, &block)
+    args << block if block_given?
+
+    %x{
+      var method = self[#{name}];
+      if (method) {
+        return method.apply(self, #{args.to_n});
+      } else {
+        return #{super}
+      }
+    }
+  end
 end

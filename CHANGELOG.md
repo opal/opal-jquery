@@ -2,6 +2,8 @@
 
 *   Add `Element#==` as an alias of `.is()`
 
+*   Add `Element#method_missing` to allow not yet wrapped methods and plugins to be accessed with zero setup
+
 ## 0.4.2 2016-07-04
 
 *   Allow Opal v0.10.0
