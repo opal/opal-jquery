@@ -743,6 +743,17 @@ class Element < `#{JQUERY_CLASS.to_n}`
     `self.is(other)`
   end
 
+  def respond_to_missing?(name, _)
+    %x{
+      var method = self[#{name}];
+      if (typeof(method) === 'function') {
+        return true;
+      } else {
+        return #{super};
+      }
+    }
+  end
+
   def method_missing(name, *args, &block)
     args << block if block_given?
 
