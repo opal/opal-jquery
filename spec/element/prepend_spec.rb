@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Element#prepend' do
+RSpec.describe 'Element#prepend' do
   html <<-HTML
     <div id="foo"></div>
     <div id="bar">

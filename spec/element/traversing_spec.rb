@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Element do
+RSpec.describe Element do
   before do
     @div = Element.parse <<-HTML
       <div id="traversing-spec">
@@ -76,7 +76,7 @@ describe Element do
   end
 end
 
-describe "Element#next" do
+RSpec.describe "Element#next" do
   before do
     @div = Element.parse <<-HTML
       <div id="next-spec">
@@ -101,7 +101,7 @@ describe "Element#next" do
   end
 end
 
-describe "Element#parent" do
+RSpec.describe "Element#parent" do
   before do
     @div = Element.parse <<-HTML
       <div id="foo">
@@ -126,7 +126,7 @@ describe "Element#parent" do
   end
 end
 
-describe "Element#succ" do
+RSpec.describe "Element#succ" do
   before do
     @div = Element.parse <<-HTML
       <div id="succ-spec">
@@ -151,7 +151,7 @@ describe "Element#succ" do
   end
 end
 
-describe "Element#siblings" do
+RSpec.describe "Element#siblings" do
   before do
     @div = Element.parse <<-HTML
       <div id="siblings-spec">

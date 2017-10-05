@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#css" do
+RSpec.describe "Element#css" do
   html <<-HTML
     <div id="foo" style="background-color:rgb(15,99,30); color:;"></div>
     <div id="bar"></div>
@@ -32,8 +32,8 @@ describe "Element#css" do
     it "should set the properties" do
       hash = Element.find("#hash")
       hash.css(:width => "100px", :height => "200px")
-      hash.css("width").should be_kind_of(String) 
-      hash.css("height").should be_kind_of(String) 
+      hash.css("width").should be_kind_of(String)
+      hash.css("height").should be_kind_of(String)
     end
 
     it "should return self" do

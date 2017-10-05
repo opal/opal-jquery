@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Element do
+RSpec.describe Element do
   html <<-HTML
     <table class="players">
     <tr class="player">

@@ -14,8 +14,8 @@ require "spec_helper"
 class Element
   expose :opal_specs_extension, :opal_specs_args
 end
+RSpec.describe "Element#expose" do
 
-describe "Element#expose" do
   it "exposes jquery plugins by given name" do
     Element.new.opal_specs_extension.should eq("foo_bar_baz")
   end

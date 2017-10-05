@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element height and width" do
+RSpec.describe "Element height and width" do
   html <<-HTML
     <div id="dimensions" style='width: 100px; height: 200px'></div>
   HTML

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Element do
+RSpec.describe Element do
   context 'events' do
     html <<-HTML
       <div id="foo">

@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'opal/jquery/local_storage'
 
-describe LocalStorage do
+RSpec.describe LocalStorage do
   before { subject.clear }
 
   it "returns nil for undefined values" do

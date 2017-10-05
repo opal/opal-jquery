@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#at" do
+RSpec.describe "Element#at" do
   html <<-HTML
     <div class="foo" id="blah"></div>
     <div class="foo" id="bleh"></div>

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe HTTP do
+RSpec.describe HTTP do
   let(:good_url) { '/spec/fixtures/simple.txt' }
   let(:json_url) { '/spec/fixtures/user.json' }
   let(:bad_url) { '/spec/fixtures/does_not_exist.txt' }

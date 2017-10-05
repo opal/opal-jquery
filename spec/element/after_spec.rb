@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Element#after' do
+RSpec.describe 'Element#after' do
   html <<-HTML
     <div id="some-header" class="kapow"></div>
     <div id="foo" class="after-spec-first"></div>

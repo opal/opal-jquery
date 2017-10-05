@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Document do
+RSpec.describe 'Document' do
   subject { Document }
 
   describe "ready?" do
@@ -14,15 +14,15 @@ describe Document do
       Document.ready? { }
     end
   end
-  
+
   describe "ready" do
     async "resolves when document is ready" do
-      Document.ready.then do 
+      Document.ready.then do
         async { Document.ready.resolved?.should be_truthy }
       end
     end
   end
-  
+
   describe "title" do
     it "gets the document title" do
       Document.title.should be_kind_of(String)

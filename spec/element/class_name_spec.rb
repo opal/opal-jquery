@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#class_name" do
+RSpec.describe "Element#class_name" do
   html <<-HTML
     <div id="foo" class="whiskey"></div>
     <div id="bar" class="scotch brandy"></div>
@@ -30,7 +30,7 @@ describe "Element#class_name" do
   end
 end
 
-describe "Element#class_name=" do
+RSpec.describe "Element#class_name=" do
   before do
     @div = Element.parse <<-HTML
       <div id="class-name-set-spec">

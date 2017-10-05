@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#before" do
+RSpec.describe "Element#before" do
   html <<-HTML
     <div id="some-header" class="kapow"></div>
     <div id="foo" class="before-spec-first"></div>

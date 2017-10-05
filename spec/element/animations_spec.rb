@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element animation methods" do
+RSpec.describe "Element animation methods" do
   html <<-HTML
     <div id="animate-foo"></div>
   HTML
@@ -41,16 +41,16 @@ describe "Element animation methods" do
   end
 end
 
-describe "Element effects methods" do
+RSpec.describe "Element effects methods" do
   html <<-HTML
     <div id="effects-foo"></div>
   HTML
-  
+
   describe "#fadeout / #fadein" do
     async "should fade the element out first" do
       foo = Element.find "#effects-foo"
       foo.effect(:fade_out)
-      
+
       delay 1 do
         async {
           foo.css("display").should eq("none")

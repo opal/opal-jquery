@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#method_missing" do
+RSpec.describe "Element#method_missing" do
   context 'with missing property' do
     html %{<div id="foo" class="bar"></div>}
 

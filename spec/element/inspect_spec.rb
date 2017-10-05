@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#inspect" do
+RSpec.describe "Element#inspect" do
   html <<-HTML
     <div id="foo"></div>
     <div class="bar"></div>

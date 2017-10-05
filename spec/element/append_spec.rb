@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Element#append" do
+RSpec.describe "Element#append" do
   html <<-HTML
     <div id="foo" class="first-append"></div>
     <div id="bar" class="first-append"></div>
