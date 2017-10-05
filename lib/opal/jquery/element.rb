@@ -656,12 +656,19 @@ class Element < `#{JQUERY_CLASS.to_n}`
 
   def on(name, sel = nil, &block)
     %x{
-      var wrapper = function(evt) {
-        if (evt.preventDefault) {
-          evt = #{Event.new `evt`};
+      var has_args = #{block.arity} !== 0;
+
+      var wrapper = function() {
+        for(var args = new Array(arguments.length), i = 0, ii = args.length; i < ii; i++) {
+          args[i] = arguments[i];
         }
 
-        return block.apply(null, arguments);
+        // Use preventDefault as a canary for native events
+        if (has_args && args[0].preventDefault) {
+          args[0] = #{Event.new `args[0]`};
+        }
+
+        return block.apply(null, args);
       };
 
       block.$$jqwrap = wrapper;
@@ -679,12 +686,19 @@ class Element < `#{JQUERY_CLASS.to_n}`
 
   def one(name, sel = nil, &block)
     %x{
-      var wrapper = function(evt) {
-        if (evt.preventDefault) {
-          evt = #{Event.new `evt`};
+      var has_args = #{block.arity} !== 0;
+
+      var wrapper = function() {
+        for(var args = new Array(arguments.length), i = 0, ii = args.length; i < ii; i++) {
+          args[i] = arguments[i];
         }
 
-        return block.apply(null, arguments);
+        // Use preventDefault as a canary for native events
+        if (has_args && args[0].preventDefault) {
+          args[0] = #{Event.new `args[0]`};
+        }
+
+        return block.apply(null, args);
       };
 
       block.$$jqwrap = wrapper;
