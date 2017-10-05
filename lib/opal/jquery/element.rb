@@ -759,10 +759,10 @@ class Element < `#{JQUERY_CLASS.to_n}`
 
     %x{
       var method = self[#{name}];
-      if (method) {
+      if (typeof(method) === 'function') {
         return method.apply(self, #{args.to_n});
       } else {
-        return #{super}
+        return #{super};
       }
     }
   end
