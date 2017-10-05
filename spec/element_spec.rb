@@ -244,41 +244,6 @@ RSpec.describe Element do
     end
   end
 
-  describe '.expose' do
-    subject(:element) { Element.new }
-    before do
-      `$.fn.exposableMethod = function() {return 123}`
-      `$.fn.exposableMethod2 = function() {return 12}`
-    end
-
-    after do
-      `delete $.fn.exposableMethod; delete $.fn.$exposableMethod;`
-      `delete $.fn.exposableMethod2; delete $.fn.$exposableMethod2;`
-    end
-
-    it 'exposes methods defined on $.fn' do
-      expect(element).not_to respond_to(:exposableMethod)
-      Element.expose :exposableMethod
-      expect(element).to respond_to(:exposableMethod)
-      expect(element.exposableMethod).to eq(123)
-    end
-
-    it 'work if exposing the same method multiple times' do
-      Element.expose :exposableMethod
-      Element.expose :exposableMethod
-      expect(element.exposableMethod).to eq(123)
-
-      Element.expose :exposableMethod, :exposableMethod
-      expect(element.exposableMethod).to eq(123)
-    end
-
-    it 'work if exposing multiple methods' do
-      Element.expose :exposableMethod, :exposableMethod2
-      expect(element.exposableMethod).to eq(123)
-      expect(element.exposableMethod2).to eq(12)
-    end
-  end
-
   describe '#prop' do
     it 'converts nil to null' do
       checkbox = Element.new(:input).attr(:type, :checkbox)
