@@ -664,7 +664,7 @@ class Element < `#{JQUERY_CLASS.to_n}`
         return block.apply(null, arguments);
       };
 
-      block._jq_wrap = wrapper;
+      block.$$jqwrap = wrapper;
 
       if (sel == nil) {
         self.on(name, wrapper);
@@ -687,7 +687,7 @@ class Element < `#{JQUERY_CLASS.to_n}`
         return block.apply(null, arguments);
       };
 
-      block._jq_wrap = wrapper;
+      block.$$jqwrap = wrapper;
 
       if (sel == nil) {
         self.one(name, wrapper);
@@ -706,10 +706,10 @@ class Element < `#{JQUERY_CLASS.to_n}`
         return self.off(name);
       }
       else if (block === nil) {
-        return self.off(name, sel._jq_wrap);
+        return self.off(name, sel.$$jqwrap);
       }
       else {
-        return self.off(name, sel, block._jq_wrap);
+        return self.off(name, sel, block.$$jqwrap);
       }
     }
   end
