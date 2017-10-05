@@ -513,11 +513,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # is given, the block is run as a callback when the animation finishes.
   def animate(params, &block)
     speed = params.has_key?(:speed) ? params.delete(:speed) : 400
-    %x{
-      self.animate(#{params.to_n}, #{speed}, function() {
-        #{block.call if block_given?}
-      })
-    }
+    if block_given?
+      `self.animate(#{params.to_n}, #{speed}, block)`
+    else
+      `self.animate(#{params.to_n}, #{speed})`
+    end
   end
 
   def data(*args)
