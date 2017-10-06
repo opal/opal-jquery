@@ -9,9 +9,7 @@ matrix:
     - rvm: 2.4.2
       env: OPAL_VERSION='master'
     - rvm: 2.3.4
-      env: OPAL_VERSION='~> 0.10.3'
-    - rvm: 2.2.4
-      env: OPAL_VERSION='~> 0.9.4'
+      env: OPAL_VERSION='~> 0.10.5'
     - rvm: 2.1.10
       env: RACK_VERSION='< 2.0'
     - rvm: 2.0.0
@@ -30,7 +28,6 @@ cache:
   bundler: true
   directories:
   - node_modules
-  - phantom20
 
 before_install:
   - gem update --system
