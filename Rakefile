@@ -3,16 +3,19 @@ Bundler.require
 Bundler::GemHelper.install_tasks
 
 require 'opal/rspec/rake_task'
-Opal::RSpec::RakeTask.new(:default) do |s|
-  s.index_path = 'spec/jquery/index.html.erb'
+Opal::RSpec::RakeTask.new(:default) do |server, task|
+  server.index_path = 'spec/jquery/index.html.erb'
+  task.default_path = 'spec'
 end
 
-Opal::RSpec::RakeTask.new(:jquery3) do |s|
-  s.index_path = 'spec/jquery/index3.html.erb'
+Opal::RSpec::RakeTask.new(:jquery3) do |server, task|
+  server.index_path = 'spec/jquery/index3.html.erb'
+  task.default_path = 'spec'
 end
 
-Opal::RSpec::RakeTask.new(:zepto) do |s|
-  s.index_path = 'spec/zepto/index.html.erb'
+Opal::RSpec::RakeTask.new(:zepto) do |server, task|
+  server.index_path = 'spec/zepto/index.html.erb'
+  task.default_path = 'spec'
 end
 
 desc "Build build/opal-jquery.js"
@@ -68,9 +71,9 @@ namespace :doc do
     sh 'git', 'clone', '-b', 'gh-pages', '--', remote, doc_repo.to_s
   end
 
-  # To generate docs that live on http://opalrb.org/opal-jquery/ use the 
+  # To generate docs that live on http://opalrb.org/opal-jquery/ use the
   # `rake doc` task
-  # 
+  #
   # DOC_REPO_REMOTE=https://github.com/opal/opal-jquery.git bundle exec rake doc
   # open gh-pages/index.html
   task :default => doc_repo.to_s do

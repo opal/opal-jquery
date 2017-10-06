@@ -22,7 +22,6 @@ matrix:
 
   allow_failures:
     - rvm: 2.1.9 # zepto
-    - rvm: 2.4.2 # opal master
 
 
 cache:
