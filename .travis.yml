@@ -21,7 +21,8 @@ matrix:
       env: RUN=zepto PATH=".:$PATH" RACK_VERSION='< 2.0'
 
   allow_failures:
-    - rvm: 2.1.9
+    - rvm: 2.1.9 # zepto
+    - rvm: 2.4.2 # opal master
 
 
 cache:
