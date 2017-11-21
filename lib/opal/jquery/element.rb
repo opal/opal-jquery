@@ -421,10 +421,11 @@ class Element < `#{JQUERY_CLASS.to_n}`
       var size = args.length;
       switch (size) {
       case 1:
-        return #{self[`args[0]`]};
+        var result = self.attr(args[0]);
+        return( (result == null) ? nil : result );
         break;
       case 2:
-        return #{self[`args[0]`] = `args[1]`};
+        return self.attr(args[0], args[1]);
         break;
       default:
         #{raise ArgumentError, '#attr only accepts 1 or 2 arguments'}
