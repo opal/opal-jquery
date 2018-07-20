@@ -738,15 +738,15 @@ class Element < `#{JQUERY_CLASS.to_n}`
   alias size length
 
   def value
-    `self.val() || ""`
+    `self.val()` || ""
   end
 
   def height
-    `self.height() || nil`
+    `self.height()` || nil
   end
 
   def width
-    `self.width() || nil`
+    `self.width()` || nil
   end
 
   def position
