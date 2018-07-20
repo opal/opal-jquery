@@ -1,4 +1,4 @@
-require 'jquery/jquery'
+require 'jquery/jquery-1.8.3'
 require 'opal-rspec'
 require 'opal/jquery'
 require 'opal/jquery/rspec'
