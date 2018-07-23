@@ -1,14 +1,42 @@
-## Unreleased
+## (0.5.0)[https://github.com/opal/opal-jquery/compare/v0.4.2...v0.5.0] 2018-07-24
 
 *   Add `Element#==` as an alias of `.is()`
 
 *   Add `Element#method_missing` to allow not yet wrapped methods and plugins to be accessed with zero setup
 
-## 0.4.2 2016-07-04
+*   Avoid `||` in JS-land because it would consider some values as falsy (e.g. `""` and `0`).
+
+*   Call `Element#prop` via `Native.call` to get the right semantics around `nil` vs. `undefined`
+
+*   Expose `Element#click`
+
+*   Fix semantics of `Element#attr` to better reflect jQuery's
+
+*   Skip sending a callback to `Element#animate` if no block is given
+
+*   Let `Element#data` return a usable Ruby object (`Array`/`Hash`) instead of a native one
+
+*   Don't wrap events with `Event.new` if no args are provided or the event is not a native object to increase performance in `Element#on` and `Element#one`
+
+*   Rename the internal property holding the callback wrapper in `Element#on` and `Element#one` from `._jq_wrap` to `.$$jqwrap` to avoid polluting instance variables and following the custom of Opal's core classes
+
+*   Fix `Element#value`, `Element#height` and `Element#width` to perform the `||` at ruby level to avoid overwriting values that are *falsy* in JavaScript with `nil`
+
+*   Add `Element#==` as an alias to jQuery's `.is()`
+
+*   Add `Element#method_missing` and `Element#respond_to_missing?` to forward calls to native plugins
+
+*   Add `HTTP#inspect` with a basic summary
+
+*   Updated specs to also use jQuery 3
+
+*   Allow Opal v0.11.0
+
+## (0.4.2)[https://github.com/opal/opal-jquery/compare/v0.4.1...v0.4.2] 2016-07-04
 
 *   Allow Opal v0.10.0
 
-## 0.4.1 2015-11-02
+## (0.4.1)[https://github.com/opal/opal-jquery/compare/v0.4.0...v0.4.1] 2015-11-02
 
 *   Updated specs to use jQuery 1.8 (that was initially released in 2012)
 
@@ -18,7 +46,7 @@
 
 *   `Document.ready?` now works even after the document is loaded (unlike jQuery)
 
-## 0.4.0 2015-07-17
+## (0.4.0)[https://github.com/opal/opal-jquery/compare/v0.3.0...v0.4.0] 2015-07-17
 
 *   `Element#[]=` now removes the attribute when the assigned value is nil.
 
