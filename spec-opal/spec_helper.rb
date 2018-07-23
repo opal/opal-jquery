@@ -9,7 +9,15 @@ module JQueryTestHelpers
   end
 end
 
+module SkipAsync
+  def async(*args, &block)
+    xit(*args, &block)
+  end
+end
+
 RSpec.configure do |config|
   config.include JQueryTestHelpers
+  config.extend SkipAsync
   config.formatter = :doc
+  config.color = true
 end
