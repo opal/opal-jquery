@@ -1,26 +1,30 @@
-## (0.5.0)[https://github.com/opal/opal-jquery/compare/v0.4.2...v0.5.0] 2018-07-24
+## (0.5.0)[https://github.com/opal/opal-jquery/compare/v0.4.3...HEAD] Unreleased
+
+*see diff*
+
+## (0.4.3)[https://github.com/opal/opal-jquery/compare/v0.4.2...v0.4.3] 2018-07-24
 
 *   Add `Element#==` as an alias of `.is()`
 
 *   Add `Element#method_missing` to allow not yet wrapped methods and plugins to be accessed with zero setup
 
-*   Avoid `||` in JS-land because it would consider some values as falsy (e.g. `""` and `0`).
+*   Avoid `||` in JS-land because it would consider some values as falsy (e.g. `""` and `0`). **breaking**
 
-*   Call `Element#prop` via `Native.call` to get the right semantics around `nil` vs. `undefined`
+*   Call `Element#prop` via `Native.call` to get the right semantics around `nil` vs. `undefined` **breaking**
 
 *   Expose `Element#click`
 
-*   Fix semantics of `Element#attr` to better reflect jQuery's
+*   Fix semantics of `Element#attr` to better reflect jQuery's **breaking**
 
 *   Skip sending a callback to `Element#animate` if no block is given
 
-*   Let `Element#data` return a usable Ruby object (`Array`/`Hash`) instead of a native one
+*   Let `Element#data` return a usable Ruby object (`Array`/`Hash`) instead of a native one **breaking**
 
 *   Don't wrap events with `Event.new` if no args are provided or the event is not a native object to increase performance in `Element#on` and `Element#one`
 
 *   Rename the internal property holding the callback wrapper in `Element#on` and `Element#one` from `._jq_wrap` to `.$$jqwrap` to avoid polluting instance variables and following the custom of Opal's core classes
 
-*   Fix `Element#value`, `Element#height` and `Element#width` to perform the `||` at ruby level to avoid overwriting values that are *falsy* in JavaScript with `nil`
+*   Fix `Element#value`, `Element#height` and `Element#width` to perform the `||` at ruby level to avoid overwriting values that are *falsy* in JavaScript with `nil` **breaking**
 
 *   Add `Element#==` as an alias to jQuery's `.is()`
 
