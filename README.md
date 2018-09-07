@@ -1,8 +1,10 @@
-# opal-jquery: jQuery wrapper for Opal
+# Opal jQuery
+
+*jQuery wrapper for Opal*
 
 [![Build Status](http://img.shields.io/travis/opal/opal-jquery/master.svg)](http://travis-ci.org/opal/opal-jquery)
 
-opal-jquery provides DOM access to opal by wrapping jQuery (or zepto)
+**opal-jquery** provides DOM access to opal by wrapping jQuery (or zepto)
 and providing a nice ruby syntax for dealing with jQuery instances.
 
 <!-- See the Opal website for [documentation](http://opalrb.org/docs/jquery). -->
