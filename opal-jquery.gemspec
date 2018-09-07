@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version      = Opal::JQuery::VERSION
   s.authors      = ['Adam Beynon', 'Elia Schito']
   s.email        = 'elia@schito.me'
-  s.homepage     = 'http://opalrb.org'
+  s.homepage     = 'https://github.com/opal/opal-jquery#readme'
   s.summary      = 'Opal access to jQuery'
   s.description  = 'Opal DOM library for jQuery'
 
