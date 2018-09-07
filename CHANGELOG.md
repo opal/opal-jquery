@@ -1,8 +1,8 @@
-## (0.5.0)[https://github.com/opal/opal-jquery/compare/v0.4.3...HEAD] Unreleased
+## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.3...HEAD) Unreleased
 
 *see diff*
 
-## (0.4.3)[https://github.com/opal/opal-jquery/compare/v0.4.2...v0.4.3] 2018-07-24
+## [0.4.3](https://github.com/opal/opal-jquery/compare/v0.4.2...v0.4.3) 2018-07-24
 
 *   Add `Element#==` as an alias of `.is()`
 
@@ -36,11 +36,11 @@
 
 *   Allow Opal v0.11.0
 
-## (0.4.2)[https://github.com/opal/opal-jquery/compare/v0.4.1...v0.4.2] 2016-07-04
+## [0.4.2](https://github.com/opal/opal-jquery/compare/v0.4.1...v0.4.2) 2016-07-04
 
 *   Allow Opal v0.10.0
 
-## (0.4.1)[https://github.com/opal/opal-jquery/compare/v0.4.0...v0.4.1] 2015-11-02
+## [0.4.1](https://github.com/opal/opal-jquery/compare/v0.4.0...v0.4.1) 2015-11-02
 
 *   Updated specs to use jQuery 1.8 (that was initially released in 2012)
 
@@ -50,7 +50,7 @@
 
 *   `Document.ready?` now works even after the document is loaded (unlike jQuery)
 
-## (0.4.0)[https://github.com/opal/opal-jquery/compare/v0.3.0...v0.4.0] 2015-07-17
+## [0.4.0](https://github.com/opal/opal-jquery/compare/v0.3.0...v0.4.0) 2015-07-17
 
 *   `Element#[]=` now removes the attribute when the assigned value is nil.
 
