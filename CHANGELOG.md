@@ -2,7 +2,7 @@
 
 *see diff*
 
-## [0.4.3](https://github.com/opal/opal-jquery/compare/v0.4.2...v0.4.3) 2018-07-24
+## [0.4.3](https://github.com/opal/opal-jquery/compare/v0.4.2...v0.4.3) 2018-09-07
 
 *   Add `Element#==` as an alias of `.is()`
 
