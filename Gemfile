@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 gemspec
 
+gem 'c_lexer', platform: :mri
+
 case (opal_version = ENV['OPAL_VERSION'])
 when 'master'
   gem 'opal', github: 'opal/opal', branch: 'master'
