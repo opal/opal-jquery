@@ -2,7 +2,7 @@ require 'opal'
 require 'capybara/rspec'
 require 'opal/simple_server'
 
-Capybara.save_and_open_page_path = "#{__dir__}/tmp"
+Capybara.save_path = "#{Dir.pwd}/tmp/capybara"
 
 Opal.append_path "#{__dir__}/app"
 
