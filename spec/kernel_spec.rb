@@ -2,17 +2,13 @@ require 'spec_helper'
 
 RSpec.describe 'Kernel#alert', type: :feature do
   it 'returns nil' do
-    visit '/'
-    binding.irb
-    save_and_open_page
-    # begin
-    #   original_alert = `window.alert`
-    #   message = nil
-    #   `window.alert = function(string) { message = string; }`
-    #   Kernel.alert('a message').should be_nil
-    #   expect(message).to eq('a message')
-    # ensure
-    #   `window.alert = #{original_alert}`
-    # end
+    accept_alert do
+      expect(evaluate_opal(%{alert "message 1"})).to eq(opal_nil)
+    end
+  end
+
+  it 'shows an alert' do
+    accept_alert("message 1") { execute_opal %{alert "message 1"} }
+    accept_alert("message 2") { execute_opal %{Kernel.alert "message 2"} }
   end
 end

@@ -1,3 +1,4 @@
+require 'puma/minissl' # avoid warnings
 require 'opal-jquery'
 require 'support/capybara'
 

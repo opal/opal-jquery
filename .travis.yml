@@ -1,39 +1,23 @@
 language: ruby
+
 sudo: false
 
 fast_finish: true
-script: bundle exec rake $RUN
 
-matrix:
-  include:
-    - rvm: 2.4.2
-      env: OPAL_VERSION='master'
-    - rvm: 2.3.4
-      env: OPAL_VERSION='~> 0.10.5'
-    - rvm: 2.1.10
-      env: RACK_VERSION='< 2.0'
-    - rvm: 2.0.0
-      env: RACK_VERSION='< 2.0'
+script: bundle exec rspec
 
-    # We use 2.1.9 to differentiate the rvm version
-    # as travis doesn't allow failures by env.
-    - rvm: 2.1.9
-      env: RUN=zepto PATH=".:$PATH" RACK_VERSION='< 2.0'
+rvm:
+  - 2.3
+  - 2.4
+  - 2.5
+  - 2.6
 
-  allow_failures:
-    - rvm: 2.1.9 # zepto
-
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 
 cache:
   bundler: true
-  directories:
-  - node_modules
-
-before_install:
-  - gem update --system
-  - "export PATH=$PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH"
-  - "if [ $(phantomjs --version) != '2.1.1' ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi"
-  - "if [ $(phantomjs --version) != '2.1.1' ]; then wget https://assets.membergetmember.co/software/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2; fi"
-  - "if [ $(phantomjs --version) != '2.1.1' ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi"
-  - "phantomjs --version"
-

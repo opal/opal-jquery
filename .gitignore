@@ -6,3 +6,4 @@ gh-pages
 /.bundle
 .yardoc
 /doc
+/tmp
