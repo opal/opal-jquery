@@ -6,7 +6,8 @@ module Browser
   # Generally, you will want to use the top level {::Window} instance, which
   # wraps `window` from the main page.
   class Window
-    include Native
+    # In more recent Opal versions Native::Wrapper should be used
+    include defined?(Native::Wrapper) ? Native::Wrapper : Native
 
     # Returns this {Window} instance wrapped as an {Element}. Useful for
     # delegating jQuery events, which allows the use of `window` as target.
