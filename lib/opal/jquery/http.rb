@@ -161,14 +161,14 @@ class HTTP
 
     @settings.update options
 
-    settings, payload = @settings.to_n, @payload
+    settings, payload = @settings.to_n, @payload.to_n
 
     %x{
-      if (typeof(#{payload}) === 'string') {
+      if (typeof(payload) === 'string' || settings.processData === false) {
         settings.data = payload;
       }
       else if (payload != nil) {
-        settings.data = payload.$to_json();
+        settings.data = JSON.stringify(payload);
         settings.contentType = 'application/json';
       }
 
