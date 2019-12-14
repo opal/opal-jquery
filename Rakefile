@@ -2,7 +2,7 @@ require 'bundler'
 Bundler.require
 Bundler::GemHelper.install_tasks
 
-ENV['RUNNER'] = 'chrome'
+ENV['RUNNER'] ||= 'chrome'
 
 require 'opal/rspec/rake_task'
 Opal::RSpec::RakeTask.new(:default) do |server, task|
