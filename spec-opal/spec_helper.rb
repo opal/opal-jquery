@@ -20,4 +20,5 @@ RSpec.configure do |config|
   config.extend SkipAsync
   config.formatter = :doc
   config.color = true
+  config.tty = true
 end
