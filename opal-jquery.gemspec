@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'opal-sprockets', ['>= 0.4.1', '< 2.0']
   s.add_development_dependency 'yard'
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'puma'
 end
