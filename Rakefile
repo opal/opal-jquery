@@ -15,11 +15,6 @@ Opal::RSpec::RakeTask.new(:jquery3) do |server, task|
   task.default_path = 'spec-opal'
 end
 
-Opal::RSpec::RakeTask.new(:zepto) do |server, task|
-  server.index_path = 'spec-opal/zepto/index.html.erb'
-  task.default_path = 'spec-opal'
-end
-
 desc "Build build/opal-jquery.js"
 task :dist do
   require 'fileutils'

@@ -1,6 +1,8 @@
 ## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.6...HEAD) Unreleased
 
-*see diff*
+*   Remove support for Zepto.
+    Zepto hasn't received substantial updates for several and is no longer under active development.
+    opal-jquery will still accept PRs targeting Zepto as long as they're compatible with jQuery.
 
 ## [0.4.6](https://github.com/opal/opal-jquery/compare/v0.4.5...v0.4.6) Unreleased
 

@@ -4,7 +4,7 @@
 
 [![Build Status](http://img.shields.io/travis/opal/opal-jquery/master.svg)](http://travis-ci.org/opal/opal-jquery)
 
-**opal-jquery** provides DOM access to opal by wrapping jQuery (or zepto)
+**opal-jquery** provides DOM access to opal by wrapping jQuery
 and providing a nice ruby syntax for dealing with jQuery instances.
 
 <!-- See the Opal website for [documentation](http://opalrb.org/docs/jquery). -->
@@ -59,13 +59,9 @@ Run the tests inside a phantom.js runner:
     $ bundle exec rake
 
 
-### Zepto
+### About Zepto support
 
-opal-jquery also supports zepto. To run specs for zepto use the rake task:
-
-    $ bundle exec rake zepto
-
-
+opal-jquery used to supports [Zepto](https://zeptojs.com), but the project is now semi abandoned and thus is not explicitly supported anymore. That being said, we still accept PRs and fixes targeted support for Zepto, as long as they also work for jQuery.
 
 
 ## Getting Started
@@ -89,7 +85,7 @@ alert "Hello from jquery + opal"
 > You need to bring your own `jquery.js` file as the gem does not include one. If
 > you are using the asset pipeline with rails, then this should be available
 > already, otherwise download a copy and place it into `app/` or whichever directory
-> you are compiling assets from. You can alternatively require a zepto instance.
+> you are compiling assets from.
 
 The `#alert` method is provided by `opal-jquery`. If the message displays, then
 `jquery` support should be working.
@@ -101,10 +97,6 @@ The `#alert` method is provided by `opal-jquery`. If the message displays, then
 bridged instances of jquery objects. Just like ruby arrays are just javascript
 arrays, `Element` instances are just jquery objects. This makes interaction
 with jquery plugins much easier.
-
-Also, `Element` will try to bridge with Zepto if it cannot find jQuery loaded,
-making it ideal for mobile applications as well.
-
 
 
 
