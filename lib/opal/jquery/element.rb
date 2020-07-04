@@ -337,6 +337,12 @@ class Element < `#{JQUERY_CLASS.to_n}`
   # @!method remove_class(class_name)
   alias_native :remove_class, :removeClass
 
+  # @!method replace_all(target)
+  alias_native :replace_all, :replaceAll
+
+  # @!method replace_with(new_content)
+  alias_native :replace_with, :replaceWith
+
   # @!method submit()
   alias_native :submit
 
