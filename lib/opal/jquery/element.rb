@@ -342,6 +342,9 @@ class Element < `#{JQUERY_CLASS.to_n}`
 
   # @!method replace_with(new_content)
   alias_native :replace_with, :replaceWith
+  
+  # @!method select()
+  alias_native :select
 
   # @!method submit()
   alias_native :submit
