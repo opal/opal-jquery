@@ -1,6 +1,12 @@
-## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.4...HEAD) Unreleased
+## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.5...HEAD) Unreleased
 
 *see diff*
+
+## [0.4.5](https://github.com/opal/opal-jquery/compare/v0.4.4...v0.4.5) 2021-07-28
+
+*   Expose `Element#replace_all` and `Element#replace_with` (#110)
+
+*   Open the opal dependency to any 1.x
 
 ## [0.4.4](https://github.com/opal/opal-jquery/compare/v0.4.3...v0.4.4) 2019-07-01
 
