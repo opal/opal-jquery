@@ -1,7 +1,12 @@
-## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.5...HEAD) Unreleased
+## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.6...HEAD) Unreleased
 
-- Initialize @@__isReady (#115)
-- Added `Element#select` (#111)
+*see diff*
+
+## [0.4.6](https://github.com/opal/opal-jquery/compare/v0.4.5...v0.4.6) Unreleased
+
+* Initialize @@__isReady (#115)
+
+* Added `Element#select` (#111)
 
 ## [0.4.5](https://github.com/opal/opal-jquery/compare/v0.4.4...v0.4.5) 2021-07-28
 
