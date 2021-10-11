@@ -21,7 +21,7 @@ jobs:
 
     runs-on: ${{ matrix.combo.os || 'ubuntu-latest' }}
     continue-on-error: ${{ matrix.combo.permissive || false }}
-    environment:
+    env:
       OPAL_VERSION: ${{ matrix.combo.opal}}
     steps:
       - uses: actions/checkout@v2
