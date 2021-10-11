@@ -1,0 +1,33 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+      - "*/ci-check"
+  pull_request: {}
+
+jobs:
+  rake:
+    name: ${{ matrix.combo.name || matrix.combo.ruby || matrix.combo.opal }}
+    strategy:
+      fail-fast: false
+      matrix:
+        combo:
+          - name: test
+            ruby: 3.0
+            opal: 1.3.0
+            command: bin/rake
+
+    runs-on: ${{ matrix.combo.os || 'ubuntu-latest' }}
+    continue-on-error: ${{ matrix.combo.permissive || false }}
+    environment:
+      OPAL_VERSION: ${{ matrix.combo.opal}}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: ${{ fromJSON(matrix.combo.fetchdepth || '1') }}
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.combo.ruby }}
+      - run: ${{ matrix.combo.command }}
