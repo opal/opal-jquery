@@ -50,6 +50,8 @@ module Browser
   #     end
   #
   module DocumentMethods
+    @@__isReady = false
+
     `var $ = #{JQUERY_SELECTOR.to_n}` # cache $ for SPEED
 
     # Register a block to run once the document/page is ready.
