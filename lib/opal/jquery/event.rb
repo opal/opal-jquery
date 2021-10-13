@@ -171,6 +171,10 @@ class Event
     `#@native.originalEvent.touches[0].pageY`
   end
 
+  def location
+    `#@native.originalEvent.location`
+  end
+
   def ctrl_key
     `#@native.ctrlKey`
   end
