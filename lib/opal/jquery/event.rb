@@ -163,12 +163,16 @@ class Event
     `#@native.pageY`
   end
 
-  def touch_x
-    `#@native.originalEvent.touches[0].pageX`
+  def touch_count
+    `#@native.originalEvent.touches.length`
   end
 
-  def touch_y
-    `#@native.originalEvent.touches[0].pageY`
+  def touch_x(index = 0)
+    `#@native.originalEvent.touches[#{index}].pageX` if index < touch_count
+  end
+
+  def touch_y(index = 0)
+    `#@native.originalEvent.touches[#{index}].pageY` if index < touch_count
   end
 
   def location
