@@ -2,7 +2,7 @@ require 'bundler'
 Bundler.require
 Bundler::GemHelper.install_tasks
 
-ENV['RUNNER'] = 'chrome'
+ENV['RUNNER'] ||= 'chrome'
 
 require 'opal/rspec/rake_task'
 Opal::RSpec::RakeTask.new(:default) do |server, task|
@@ -12,11 +12,6 @@ end
 
 Opal::RSpec::RakeTask.new(:jquery3) do |server, task|
   server.index_path = 'spec-opal/jquery/index3.html.erb'
-  task.default_path = 'spec-opal'
-end
-
-Opal::RSpec::RakeTask.new(:zepto) do |server, task|
-  server.index_path = 'spec-opal/zepto/index.html.erb'
   task.default_path = 'spec-opal'
 end
 

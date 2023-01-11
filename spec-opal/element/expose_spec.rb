@@ -56,7 +56,9 @@ RSpec.describe "Element#expose" do
   end
 
   it 'does not call method_missing after the method is exposed' do
-    pending "broken on opal < 0.11" if RUBY_ENGINE_VERSION.to_f < 0.11
+    unless RUBY_ENGINE_VERSION.start_with? '0.11.'
+      pending "broken on opal < 0.11 and = 1.0"
+    end
 
     expect(element).to receive(:method_missing).once.with(:exposableMethod)
     def element.method_missing(name)

@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 gemspec
 
-case (opal_version = ENV['OPAL_VERSION'])
+gem 'c_lexer', platform: :mri
+
+case (opal_version = ENV['OPAL_VERSION']) || 'master'
 when 'master'
   gem 'opal', github: 'opal/opal', branch: 'master'
   gem 'opal-sprockets', github: 'opal/opal-sprockets'
