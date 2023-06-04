@@ -9,5 +9,5 @@ else
   require 'opal'
   require 'opal/jquery/version'
 
-  Opal.append_path File.expand_path('../..', __FILE__).untaint
+  Opal.append_path File.expand_path('../..', __FILE__)
 end
