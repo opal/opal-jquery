@@ -1,12 +1,15 @@
-## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.6...HEAD) Unreleased
+## [0.5.0](https://github.com/opal/opal-jquery/compare/v0.4.6...v0.5.0) 2024-01-05
 
-*see diff*
+*   Added `Event#location` (#114)
+*   Add `Event#touch_count`; access each point via an optional `index` on `Event#touch_x`/`Event#touch_y` (#117)
+*   Add setting to prevent payload automatic processing (#103) **breaking**
+*   Remove untaint method for Ruby 3.2 compatibility (#119) **breaking**
 
-## [0.4.6](https://github.com/opal/opal-jquery/compare/v0.4.5...v0.4.6) Unreleased
+## [0.4.6](https://github.com/opal/opal-jquery/compare/v0.4.5...v0.4.6) 2021-10-11
 
-* Initialize @@__isReady (#115)
+*   Initialize @@__isReady (#115)
 
-* Added `Element#select` (#111)
+*   Added `Element#select` (#111)
 
 ## [0.4.5](https://github.com/opal/opal-jquery/compare/v0.4.4...v0.4.5) 2021-07-28
 

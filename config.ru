@@ -2,6 +2,7 @@ require 'bundler'
 Bundler.require
 
 require 'opal/rspec'
+require 'opal/rspec/sprockets_environment'
 
 sprockets_env = Opal::RSpec::SprocketsEnvironment.new
 run Opal::Server.new(sprockets: sprockets_env) { |s|
