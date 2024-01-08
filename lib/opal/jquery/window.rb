@@ -1,3 +1,5 @@
+# backtick_javascript: true
+
 require 'opal/jquery/element'
 
 module Browser

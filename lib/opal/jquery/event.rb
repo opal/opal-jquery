@@ -1,3 +1,5 @@
+# backtick_javascript: true
+
 require 'opal/jquery/constants'
 
 # {Event} wraps native jQuery events into a ruby api. Instances of events

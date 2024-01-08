@@ -1,3 +1,5 @@
+# backtick_javascript: true
+
 require 'native'
 
 unless defined?(JQUERY_CLASS)
