@@ -1,3 +1,5 @@
+# backtick_javascript: true
+
 module Browser
   # {Browser::LocalStorage} is a simple wrapper around `localStorage` in the
   # browser.

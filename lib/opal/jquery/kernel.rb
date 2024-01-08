@@ -1,3 +1,5 @@
+# backtick_javascript: true
+
 module Kernel
   # Alert the given message using `window.alert()`. This is a blocking
   # method.
