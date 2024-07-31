@@ -169,7 +169,7 @@ class HTTP
       if (typeof(payload) === 'string' || settings.processData === false) {
         settings.data = payload;
       }
-      else if (payload != nil) {
+      else if (payload != null) {
         settings.data = JSON.stringify(payload);
         settings.contentType = 'application/json';
       }

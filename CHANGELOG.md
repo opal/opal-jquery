@@ -1,3 +1,7 @@
+## [0.5.2](https://github.com/opal/opal-jquery/compare/v0.5.1...v0.5.2) 2024-07-31
+
+*   Fix issue with incorrectly auto-setting content-type as 'application/json' when payload is null (#122)
+
 ## [0.5.1](https://github.com/opal/opal-jquery/compare/v0.5.0...v0.5.1) 2024-01-08
 
 *   Added `# backtick_javascript: true` where needed to satisfy new Opal requirement (#121)
